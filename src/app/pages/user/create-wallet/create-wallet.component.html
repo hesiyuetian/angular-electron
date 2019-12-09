@@ -1,0 +1,167 @@
+<div class="main min-height-vh">
+    <div class="main-body">
+
+        <!-- 1 creat account-->
+        <div class="container mix-container" *ngIf="step == 1">
+            <h3 class="main-body-d1-col1">{{'Login.createWallet' | translate}}</h3>
+            <div class="main-body-d1-col3">
+                <p>{{'createWallet.address' | translate}}</p>
+                <input class="put-focus" type="text" [(ngModel)]="walletAddress" disabled />
+                <label (click)="copyWallet()">{{'createWallet.copy' | translate}}</label>
+            </div>
+            <div class="container-btn btn-sure f-cursor" (click)="nextStep(2)">{{'createWallet.continue' | translate}}</div>
+            <p  class="container-login f-cursor" (click)="goTo('/user/login')">{{'Login.login' | translate}}</p>
+        </div>
+
+        <!-- 2 input accountName Pwd -->
+        <div class="container mix-container" *ngIf="step == 2">
+            <h3 class="main-body-d1-col1">{{'Login.createWallet' | translate}}</h3>
+
+            <div class="main-body-d2-col1">
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': userNameFocusS}">
+                    <span (click)="putStatue('span', 0)">{{'createWallet.userName' | translate}}</span>
+                    <input class="put-focus" type="text" maxlength="20" [(ngModel)]="userName" autocomplete="off" [readonly]=!userNameFocusS (focus)="putStatue('userName', true)" (blur)="putStatue('userName', false)" (keyup)="enterValue('userName');verification();" (change)="enterValue('userName');verification();" />
+                    <ul *ngIf="userName && userName.length<5">
+                        <li class="direction"></li>
+                        <li>{{'createWallet.userLength' | translate}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-body-d2-col1">
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': password1FocusS}">
+                    <span (click)="putStatue('span', 1)">{{'createWallet.password' | translate}}</span>
+                    <input class="put-focus auth-input" type={{passwordType1}} [(ngModel)]="password1" autocomplete="off" [readonly]=!password1FocusS (focus)="putStatue('password1', true)" (blur)="putStatue('password1', false)" (keyup)="enterValue('password1');verification();" (change)="enterValue('password1');verification();" />
+
+                    <label class="iconfont label-light" *ngIf="passwordType1 == 'password'" (click)="passwordIsShow('passwordType1')">&#xe683;</label>
+                    <label class="iconfont" *ngIf="passwordType1 == 'text'" (click)="passwordIsShow('passwordType1')">&#xe682;</label>
+                    <div class="row3-cols2">
+                        <div *ngFor="let i of passwordTotalStrength" class="{{i.status}}"></div>
+                    </div>
+                    <ul *ngIf="passwordSecurity>=0 && passwordSecurity<3">
+                        <li class="direction"></li>
+                        <li>{{'createWallet.passwordLength' | translate}}</li>
+                    </ul>
+                </div>
+                <div class="main-body-d2-cols2">
+                    <div *ngFor="let i of passwordTotalStrength" class="{{i.status}}"></div>
+                </div>
+            </div>
+
+            <div class="main-body-d2-col1 sprace">
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': password2FocusS}">
+                    <span (click)="putStatue('span', 2)">{{'createWallet.passwordTo' | translate}}</span>
+                    <input class="put-focus auth-input" type={{passwordType2}} [(ngModel)]="password2" autocomplete="off" [readonly]=!password2FocusS (focus)="putStatue('password2', true)" (blur)="putStatue('password2', false)" (keyup)="enterValue('password2');verification();" (change)="enterValue('password2');verification();" />
+
+                    <label class="iconfont label-light" *ngIf="passwordType2 == 'password'" (click)="passwordIsShow('passwordType2')">&#xe683;</label>
+                    <label class="iconfont" *ngIf="passwordType2 == 'text'" (click)="passwordIsShow('passwordType2')">&#xe682;</label>
+                    <ul *ngIf="password2 && (password1 != password2)">
+                        <li class="direction"></li>
+                        <li>{{'createWallet.passwordEqually' | translate}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container-btn" [ngClass]="{'f-cursor-not btn-dis': stepBtn1 == 0, 'f-cursor btn-sure': 'stepBtn1 == 1'}" (click)="stepBtn1 == 1 && createdAccount()">{{'createWallet.continue' | translate}}</div>
+        </div>
+
+        <!-- 3 mnemonic Dialog -->
+        <div class="container " *ngIf="step == 3">
+            <h4>
+                {{'createWallet.mnemonicTip1' | translate}}
+                <span class="f-fr f-cursor" (click)="nextStep(6)">{{'createWallet.backupPrivateKey' | translate}}</span>
+            </h4>
+            <div class="container-textarea">
+                <div class="container-textarea-tip f-center">
+                    <p>{{'createWallet.mnemonicTip2' | translate}}</p>
+                    <p>{{'createWallet.mnemonicTip3' | translate}}</p>
+                </div>
+            </div>
+
+            <div class="container-btn f-center-x qcfd">
+                <div class="close f-fr" (click)="nextStep(4)">{{'createWallet.mnemonicBack' | translate}}</div>
+                <div class="remove-cancel f-fr" (click)="goTo('/user/login')">{{'createWallet.mnemonicLater' | translate}}</div>
+            </div>
+        </div>
+
+        <!-- 4 see mnemonic -->
+        <div class="container " *ngIf="step == 4">
+            <h4>
+                {{'createWallet.mnemonicTip1' | translate}}
+                <span class="f-fr f-cursor" (click)="nextStep(6)">{{'createWallet.backupPrivateKey' | translate}}</span>
+            </h4>
+            <div class="container-textarea">
+                <ul class="qcfd">
+                    <li class="f-fl f-cursor" *ngFor="let item of mnemonicShow">
+                        {{item}}
+                    </li>
+                </ul>
+                <div class="container-textarea-clean f-cursor" (click)="mnemonicCopy()">{{'createWallet.copy' | translate}}</div>
+            </div>
+
+            <div class="container-btn f-center-x btn-sure" (click)="nextStep(5)">{{'createWallet.continue' | translate}}</div>
+        </div>
+
+        <!-- 5 select mnemonic -->
+        <div class="container " *ngIf="step == 5">
+            <h4>{{"createWallet.confirm" | translate}}</h4>
+            <div class="container-textarea container-textarea-mix">
+                <ul class="qcfd">
+                    <li class="f-fl f-cursor" *ngFor="let item of mnemonicSelect;let ind = index" (mouseover)='mnemonicIndex = ind' (mouseleave)='mnemonicIndex = null'>
+                        {{item}}
+                        <i class="iconfont" *ngIf="mnemonicIndex == ind" (click)="removeMnemonic(item, ind);$event.stopPropagation();">&#xe610;</i>
+                    </li>
+                </ul>
+                <div class="container-textarea-tip f-center" *ngIf="mnemonicSelect.length < 1">
+                    <p>{{"createWallet.verificationSEED" | translate}}</p>
+                </div>
+            </div>
+
+            <div class="container-radom-mnemonic">
+                <ul class="qcfd">
+                    <li class="f-fl noselect"  *ngFor="let item of mnemonicShowRand;let ind = index" [ngClass]="{'act f-cursor': !item.s, 'dis':  item.s}" (click)="!item.s && selectMnemonic(item.word, ind)"> {{item.word}} </li>
+                </ul>
+            </div>
+
+            <div class="container-btn f-center-x btn-sure f-cursor" *ngIf="mnemonicSelect.length == 15" (click)="regMnemonic()">{{'createWallet.continue' | translate}}</div>
+        </div>
+
+        <!-- 6 privateKey Dialog -->
+        <div class="container " *ngIf="step == 6">
+            <h4>
+                {{'createWallet.backupPrivateKey' | translate}}
+                <span class="f-fr f-cursor" (click)="nextStep(3)">{{'createWallet.mnemonicTip1' | translate}}</span>
+            </h4>
+            <div class="container-textarea">
+                <div class="container-textarea-tip f-center">
+                    <p>{{'createWallet.privateTip4' | translate}}</p>
+                    <p>{{'createWallet.privateTip5' | translate}}</p>
+                </div>
+            </div>
+
+            <div class="container-btn f-center-x qcfd">
+                <div class="close f-fr" (click)="nextStep(7)">{{'createWallet.mnemonicBack' | translate}}</div>
+                <div class="remove-cancel f-fr" (click)="goTo('/user/login')">{{'createWallet.mnemonicLater' | translate}}</div>
+            </div>
+        </div>
+
+        <!-- 7 privateKey -->
+        <div class="container " *ngIf="step == 7">
+            <h4>
+                {{'createWallet.privateKey' | translate}}
+                <span class="f-fr f-cursor" (click)="nextStep(3)">{{'createWallet.mnemonicTip1' | translate}}</span>
+            </h4>
+            <div class="container-textarea">
+                <div class="container-textarea-tip f-center">
+                    <p class="container-textarea-tip-privateKey">{{privateKey}}</p>
+                </div>
+            </div>
+
+            <div class="container-btn f-center-x btn-sure" (click)="login()">{{"LoginAlert.ok" | translate}}</div>
+        </div>
+
+    </div>
+</div>
+
+
+

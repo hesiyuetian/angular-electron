@@ -1,0 +1,16 @@
+<div class='alert' [ngClass]="fadeFlag">
+  <div class='alert_mask'></div>
+  <div class='alert_cont f-center border-box'>
+    <i class='iconfont f-cursor close icon_style' (click)='close()'>&#xe608;</i>
+    <div class='alert_cont_con'>
+      <div class='alert_cont_con_cons'>
+          <p class='alert_cont_con_tip'> {{config.tip}} </p>
+          <p class='alert_cont_con_tips' *ngIf="config.tipKey"> {{config.tipKey}} </p>
+      </div>
+      <div class='alert_cont_con_btn qcfd f-center-x'>
+          <div class='f-cursor alert_cont_con_btn_left left' (click)="config.callbackCancel();close();">{{'common.return' | translate}}</div>
+          <div class='f-cursor alert_cont_con_btn_right right' (click)="config.callbackSure();close();">{{config.ok}}</div>
+      </div>
+    </div>
+  </div>
+</div>

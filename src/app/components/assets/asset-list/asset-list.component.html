@@ -1,0 +1,330 @@
+<div class='assets'>
+    <!-- 资产列表 -->
+    <ng-container>
+        <div class='assets-list special'>
+            <div class='assets-list-item flex2'>{{'assets.list.coin' | translate}}</div>
+            <div class='assets-list-item'>{{'assets.list.available' | translate}}</div>
+            <div class='assets-list-item'>{{'assets.list.orders' | translate}}</div>
+            <div class='assets-list-item'>{{'assets.list.btc' | translate}}</div>
+            <div class='assets-list-item flex3'></div>
+            <div class='assets-list-item'>{{'assets.list.action' | translate}}</div>
+        </div>
+
+        <div class='assets-con'>
+            <div class='assets-list f-cursor' *ngFor="let item of assetList;let ind = index" (click)='seeDeatil(item)'>
+                <div class='assets-list-item flex2'>
+                    <img *ngIf="!item.logo" src="./assets/images/btc.svg" alt="">
+                    <img  *ngIf="item.logo" [src]="item.logo" alt="">
+
+                    <p class="assets-list-item-name" [id]="item.contractAddress">
+                        {{item.symbol}}
+                    </p>
+                    <p class="assets-list-item-balance f-opacity-k" *ngIf="!item.haveOutAsset">{{'assets.list.WalletBacked' | translate}}：{{regular.toFixed(item.balance || '0.0',item.precision)}}</p>
+                    <p class="assets-list-item-balance f-opacity-k" *ngIf="item.haveOutAsset">{{'assets.list.backed' | translate}}</p>
+                </div>
+                <div class='assets-list-item font14 f-fontw6 f-opacity f-curdor' (click)='auxBt.getDexBlanace(item.contractAddress,item.precision);$event.stopPropagation();'>{{regular.toFixed(item.available || '0.0000000',item.precision) }}</div>
+                <div class='assets-list-item font14 f-fontw6 f-opacity'>{{regular.toFixed(regular.toPlus(item.on_orders || 0, item.on_withdraw || 0),item.precision)}}</div>
+                <div class='assets-list-item font14 f-fontw6 f-opacity'>{{regular.numFormat(item.btcVal)}}</div>
+                <div class='assets-list-item font14 f-fontw6 f-opacity-f f-text-left flex3'>
+                    <p class='assets-list-item-usdt f-center-y'>
+                        ≈
+                        <span>{{regular.numFormat(item.usdtVal)}} USD</span>
+                    </p>
+                </div>
+                <div class='assets-list-item' (click)='$event.stopPropagation();'>
+                    <span class='operation' *ngIf="item.can_deposit && (config.tag === 'UAT' || config.tag === 'PRO')" (click)='deposit(item);$event.stopPropagation();'>{{'assets.list.deposit' | translate}}</span>
+                    <span class='operation' *ngIf="config.tag === 'TEST' || config.tag === 'BETA'" (click)='getNetCoin(item.symbol);$event.stopPropagation();'>{{'assets.list.give' | translate}}</span>
+                    <span class='operation' *ngIf="item.can_withdraw" (click)='withdraw(item);$event.stopPropagation();'>{{'assets.list.withdraw' | translate}}</span>
+                </div>
+            </div>
+
+            <div *ngIf="assetList.length < 1" style="margin: 200px 0;">
+                <app-no-data></app-no-data>
+            </div>
+        </div>
+
+    </ng-container>
+
+
+    <!-- 提币  -->
+    <div class='assets-sub' *ngIf="sub_flag">
+        <div class='assets-sub-zhan'></div>
+        <div class='assets-sub-con border-box'>
+            <header>
+                <img class='btc' *ngIf="symbolInfo.logo" [src]="symbolInfo.logo" alt="">
+                <img class='btc' *ngIf="!symbolInfo.logo" src="./assets/images/btc.svg" alt="">
+                <span>{{symbolInfo.name}} {{'assets.list.withdraw' | translate}}</span>
+                <i class='iconfont close f-cursor icon_style' (click)='sub_flag = false'>&#xe608;</i>
+            </header>
+
+            <ng-container *ngIf="sub_flag == 'step1'">
+                <div class='assets-sub-con-list'>
+                    <p>{{'assets.list.asset' | translate}}</p>
+                    <input class='bottom' type="text" [value]="symbolInfo.name+'（'+symbolInfo.symbol+')'" disabled>
+                    <span class='assets-sub-con-list-right'>{{'assets.list.balance' | translate}} {{regular.toFixed(symbolInfo.withdrawBalance || 0,symbolInfo.precision)}} {{symbolInfo.symbol}}</span>
+                </div>
+
+                <div class='assets-sub-con-list' [ngClass]="{'f-enterTxtFocus': sub_addressF}" *ngIf="haveOutAsset">
+                    <span class='f-up-title'>{{'assets.list.recipientAddress' | translate}}</span>
+                    <input class='bottom' type="text" [(ngModel)]="sub_address" (focus)='focusInput("sub_address",true)'
+                        (blur)='focusInput("sub_address")'>
+                    <i class="iconfont copy icon_style f-cursor" (click)='!!sub_address && regular.copyTextToClipboard(sub_address)'>&#xe620;</i>
+                </div>
+
+                <div class='assets-sub-con-list' [ngClass]="{'f-enterTxtFocus': have_tagF}" *ngIf="symbolInfo.is_tag">
+                    <span class='f-up-title'>{{'assets.list.tag' | translate}}</span>
+                    <input class='bottom' type="text" [(ngModel)]="have_tag" (focus)='focusInput("have_tag",true)'
+                        (blur)='focusInput("have_tag")'>
+                </div>
+
+                <div class='assets-sub-con-list qcfd' [ngClass]="{'error': !minWithdrawFlag}">
+                    <div class='assets-sub-con-list-item f-fl' [ngClass]="{'f-enterTxtFocus': sub_amountLeftF}">
+                        <span class='f-up-title'>{{'assets.list.amount' | translate}} &nbsp;( {{'assets.list.smallestAmount' | translate}}={{symbolInfo.minWithdraw || 0}} )</span>
+                        <input #subAmountLeft type="text" [(ngModel)]="sub_amountLeft" (focus)='focusInput("sub_amountLeft",true)'
+                            (blur)='focusInput("sub_amountLeft");verifyMinWithdraw(sub_amountLeft,symbolInfo.minWithdraw);' (keydown)="onInputKeyDown($event)"
+                            (ngModelChange)="onModelChange('sub_amountLeft', subAmountLeft.value, symbolInfo.precision,symbolInfo.withdrawBalance)">
+                        <span class='assets-sub-con-list-item-symbol'>{{symbolInfo.symbol}}</span>
+                        <div class='minWithdraw-tip' *ngIf="!minWithdrawFlag">
+                            <span></span>
+                            {{'assets.list.smallestAmount' | translate}}: {{symbolInfo.minWithdraw || 0}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class='assets-sub-con-list' [ngClass]="{'f-enterTxtFocus': sub_desF}">
+                    <span class='f-up-title'>{{'assets.list.description' | translate}}</span>
+                    <input class='bottom' type="text" [(ngModel)]="sub_des" (focus)='focusInput("sub_des",true)'
+                        (blur)='focusInput("sub_des")'>
+                </div>
+
+                <p class='assets-sub-con-fee f-opacity' *ngIf="haveOutAsset">{{'assets.list.custodianFee' | translate}} ：0.00000000 {{symbolInfo.symbol}}</p>
+                <p class='assets-sub-con-fee f-opacity'>{{'assets.list.transactionFee' | translate}} ：{{regular.toFixed(symbolInfo.withdrawFeeRate * sub_amountLeft,symbolInfo.precision) }} {{symbolInfo.symbol}}</p>
+
+                <div class='assets-sub-con-btn f-cursor' [ngClass]="{
+                    'assets-sub-con-btn-dis f-cursor-not': !qurTableCount(),
+                    'assets-sub-con-btn-carry': qurTableCount()
+                }" (click)=' qurTableCount() && (sub_flag = "step2") '>
+                    {{'assets.list.coutinue' | translate}}
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="sub_flag == 'step2'">
+                <div class='assets-sub-con-list assets-sub-con-list2'>
+                    <input class='bottom opacity2' type="text" [value]="'assets.list.address' | translate" disabled>
+                    <span class='assets-sub-con-list-right'>{{sub_address}}</span>
+                </div>
+                <div class='assets-sub-con-list assets-sub-con-list2'>
+                    <input class='bottom opacity2' type="text" [value]="'assets.list.amount' | translate" disabled>
+                    <span class='assets-sub-con-list-right'>{{toNumber(sub_amountLeft)}} {{symbolInfo.symbol}}</span>
+                </div>
+                <div class='assets-sub-con-list assets-sub-con-list2'>
+                    <input class='bottom opacity2' type="text" [value]="'assets.list.transactionFee' | translate" disabled>
+                    <span class='assets-sub-con-list-right'>{{regular.toFixed(symbolInfo.withdrawFeeRate * sub_amountLeft,symbolInfo.precision) }} {{symbolInfo.symbol}}</span>
+                </div>
+
+                <!-- 托管方 -->
+                <ng-container  *ngIf="haveOutAsset">
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.custodyAddress' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{withdrawAddress}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.custodianFee' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>0.00000020 {{symbolInfo.symbol}}</span>
+                    </div>
+                </ng-container>
+
+                <div class='assets-sub-con-btn2'>
+                    <div class='f-cursor return' (click)="sub_flag = 'step1'">{{'assets.list.return' | translate}}</div>
+                    <div class='f-cursor btn' (click)="sub_send('step2')">{{'assets.list.send' | translate}}</div>
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="sub_flag == 'step3'">
+                <div class='assets-sub-con-list assets-sub-con-list2' [ngClass]="{'f-enterTxtFocus': sub_pwdF}">
+                    <span class='f-up-title'>{{'assets.list.enterPassword' | translate}}</span>
+                    <input class='bottom auth-input' type="password" [(ngModel)]="sub_pwd" (focus)='focusInput("sub_pwd",true)'
+                        (blur)='focusInput("sub_pwd")'>
+                </div>
+
+                <div class='assets-sub-con-btn2 special-btn'>
+                    <div class='f-cursor return' (click)="sub_flag = 'step2'">{{'assets.list.return' | translate}}</div>
+                    <div class='pwdbtn' [ngClass]="{'assets-sub-con-btn-dis f-cursor-not': !sub_pwd,'f-cursor btn': sub_pwd}"
+                        (click)='sub_send()'>{{'assets.list.send' | translate}}</div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- 充值 -->
+    <div class='assets-sub assets-deposit' *ngIf="add_flag">
+        <div class='assets-sub-zhan'></div>
+        <div class='assets-sub-con border-box'>
+            <header>
+                <img class='btc' *ngIf="symbolInfo.logo" [src]="symbolInfo.logo" alt="">
+                <img class='btc' *ngIf="!symbolInfo.logo" src="./assets/images/btc.svg" alt="">
+                <span class='f-opacity'>{{symbolInfo.name}} {{'assets.list.deposit' | translate}}</span>
+                <i class='iconfont close f-cursor icon_style' (click)='deoClose()'>&#xe608;</i>
+            </header>
+
+            <!-- 有资产托管 -->
+            <ng-container *ngIf="haveOutAsset">
+                <div class='assets-sub-con-list'>
+                    <p>{{'assets.list.walletAddress' | translate}}</p>
+                    <input class='bottom' type="text" [(ngModel)]="depositAddress" disabled>
+                    <i class="iconfont copy icon_style f-cursor" (click)='regular.copyTextToClipboard(depositAddress)'>&#xe620;</i>
+                </div>
+                <div class='assets-sub-con-list' *ngIf="symbolInfo.is_tag">
+                    <p>{{'assets.list.tag' | translate}}</p>
+                    <input class='bottom' type="text" [(ngModel)]="symbolInfo.have_tag" disabled>
+                    <i class="iconfont copy icon_style f-cursor" (click)='regular.copyTextToClipboard(symbolInfo.have_tag)'>&#xe620;</i>
+                </div>
+                <p class='assets-sub-con-tip'>
+                    <span>{{'assets.list.only' | translate}} {{symbolInfo.symbol}} {{'assets.list.onlyf' | translate}}</span>
+                    <!-- <span class='f-fr'>{{'assets.list.smallestAmount' | translate}}=0.01000000</span> -->
+                </p>
+
+                <div class='assets-sub-con-qrcode'>
+                    <div class='assets-sub-con-qrcode-or f-center-x'></div>
+                    <div class='assets-sub-con-qrcode-or assets-sub-con-qrcode-font f-center-x'>OR</div>
+                    <div id='qr-code' class='f-center-x qr-code'></div>
+                    <p>{{'assets.list.qr' | translate}}</p>
+                </div>
+            </ng-container>
+
+            <!-- 无资产托管 -->
+            <ng-container *ngIf="!haveOutAsset && dep_flag =='step1'">
+                <div class='assets-sub-con-list qcfd'>
+                    <div class='assets-sub-con-list-item f-fl' [ngClass]="{'f-enterTxtFocus': deo_amountLeftF}">
+                        <span class='f-up-title'>{{'assets.list.amount' | translate}}</span>
+                        <input #deoAmountLeft type="text"  [(ngModel)]="deo_amountLeft" (focus)='focusInput("deo_amountLeft",true)'
+                            (blur)='focusInput("deo_amountLeft")' (keydown)="onInputKeyDown($event)"
+                            (ngModelChange)="onModelChange('deo_amountLeft', deoAmountLeft.value, symbolInfo.precision,symbolInfo.balance)">
+                        <span class='assets-sub-con-list-item-symbol'>{{symbolInfo.symbol}}</span>
+                    </div>
+                </div>
+
+                <div class='assets-sub-con-list' style="margin-top: 20px">
+                    <p>{{'assets.list.Payer' | translate}}</p>
+                    <div class="assets-sub-con-list-select f-cursor" (click)="payerStatus = true">
+                        <input class='bottom' type="text" [value]="'assets.list.'+payerType | translate" disabled>
+                        <span class='assets-sub-con-list-right' > <label class="iconfont f-opacity-t f-cursor" >&#xe771;</label></span>
+                        <div class="assets-sub-con-list-select-list" *ngIf="payerStatus">
+                            <div class="assets-sub-con-list-select-list-lib" (click)="selectPayer('proxy');$event.stopPropagation();">{{'assets.list.proxy' | translate}}</div>
+                            <div class="assets-sub-con-list-select-list-lib" (click)="selectPayer('selfResource');$event.stopPropagation();">{{'assets.list.selfResource' | translate}} <span class="f-fr f-opacity-4">{{'assets.list.24hReturn' | translate}}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <p class='assets-sub-con-fee f-opacity'>{{'assets.list.WalletBacked' | translate}}：{{regular.toFixed(symbolInfo.balance,symbolInfo.precision)}} {{symbolInfo.symbol}}</p>
+                <div class='assets-deposit-btn f-cursor-not'
+                     [ngClass]="{
+                     'f-cursor assets-sub-con-btn-carry': deo_amountLeft > 0 && !payerStatus
+                     }"
+                     (click)='this.deo_amountLeft > 0 && !payerStatus && depositPayer()'>{{'assets.list.coutinue' | translate}}</div>
+            </ng-container>
+
+            <ng-container *ngIf="!haveOutAsset && dep_flag == 'step2'">
+                <div class='assets-sub-con-list assets-sub-con-list2'>
+                    <input class='bottom opacity2' type="text" [value]="'assets.list.depositAmount' | translate" disabled>
+                    <span class='assets-sub-con-list-right'>{{deo_amountLeft}} {{symbolInfo.symbol}}</span>
+                </div>
+                <div class='assets-sub-con-list assets-sub-con-list2' *ngIf="payerType === 'proxy'">
+                    <input class='bottom opacity2' type="text" [value]="'assets.list.PayerFee' | translate" disabled>
+                    <span class='assets-sub-con-list-right'>{{payerInfo.amount || 0}}BT</span>
+                </div>
+
+                <div class='assets-sub-con-btn2'>
+                    <div class='f-cursor return' (click)="dep_flag = 'step1'">{{'assets.list.return' | translate}}</div>
+                    <div class='f-cursor btn' (click)="deo_send('step3')">{{'assets.list.coutinue' | translate}}</div>
+                </div>
+
+            </ng-container>
+
+            <ng-container *ngIf="!haveOutAsset && dep_flag =='step3'">
+                <div class='assets-sub-con-list assets-sub-con-list2 assets-deposit-pwd' [ngClass]="{'f-enterTxtFocus': deo_pwdF}">
+                    <span class='f-up-title'>{{'assets.list.enterPassword' | translate}}</span>
+                    <input class='bottom auth-input' type="password" [(ngModel)]="deo_pwd" (focus)='focusInput("deo_pwd",true)'
+                        (blur)='focusInput("deo_pwd")'>
+                </div>
+
+                <div class='assets-sub-con-btn2 special-btn'>
+                    <div class='f-cursor return' (click)="dep_flag = 'step2';deo_pwd = '';deo_pwdF = false">{{'assets.list.return' | translate}}</div>
+                    <div class='pwdbtn' [ngClass]="{'assets-sub-con-btn-dis f-cursor-not': !deo_pwd,'f-cursor btn': deo_pwd}"
+                        (click)='deo_send()'>{{'assets.list.send' | translate}}</div>
+                    </div>
+            </ng-container>
+        </div>
+    </div>
+
+    <!-- 详情 -->
+    <div class='assets-sub' *ngIf="assetDetail">
+        <div class='assets-sub-zhan' (click)='assetDetail = false'></div>
+        <div class='assets-sub-con border-box detail'>
+            <header>
+                <img class='btc' *ngIf="symbolInfo.logo" [src]="symbolInfo.logo" alt="">
+                <img class='btc' *ngIf="!symbolInfo.logo" src="./assets/images/btc.svg" alt="">
+                <span>{{symbolInfo.name}}（{{symbolInfo.symbol}}）{{'assets.list.detail' | translate}}</span>
+                <i class='iconfont close f-cursor icon_style' (click)='assetDetail = false'>&#xe608;</i>
+            </header>
+
+            <ng-container >
+                <div class='assets-sub-con-lab' *ngIf="assetsDetail.is_backed">
+                    <div class='assets-sub-con-lab-list f-cursor' [ngClass]="{'act': changeType === 'detail'}" (click)='change("detail")'>{{'assets.list.detail' | translate}}</div>
+                    <div class='assets-sub-con-lab-list f-cursor' [ngClass]="{'act': changeType === 'custodian'}" (click)='change("custodian")'>{{'assets.list.custodian' | translate}}</div>
+                </div>
+
+                <div *ngIf="changeType === 'detail'" style="padding-bottom: 50px">
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.issuer' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.issuer}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" value="ID" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.contract_address}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.name' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.name}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.totalSupply' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.totalSupply}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.currentSupply' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.currentSupply}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.decimal' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.decimal}}</span>
+                    </div>
+                    <div class='assets-sub-con-list assets-sub-con-list2'>
+                        <input class='bottom opacity2' type="text" [value]="'assets.list.issueDate' | translate" disabled>
+                        <span class='assets-sub-con-list-right'>{{assetsDetail.issue_date}}</span>
+                    </div>
+                </div>
+
+                <div class='assets-sub-con-custodian border-box' *ngIf="changeType === 'custodian'">
+                    <div class='assets-sub-con-custodian-logo qcfd'>
+                        <img class='assets-sub-con-custodian-logo-left f-fl' [src]="assetsDetail.custodian_logo" alt="">
+                        <div class='assets-sub-con-custodian-logo-right f-fl'>
+                            <p>{{assetsDetail.custodian_name}} <img *ngIf="assetsDetail.custodian_verify" src="./assets/images/stroke.svg" alt=""></p>
+                            <a [href]="assetsDetail.custodian_link" target="_blank">{{assetsDetail.custodian_link}}</a>
+                        </div>
+                    </div>
+                    <div class='assets-sub-con-custodian-adress'>
+                        <span>{{'assets.list.custodyAddress' | translate}}</span>
+                        <span>{{assetsDetail.custodian_withdraw_address || 'assets.list.noCustodyAddress' | translate}}</span>
+                    </div>
+                    <p class='assets-sub-con-custodian-title'>{{'assets.list.info' | translate}}</p>
+                    <div class='assets-sub-con-custodian-info border-box'>
+                        {{assetsDetail.custodian_info}}
+                    </div>
+
+                </div>
+            </ng-container>
+
+        </div>
+    </div>
+</div>

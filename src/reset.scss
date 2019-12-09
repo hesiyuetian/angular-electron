@@ -1,0 +1,761 @@
+@charset "utf-8";
+@font-face {
+    font-family: 'iconfont';  /* project id 1066588 */
+    src: url('http://at.alicdn.com/t/font_1066588_p9vf7ftdrq.eot');
+    src: url('http://at.alicdn.com/t/font_1066588_p9vf7ftdrq.eot?#iefix') format('embedded-opentype'),
+    url('http://at.alicdn.com/t/font_1066588_p9vf7ftdrq.woff2') format('woff2'),
+    url('http://at.alicdn.com/t/font_1066588_p9vf7ftdrq.woff') format('woff'),
+    url('http://at.alicdn.com/t/font_1066588_p9vf7ftdrq.ttf') format('truetype'),
+    url('http://at.alicdn.com/t/font_1066588_p9vf7ftdrq.svg#iconfont') format('svg');
+}
+
+@import './app/skin/mixin.scss';
+/*=========================Reset_start==========================*/
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+form,
+table,
+th,
+td,
+a,
+img,
+span,
+strong,
+var,
+em,
+input,
+textarea,
+select,
+option {
+    margin: 0;
+    padding: 0;
+}
+
+/*html,body{font-family:"微软雅黑"; font-size: 12px; text-align: left;}*/
+
+html,
+body {
+    font-size: 12px;
+    text-align: left;
+    font-weight: 400;
+    //font-family: DINPro-Regular,PingFang SC,Hiragino Sans GB,Microsoft YaHei UI,Microsoft YaHei,Source Han Sans CN,sans-serif!important; Malayalam Sangam MN,
+    font-family: DINPro, PingFang SC, Noto Sans CJK, Noto Sans SC, Roboto, Heiti SC, Microsoft YaHei, Helvetica, Arial, sans-serif!important;
+    width: 100%;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // font-family: 'Montserrat', sans-serif,
+}
+
+@font-face {
+    font-family: 'DINPro';
+    src: url('./assets/font/DINPro-Regular.otf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+img {
+    border: 0;
+}
+
+
+.max-box {
+    width: 100%;
+    height: 100%;
+}
+
+/*************iconfont图标******************/
+.icon_style {
+    @include mixin-font-color();
+    opacity: .4 !important;
+}
+
+.icon_style:hover {
+    opacity: 1 !important;
+}
+
+/*************确认按钮******************/
+.f-confirm {
+    background: #4181ff !important;
+}
+
+.f-confirm:hover {
+    background: #1E5ED9 !important;
+}
+
+/*************语义按钮(detail,cancel,deposit,withdraw)******************/
+.f-semantic-btn {
+    color: #FA9128 !important;
+}
+
+.f-semantic-btn:hover {
+    color: #FA9128 !important;
+}
+
+
+/*************主题opacity值******************/
+.f-opacity {
+    opacity: .8 !important;
+}
+
+.f-opacity-c {
+    opacity: .6 !important;
+}
+
+.f-opacity-t {
+    opacity: .3 !important;
+}
+
+.f-opacity-4 {
+    opacity: .3 !important;
+}
+
+.f-opacity-k {
+    opacity: .8 !important;
+}
+
+.f-opacity-f {
+    opacity: .5 !important;
+}
+
+.f-opacity-w {
+    opacity: 1 !important;
+}
+
+
+/*input,select,textarea{outline:0;}*/
+
+textarea {
+    resize: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+th,
+strong,
+var,
+em {
+    font-weight: normal;
+    font-style: normal;
+}
+
+/*a:link,a:visited,a:hover,a:active{text-decoration:none;} */
+
+.dis-none {
+    display: none;
+}
+
+// 居中
+.f-center {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+// 水平居中
+.f-center-x {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%)
+}
+
+// 垂直居中
+.f-center-y {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%)
+}
+
+// div禁用点击事件
+.disable {
+    pointer-events: none;
+}
+
+/*==========================Reset_End===========================*/
+
+a {
+    // text-decoration: none;
+}
+
+.f-fl {
+    float: left;
+}
+
+.f-fr {
+    float: right;
+}
+
+.f-input {
+    outline: none;
+}
+
+
+
+// div 禁止点击
+.not-click {
+    pointer-events: none
+}
+
+// 定义字体相关样式
+.f-tal {
+    text-align: left;
+}
+
+.f-tac {
+    text-align: center;
+}
+
+.f-tar {
+    text-align: right;
+}
+
+.f-fwb {
+    font-weight: bold;
+}
+
+
+// 定义字体位置
+.f-text-left {
+    text-align: left !important;
+}
+
+.f-text-center {
+    text-align: center
+}
+
+.f-text-right {
+    text-align: right
+}
+
+// 定义字体权重
+.f-fontw1 {
+    font-weight: 100 !important;
+}
+
+.f-fontw2 {
+    font-weight: 200 !important;
+}
+
+.f-fontw3 {
+    font-weight: 300 !important;
+}
+
+.f-fontw4 {
+    font-weight: 400 !important;
+}
+
+.f-fontw5 {
+    font-weight: 600 !important;
+}
+
+.f-fontw6 {
+    font-weight: 600 !important;
+}
+
+.f-fontw7 {
+    font-weight: 700 !important;
+}
+
+.f-fontw8 {
+    font-weight: 800 !important;
+}
+
+/***********font************8*/
+.font14 {
+    font-size: 14px;
+}
+
+
+/***********按钮点击清除样式**************/
+
+button {
+    outline-style: none;
+}
+
+.href-link {
+    color: #004EFF !important;
+}
+
+
+/********清除浮动**********/
+
+.qcfd:after {
+    display: block;
+    clear: both;
+    content: "";
+    visibility: hidden;
+    height: 0
+}
+
+
+/********取消缩进**********/
+
+.f-indent {
+    text-indent: 0;
+}
+
+
+/********鼠标**********/
+
+.f-cursor-not {
+    cursor: not-allowed;
+}
+
+.f-cursor {
+    cursor: pointer;
+}
+
+// ******input边框样式*******/
+.bor {
+    border: 1px solid #d9d9d9;
+    // border:#87C6F9 1px solid;
+    // box-shadow: 0 0 12px rgba(103, 166, 217, 1);
+}
+
+.bor:focus {
+    outline: none;
+    border: #87C6F9 1px solid;
+    box-shadow: 0 0 12px #2799f5;
+}
+
+div:focus {
+    outline: none;
+    border: none;
+    box-shadow: none;
+}
+
+input {
+    // border: 1px solid #d9d9d9;
+    // border-radius: 5px;
+    // text-indent: 10px;
+
+    background: none;
+    border: none;
+    outline: none !important;
+}
+
+input:focus {
+    border-width: 2px;
+    border-bottom-color: #4F6CFF;
+    box-shadow: 0 0 0px #67a6d9;
+    // outline: none;
+    // border: #87C6F9 1px solid;
+    // box-shadow: 0 0 1px rgba(103, 166, 217, 1);
+}
+
+
+
+/************ style reset end *******************/
+
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently  not supported by any browser */
+}
+
+
+/*******input框设置placeholder颜色、字体大小*********/
+
+:-moz-placeholder {
+    color: $color;
+    opacity: .4;
+}
+
+::-moz-placeholder {
+    color: $color;
+    opacity: .4;
+}
+
+input:-ms-input-placeholder, textarea::-ms-input-placeholder {
+    color: $color;
+    opacity: .4;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+    color: $color;
+    opacity: .4;
+}
+
+//textarea::-webkit-input-placeholder {
+//    opacity: .4;
+//    color: $color;
+//}
+//textarea:-moz-placeholder {
+//    opacity: .4;
+//    color: $color;
+//}
+//textarea::-moz-placeholder {
+//    opacity: .4;
+//    color: $color;
+//}
+//textarea:-ms-input-placeholder {
+//    opacity: .4;
+//    color: $color;
+//}
+
+.border-bottom {
+    border-bottom: 1px solid #000;
+}
+
+//*******************盒模型***************
+.border-box {
+    box-sizing: border-box;
+}
+
+.content-box {
+    box-sizing: content-box;
+}
+
+
+/************ style reset end *******************/
+
+.f-pre {
+    overflow: hidden;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+
+/******消失******/
+
+.f-dis {
+    display: none;
+}
+
+//******************文本溢出***************
+// ******两行溢出显示省略号*******/
+.els-two {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    box-orient: vertical;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+//*******************文本溢出***************
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+
+/************ style reset end *******************/
+::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    // background-color: rgba(18, 25, 50, 0);
+    // opacity: 0;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb, ::-webkit-scrollbar {
+    // background-color: #5f6990;
+    width: 5px;
+    height: 5px;
+    background-color: rgba(127, 143, 164, .4);
+    // @include mixin-scroll-color()
+    // background-color: rgba(18, 25, 50, 0.05);
+}
+
+// ::-webkit-scrollbar-button {
+//     background-color: #5f6990;
+// }
+
+// ::-webkit-scrollbar-corner {
+//     background-color: #5f6990;
+// }
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar, ::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-track {
+    // box-shadow: inset 0 0 4px #141E46;
+    // box-shadow: inset 0 0 4px rgba(18, 25, 50, 0);
+    opacity: 0;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    // box-shadow: inset 0 0 4px rgba(127,143,164,.4);
+    // @include mixin-scroll-bg();
+    // box-shadow: inset 0 0 4px rgba(18, 25, 50, 0.05);
+}
+
+.some-element::webkit-scrollbar {
+}
+
+/************ style reset end *******************/
+
+//*******************省略文字 鼠标滑过显示全部***************
+.dis-tip-s {
+    position: absolute;
+    background: #3a4980;
+    line-height: 16px;
+    font-size: 12px;
+    z-index: 999999999;
+    border-radius: 5px;
+    padding: 2px 10px;
+    max-width: 200px;
+    text-align: center;
+    min-width: 160px;
+    color: #a0c3eb;
+}
+
+
+/************ style reset end *******************/
+
+
+//*******************dialog 弹框样式 布局 ***************
+.content {
+    width: 1280px;
+    margin: 0 auto;
+}
+
+.content-center {
+    width: 1002px;
+    margin: 0 auto;
+}
+
+/************ style reset end *******************/
+
+
+//*******************input自动填充样式 ***************
+.Dark .auth-input:-webkit-autofill {
+    caret-color: #3075ee;
+    border: none;
+    -webkit-box-shadow: 0 0 0 30px rgb(28, 37, 57) inset;
+    -webkit-text-fill-color: #fff !important;
+}
+
+.Light .auth-input:-webkit-autofill {
+    caret-color: #3075ee;
+    border: none;
+    -webkit-box-shadow: 0 0 0 30px rgb(255, 255, 255) inset;
+    -webkit-text-fill-color: #4c5264 !important;
+}
+
+/************ style reset end *******************/
+
+
+/************ style reset end *******************/
+input[type='checkbox'], input[type='radio'] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance:  none;
+    -o-appearance:  none;
+    appearance:  none;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border: 1px solid #AAB2C0;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    margin: 0 .5rem;
+    // border-radius:.2rem;
+}
+
+.drak {
+    input[type='checkbox']:checked, input[type='radio']:checked {
+        //background: url(./assets/icon/checked.png) no-repeat center;
+        background-size: 100% auto;
+        border: 1px solid #00CEFF;
+    }
+}
+
+.light {
+    input[type='checkbox']:checked, input[type='radio']:checked {
+        //background: url(./assets/icon/checked-light.png) no-repeat center;
+        background-size: 100% auto;
+        border: none;
+    }
+}
+
+
+.bg-zhan {
+    background: url(./assets/images/zhan.png) no-repeat;
+    background-size: 100% 100%;
+}
+
+
+/**
+ *  自定义动画
+ */
+
+.fadeInT {
+    animation: fadeInT 500ms;
+}
+
+.fadeOutF {
+    animation: fadeOutF 500ms;
+}
+
+@keyframes fadeInT {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes fadeOutF {
+    from {
+        opacity: 1
+    }
+    to {
+        opacity: 0
+    }
+}
+
+
+.fadeIns {
+    animation: fadeIns 800ms forwards;
+}
+
+@keyframes fadeIns {
+    0% {
+        top: -131px;
+        opacity: 0;
+    }
+    100% {
+        top: 110px;
+        opacity: 1;
+    }
+}
+
+@keyframes alertTip {
+    0% {
+        top: -100px;
+    }
+    10% {
+        top: 60px;
+    }
+    90% {
+        top: 60px;
+    }
+    100% {
+        top: -100px;
+    }
+}
+
+
+.fadeIn {
+    animation: fadeIn 300ms;
+}
+
+.fadeOut {
+    animation: fadeOut 300ms;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0 !important;
+    }
+    to {
+        opacity: 1 !important;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1 !important;
+    }
+    to {
+        opacity: 0 !important;
+    }
+}
+
+.f-enterTxtFocus {
+    .f-up-title {
+        bottom: 36px !important;
+        left: 0px !important;
+        transition: all .3s;
+    }
+}
+
+@keyframes ts {
+    0% {
+        opacity: 0.1;
+        transform: rotate(0deg)
+    }
+    100% {
+        opacity: 1 !important;
+        transform: rotate(360deg)
+    }
+}
+
+// loading
+@keyframes t {
+    0% {
+        transform: rotate(0deg)
+    }
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
+
+.loadingAnimation {
+    animation: loadingAnimation 2000ms linear infinite;
+}
+@keyframes loadingAnimation {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.1;
+    }
+    100% {
+        opacity: 1;
+    }
+}

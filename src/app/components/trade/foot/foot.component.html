@@ -1,0 +1,89 @@
+<div class='trad-foot border-box'>
+    <div class='trad-foot-head qcfd'>
+        <span class='trad-foot-head-item f-cursor f-fl' (click)='change(0)' [ngClass]="{'act': muneIndex === 0}">{{'tradeFoot.inHead' | translate}}</span>
+        <span class='trad-foot-head-item f-cursor f-fl' (click)='change(1)'  [ngClass]="{'act': muneIndex === 1}">{{'tradeFoot.history' | translate}}</span>
+        <i class="iconfont f-cursor" (click)='link()'>&#xe63c;</i>
+    </div>
+    <ul class='trad-foot-con'>
+        <li class='trad-foot-con-item'>
+            <div class='line special qcfd'>
+                <div class='trad-foot-con-item-item border-box f-fl'>{{'tradeFoot.time' | translate}}</div>
+                <div class='trad-foot-con-item-item border-box f-fl'>{{'tradeFoot.type' | translate}}</div>
+                <div class='trad-foot-con-item-item border-box f-fl'>{{'tradeFoot.ticker' | translate}}</div>
+                <div class='trad-foot-con-item-item border-box f-fl'>{{'tradeFoot.unitPrice' | translate}}({{symbol.split('_')[1]}})</div>
+                <div class='trad-foot-con-item-item border-box f-fl'>{{'tradeFoot.amount' | translate}}({{symbol.split('_')[0]}})</div>
+                <!-- <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{'tradeFoot.total' | translate}}({{symbol.split('_')[1]}})</div> -->
+
+                <!-- 委托中 -->
+                <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 0">{{'tradeFoot.executed' | translate}}({{symbol.split('_')[0]}})</div>
+                <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 0">{{'tradeFoot.unexecuted' | translate}}({{symbol.split('_')[0]}})</div>
+
+                <!-- 委托历史 -->
+                <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{'tradeFoot.executed' | translate}}({{symbol.split('_')[0]}})</div>
+                <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{'tradeFoot.averagePrice' | translate}}({{symbol.split('_')[1]}})</div>
+
+                <div class='trad-foot-con-item-item border-box f-fl'>{{'tradeFoot.status' | translate}}</div>
+                <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 0">{{'tradeFoot.operation' | translate}}</div>
+                <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{'tradeFoot.details' | translate}}</div>
+            </div>
+        </li>
+        <div class='con' *ngIf="orderList.length > 0">
+            <li class='trad-foot-con-item ' *ngFor="let item of orderList; let index = index" >
+                <div class='line hover qcfd f-opacity'>
+                    <div class='trad-foot-con-item-item border-box f-fl' [ngClass]="item.order_id">{{item.create_time | utcTolocal}}</div>
+                    <div class='trad-foot-con-item-item border-box f-fl'>{{'Rootrex.finaStatus'+item.side | translate}}</div>
+                    <div class='trad-foot-con-item-item border-box f-fl'>
+                        {{pairSplit(item.pair,0)}}/{{pairSplit(item.pair,1)}}
+                    </div>
+                    <div class='trad-foot-con-item-item border-box f-fl'>{{regular.toFixed(item.price,precision.pricePrecision)}}</div>
+                    <div class='trad-foot-con-item-item border-box f-fl'>{{regular.toFixed(item.amount,precision.amountPrecision)}}</div>
+                    <!-- <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{regular.toFixed(item.total,precision.pricePrecision) }}</div> -->
+
+                    <!-- 委托中 -->
+                    <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 0">{{regular.toFixed(item.filled_amount,precision.amountPrecision)}}</div>
+                    <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 0">{{regular.toModulo(item.amount,item.filled_amount,precision.amountPrecision)}}</div>
+
+                    <!-- 委托历史 -->
+                    <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{regular.toFixed(item.filled_amount,precision.amountPrecision)}}</div>
+                    <div class='trad-foot-con-item-item border-box f-fl' *ngIf="muneIndex === 1">{{regular.toFixed(item.avg_price || "0",precision.amountPrecision)}}</div>
+
+                    <div class='trad-foot-con-item-item border-box f-fl'>{{('Rootrex.OrderStatus:-:'+ item.status) | translate}}</div>
+                    <div class='trad-foot-con-item-item border-box action f-fl'>
+                        <span class='f-cursor detail' *ngIf="item.status == 2 || item.status == 3 || (item.status == 4 && regular.toNumber(item.filled_amount) != 0)" (click)="orderDetial(item.order_id,index)">
+                            {{'tradeFoot.details' | translate}}
+                            <label class='iconfont' [ngClass]="{'animation-triangle': detailKey == index}">&#xe771;</label>
+                        </span>
+                        <span class='f-cursor revoke' [ngClass]="{'f-cursor-not f-opacity-t': item.status == 5}" *ngIf="muneIndex === 0 && (item.status == 0 || item.status == 1 || item.status == 2 || item.status == 5)" (click)='item.status != 5 && cancel(item.order_id)'>{{'tradeFoot.revoke' | translate}}</span>
+                    </div>
+                </div>
+
+                <div class=' trad-foot-con-item-detail' *ngIf="detailKey == index">
+                    <div class='trad-foot-con-item-detail-item'>
+                        <div>{{'tradeFoot.time' | translate}}</div>
+                        <div>{{'tradeFoot.price' | translate}}({{pairSplit(item.pair,1)}})</div>
+                        <div>{{'tradeFoot.amount' | translate}}({{pairSplit(item.pair,0)}})</div>
+                        <div>{{'tradeFoot.dealMoney' | translate}}({{pairSplit(item.pair,1)}})</div>
+                        <div>{{'tradeFoot.fee' | translate}}({{item.side === 0 ? pairSplit(item.pair,0) : pairSplit(item.pair,1)}})</div>
+					    <div>{{'tradeFoot.status' | translate}}</div>
+                        <div>TxId</div>
+                    </div>
+                    <div class='trad-foot-con-item-detail-item' *ngFor="let val of detailDetailList">
+                        <div>{{val.finish_time | utcTolocal }}</div>
+                        <div>{{regular.toFixed(val.trade_price,precision.pricePrecision)}}</div>
+                        <div>{{regular.toFixed(val.trade_amount,precision.amountPrecision)}}</div>
+                        <div>{{regular.toBigNumber(val.trade_total)}}</div>
+                        <div>{{val.fee}}</div>
+                        <div>{{('Rootrex.tradStatus:-:'+ val.status) | translate}}</div>
+                        <div class='f-cursor link' [ngClass]="{'fail': val.status == 5}" (click)='val.tx_id && auxBt.getOrderInfo(val.tx_id)'>{{regular.sensitiveCheck(val.tx_id)}}</div>
+                    </div>
+                </div>
+            </li>
+        </div>
+
+        <div class='trad-foot-con-unlogin f-opacity f-center' *ngIf="!user.token()">{{'tradeFoot.noLoginTip1' | translate}} <a [href]="forward">{{'tradeFoot.noLoginTip2' | translate}}</a> {{'tradeFoot.noLoginTip3' | translate}}</div>
+        <div class="f-center-y" style="top: 40%;" *ngIf="user.token() && orderList.length <= 0">
+            <app-load *ngIf="loadTrade"></app-load>
+            <app-no-data *ngIf="!loadTrade"></app-no-data>
+        </div>
+    </ul>
+</div>

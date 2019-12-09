@@ -1,1 +1,17 @@
-<router-outlet></router-outlet>
+<div class="main-content"  [ngClass]="[theme,lang]" >
+    <div class="content body-main" [ngClass]="{'content2': routerUrl=='/home','screen': isMode, 'no-foot': routerUrl === '/home'}">
+        <div class="header header-bg" [ngClass]="{'absoults': routerUrl=='/home'}" id='head' *ngIf="!isDisFlag || scrollTop <= 80" >
+          <app-header></app-header>
+        </div>
+
+        <div class="router-content bg dark-background" [ngClass]="{'white': specialFlag, 'home': routerUrl === '/home'}" [lang]='lang' >
+          <router-outlet></router-outlet>
+        </div>
+
+        <!-- <div class="footer footer-bg" *ngIf="(routerUrl.indexOf('/trade/') != -1 && !isMode) || (routerUrl.indexOf('/trade/') == -1 && routerUrl != '/home')" [ngClass]="{'white': specialFlag}"> -->
+        <div class="footer footer-bg" *ngIf="(routerUrl.indexOf('/trade/') != -1 && !isMode) || (routerUrl.indexOf('/trade/') == -1)" [ngClass]="{'white': specialFlag}">
+          <app-footer></app-footer>
+        </div>
+    </div>
+
+</div>

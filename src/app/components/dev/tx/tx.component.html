@@ -1,0 +1,39 @@
+<div class='tx-dialog'>
+  <div class='tx-dialog-zhan'></div>
+  <div class='tx-dialog-con f-center'>
+    <h1>TxID Info</h1>
+    <i class='iconfont f-cursor' (click)='onDialogClose()'>&#xe610;</i>
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>height :</div>
+      <div class='right f-fl'>{{config?.height}}</div>
+    </div>
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>tx_hash :</div>
+      <div class='right f-fl'>{{config?.tx_hash}}</div>
+    </div>
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>error_code :</div>
+      <div class='right f-fl'>{{config?.error_code}}</div>
+    </div>
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>net_usage :</div>
+      <div class='right f-fl'>{{config?.net_usage}}</div>
+    </div>
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>cpu_usage :</div>
+      <div class='right f-fl'>{{config?.cpu_usage}}</div>
+    </div>
+    <!-- event_logs -->
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>contract :</div>
+      <div class='right f-fl'>{{config?.event_logs[0]?.contract || ''}}</div>
+    </div>
+    <div class='tx-dialog-con-item qcfd'>
+      <div class='left f-fl'>data :</div>
+      <div class='right f-fl'>
+        <!-- toWrap -->
+          [{{toWrap(config?.event_logs[0]?.data)}}]
+      </div>
+    </div>
+  </div>
+</div>

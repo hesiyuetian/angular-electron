@@ -1,0 +1,51 @@
+<div class='dialog-members'>
+    <div class='dialog-members-zhan'></div>
+    <div class='dialog-members-con f-center'>
+        <i class='dialog-members-con-close iconfont f-cursor icon_style' (click)='close()'>&#xe610;</i>
+
+        <!--   已经是会员     -->
+        <ng-container *ngIf="hasTag">
+            <h2>{{'member.success' | translate}}</h2>
+            <p class="dialog-members-con-tip dialog-members-con-hastag">{{'member.successTip' | translate}}</p>
+        </ng-container>
+
+        <!--   账户余额满足要求     -->
+        <ng-container *ngIf="!hasTag && blance">
+            <h2>{{'member.register' | translate}}</h2>
+            <p class="dialog-members-con-tip">{{'member.registerTip' | translate}}</p>
+
+            <div class='dialog-members-con-list'>
+                <p>{{'assets.list.Payer' | translate}}</p>
+                <div class="dialog-members-con-list-select f-cursor" (click)="payerStatus = true">
+                    <input class='bottom' type="text" [value]="'assets.list.'+payerType | translate" disabled>
+                    <span class='dialog-members-con-list-right' > <b *ngIf="payerType === 'proxy'">{{payerInfo?.amount || 0}} BT</b> <label class="iconfont f-opacity-t f-cursor" >&#xe771;</label></span>
+                    <div class="dialog-members-con-list-select-list" *ngIf="payerStatus">
+                        <div class="dialog-members-con-list-select-list-lib" (click)="selectPayer('proxy');$event.stopPropagation();">{{'assets.list.proxy' | translate}}</div>
+                        <div class="dialog-members-con-list-select-list-lib" (click)="selectPayer('selfResource');$event.stopPropagation();">{{'assets.list.selfResource' | translate}} <span class="f-fr f-opacity-4">{{'assets.list.24hReturn' | translate}}</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='dialog-members-con-item' [ngClass]="{'f-enterTxtFocus': pwdFlag}" *ngIf="isExpir">
+                <span class='f-up-title'>{{'assets.list.enterPassword' | translate}}</span>
+                <input class='bottom auth-input' [type]="regular.isCssSuper() ? 'text' : 'password'" style="-webkit-text-security: disc" autocomplete="off" [(ngModel)]="pwd" [readonly]=!pwdFlag (focus)='focusInput(true)'
+                       (blur)='focusInput()'>
+            </div>
+
+            <div class='dialog-members-con-btn' >
+                <div class='btn' [ngClass]="{'dialog-members-con-btn-dis f-cursor-not': !pwd && isExpir,'f-cursor': pwd || !isExpir}"
+                     (click)='register()'>{{'assets.list.send' | translate}}</div>
+            </div>
+        </ng-container>
+
+        <!--    账户余额不满足要求    -->
+        <ng-container *ngIf="!hasTag && !blance">
+            <h2>{{'member.register' | translate}}</h2>
+            <p class="dialog-members-con-tip">{{'member.noMoney' | translate}}</p>
+
+            <div class='dialog-members-con-btn' >
+                <div class='btn f-cursor' (click)="link('/assets_records/list')">{{'assets.list.deposit' | translate}}</div>
+            </div>
+        </ng-container>
+    </div>
+</div>

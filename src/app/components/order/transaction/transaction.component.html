@@ -1,0 +1,120 @@
+<div class='order-list'>
+	<header class='qcfd'>
+		<div class='order-list-ser f-fl date'>
+			<app-april-date [height]=32 [date]='startDate' [minDate]='minDate' [maxDate]='endDate' (change)='startChangeDate($event)'></app-april-date>
+		</div>
+		<div class='assets-list-row f-fl'>~</div>
+		<div class='order-list-ser f-fl date'>
+			<app-april-date [height]=32 [date]='endDate' [minDate]='startDate' [maxDate]='maxDate' (change)='endChangeDate($event)'></app-april-date>
+		</div>
+		<div class='order-list-ser f-fl'>
+			<app-april-sear-select [height]=32 [list]=pairsList [defaultt]= "'common.pairs' | translate" (requer)='requer($event)'></app-april-sear-select>
+		</div>
+		<div class='order-list-ser f-fl'>
+			<app-april-select [placeholder]="'common.direction' | translate" [list]=directionList [height]=32 (change)='checkedBack($event,"side")'></app-april-select>
+		</div>
+		<div class='order-list-ser f-fl'>
+			<app-april-select [placeholder]="'common.status' | translate" [list]=statusList [height]=32 (change)='checkedBack($event,"status")'></app-april-select>
+		</div>
+		<!-- <div class='order-list-ser f-fl f-cursor' id='btnb' (click)='search()'>{{'common.search' | translate}}</div> -->
+	</header>
+	<div class='order-list-con'>
+		<div class='order-list-con-list'>
+			<div class='order-list-con-list-item'>{{'tradeFoot.time' | translate}}</div>
+			<div class='order-list-con-list-item flex1'>{{'tradeFoot.type' | translate}}</div>
+			<div class='order-list-con-list-item flex2'>{{'tradeFoot.ticker' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.unitPrice' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.amount' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.total' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.fee' | translate}}</div>
+<!--			<div class='order-list-con-list-item'>{{'tradeFoot.bonus' | translate}}</div>-->
+			<div class='order-list-con-list-item'>{{'tradeFoot.status' | translate}}</div>
+			<div class='order-list-con-list-item'>TxId</div>
+            <div class='order-list-con-list-item flex1'>{{'tradeFoot.operation' | translate}}</div>
+
+        </div>
+
+		<div class='order-list-con-list hover' *ngFor="let item of historyList;let index = index">
+			<div class='order-list-con-list-item'>{{item.finish_time | utcTolocal}}</div>
+			<div class='order-list-con-list-item flex1'>{{'Rootrex.finaStatus'+item.side | translate}}</div>
+			<div class='order-list-con-list-item flex2'>{{pairSplit(item.pair,0)}}/{{pairSplit(item.pair,1)}}</div>
+			<div class='order-list-con-list-item'>{{regular.toFixed(item.trade_price,item.priciPrecision)}} {{pairSplit(item.pair,1)}}</div>
+			<div class='order-list-con-list-item'>{{regular.toFixed(item.trade_amount,item.amountPrecision)}} {{pairSplit(item.pair,0)}}</div>
+			<div class='order-list-con-list-item'>
+				{{regular.toBigNumber(item.trade_total)}} {{pairSplit(item.pair,1)}}</div>
+			<div class='order-list-con-list-item'>{{item.fee || '0'}} {{item.side === 0 ? pairSplit(item.pair,0) : pairSplit(item.pair,1)}}</div>
+<!--			<div class='order-list-con-list-item'>{{item.bonus || '0'}} BT</div>-->
+			<div class='order-list-con-list-item'>{{('Rootrex.tradStatus:-:'+ item.status) | translate}}</div>
+			<div class='order-list-con-list-item link f-cursor' [ngClass]="{'fail': item.status == 5 || item.status == 2}" (click)='item.tx_id && auxBt.getOrderInfo(item.tx_id)'>{{regular.sensitiveCheck(item.tx_id)}}</div>
+            <div class='order-list-con-list-item flex1'>
+                <div class='order-list-con-list-item-btn f-cursor f-semantic-btn f-fontw8' (click)="openDetail(item)">{{'tradeFoot.details' | translate}}</div>
+            </div>
+        </div>
+
+		<div class='f-text-right' style="margin: 20px 0 0 0;">
+			<app-paginator [currentPage]='currentPage' [totalRow]='totalRow' (onCurrentPageChange)='onCurrentPageChange($event)'></app-paginator>
+		</div>
+
+		<div style="margin-top: 200px;" *ngIf=" historyList.length < 1">
+			<!-- <app-load *ngIf="loadTrade"></app-load> -->
+			<app-no-data *ngIf="!loadTrade"></app-no-data>
+		</div>
+	</div>
+</div>
+
+<!--  挖矿奖励详情  -->
+<div class="order-detail" *ngIf="transFlag">
+    <div class='order-detail-zhan'></div>
+    <div class="order-detail-con">
+        <header>
+            <div class="header-title">
+                <h2>
+                    {{'tradeFoot.tradeDetail' | translate}}
+                    <div [ngClass]="{'sell': transInfo.side == 1 }">
+                        {{'Rootrex.finaStatus'+transInfo.side | translate}}
+                    </div>
+                </h2>
+                <p>{{pairSplit(transInfo.pair,0)}}/{{pairSplit(transInfo.pair,1)}}</p>
+            </div>
+            <i class='iconfont close f-cursor icon_style' (click)='transFlag = false'>&#xe608;</i>
+        </header>
+        <section class="order-detail-content">
+            <div class="order-detail-content-transaction qcfd">
+                <div class="order-detail-content-transaction-line f-fl">
+                    <span class="order-detail-content-transaction-line-name f-opacity-k">{{'tradeFoot.price' | translate}}</span>
+                    <span class="order-detail-content-transaction-line-value f-fr">{{regular.toFixed(transInfo.trade_price, transInfo.priciPrecision)}} {{pairSplit(transInfo.pair,1)}}</span>
+                </div>
+                <div class="order-detail-content-transaction-line f-fl">
+                    <span class="order-detail-content-transaction-line-name f-opacity-k">{{'tradeFoot.amount' | translate}}</span>
+                    <span class="order-detail-content-transaction-line-value f-fr">{{regular.toFixed(transInfo.trade_amount,transInfo.amountPrecision)}} {{pairSplit(transInfo.pair,0)}}</span>
+                </div>
+                <div class="order-detail-content-transaction-line f-fl">
+                    <span class="order-detail-content-transaction-line-name f-opacity-k">{{'tradeFoot.total' | translate}}</span>
+                    <span class="order-detail-content-transaction-line-value f-fr">{{regular.toBigNumber(transInfo.trade_total)}} {{pairSplit(transInfo.pair,1)}}</span>
+                </div>
+                <div class="order-detail-content-transaction-line f-fl">
+                    <span class="order-detail-content-transaction-line-name f-opacity-k">{{'tradeFoot.fee' | translate}}</span>
+                    <span class="order-detail-content-transaction-line-value f-fr">{{transInfo.fee || '0'}} {{transInfo.side === 0 ? pairSplit(transInfo.pair,0) : pairSplit(transInfo.pair,1)}}</span>
+                </div>
+                <div class="order-detail-content-transaction-line f-fl">
+                    <span class="order-detail-content-transaction-line-name f-opacity-k">{{'tradeFoot.sysfee' | translate}}</span>
+                    <span class="order-detail-content-transaction-line-value f-fr">{{transInfo.channel_fee || '0'}} {{transInfo.side === 0 ? pairSplit(transInfo.pair,0) : pairSplit(transInfo.pair,1)}}</span>
+                </div>
+                <div class="order-detail-content-transaction-line f-fl">
+                    <span class="order-detail-content-transaction-line-name f-opacity-k">{{'tradeFoot.channelfee' | translate}}</span>
+                    <span class="order-detail-content-transaction-line-value f-fr">{{transInfo.system_fee || '0'}} {{transInfo.side === 0 ? pairSplit(transInfo.pair,0) : pairSplit(transInfo.pair,1)}}</span>
+                </div>
+            </div>
+            <div class="order-detail-content-info">
+                <div class="order-detail-content-info-line">
+                    <span class="order-detail-content-info-line-name f-opacity-k">{{'tradeFoot.time' | translate}}</span>
+                    <div class="order-detail-content-info-line-value f-fr">{{transInfo.finish_time | utcTolocal}}</div>
+                </div>
+                <div class="order-detail-content-info-line">
+                    <span class="order-detail-content-info-line-name f-opacity-k">TX ID</span>
+                    <div class="order-detail-content-info-line-value f-fr" [ngClass]="{'fail': transInfo.status == 5 || transInfo.status == 2}"> <p class="f-center-y f-cursor" (click)='transInfo.tx_id && auxBt.getOrderInfo(transInfo.tx_id)'>{{transInfo.tx_id || ''}}</p> </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

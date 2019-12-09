@@ -1,0 +1,481 @@
+@import "../../../skin/mixin";
+
+$buy_bg : rgba(0,195,179,1);
+$sell_bg : rgba(255,111,121,1);
+
+.sell-buy-left{
+    width: 100%;
+    height: 100%;
+    float: left;
+    overflow: hidden;
+    @include mixin-font-color();
+    .block{
+        display: block;
+    }
+    &-con{
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        &-item{
+            width: calc(50% - 5px);
+            height: 284px;
+            margin: 0 10px 0 0;
+            @include mixin-bg-color();
+            border: 1px solid;
+            @include mixin-border-color();
+            border-radius: 4px;
+            overflow: hidden;
+            display: none;
+            &-blance{
+                font-size: 12px;
+                box-sizing: border-box;
+                line-height: 50px;
+                margin: 0 0 22px 0;
+                border-bottom: 1px solid;
+                @include mixin-border-color();
+                text-indent: 20px;
+                &-item{
+                    font-size: 14px;
+                    font-weight: 800;
+                }
+                .balance{
+                    font-weight: 800;
+                    span{
+                        margin: 0;
+                        opacity: $opction !important;
+                        font-weight: 600;
+                        margin-right: 8px;
+                    }
+                    span:nth-of-type(2){
+                        margin: 0 20px 0 8px;
+                    }
+                }
+
+            }
+
+            &-price{
+                width: 100%;
+                height: 30px;
+                position: relative;
+                margin-top: 5px;
+                text-indent: 20px;
+                line-height: 30px;
+                &-title{
+                    width: 54px;
+                    font-size: 12px;
+                    //line-height: 30px;
+                    float: left;
+                    opacity: $opction;
+                    margin-left: 20px;
+                    text-align: left;
+                    text-indent: 0;
+                    position: relative;
+                    top: 2px;
+                }
+                input{
+                    width: calc(100% - 83px);
+                    height: 30px;
+                    float: left;
+                    background: none;
+                    border: none;
+                    outline: none !important;
+                    border-bottom: 2px solid;
+                    @include mixin-border-color();
+                    overflow: hidden;
+                    opacity: .8;
+                    border-radius: 0;
+                    text-indent: 0px;
+                    @include mixin-font-act-color();
+                }
+                input:focus{
+                    @include mixin-input-focus-border();
+                    box-shadow: 0 0 0px #67a6d9;
+                }
+                .fail{
+                    border-color: $sell_bg !important;
+                }
+                &-symbol{
+                    position: absolute;
+                    right: 20px;
+                    top: 3px;
+                    font-size: 12px;
+                    opacity: $opction;
+                }
+                &-tip{
+                    position: absolute;
+                    top: 39px;
+                    left: 73px;
+                    @include mixin-bgTip-color();
+                    @include mixin-fontTip-color();
+                    line-height: 30px;
+                    padding: 0 20px;
+                    border-radius: 4px;
+                    text-indent: 0;
+                    span{
+                        width: 8px;
+                        height: 8px;
+                        display: inline-block;
+                        position: absolute;
+                        top: -3px;
+                        left: 10px;
+                        @include mixin-bgTip-color();
+                        transform: rotate(45deg)
+                    }
+                }
+            }
+            &-prices{
+                margin-top: 18px;
+            }
+
+            &-pricet{
+                height: 40px;
+                line-height: 40px;
+                font-size: 12px;
+            }
+            &-usemoney{
+                height: 12px;
+                line-height: 12px;
+                font-size: 12px;
+                text-align: right;
+                margin-top: 22px;
+                padding-right: 20px;
+                opacity: 1;
+            }
+            .buy{
+                color: $buy_bg;
+            }
+            .sell{
+                color: $sell_bg;
+            }
+            &-relx{
+                height: 32px;
+                line-height: 32px;
+                margin: 31px 0 14px;
+                font-size: 12px;
+                text-indent: 20px;
+                @include mixin-font-color();
+                &-item{
+                    width: 50px;
+                    height: 16px;
+                    text-align: center;
+                    line-height: 16px;
+                    font-size: 12px;
+                    border-radius: 2px;
+                    margin-right: 6px;
+                    cursor: pointer;
+                    text-indent: 0;
+                    float: left;
+                    @include mixin-flexBtn-bg();
+                    @include mixin-flexBtn-color();
+                }
+                &-item:hover{
+                    @include mixin-bg-buy-btn();
+                    color: #fff !important;
+                }
+            }
+
+            &-model-tile{
+                @include mixin-bg-banner();
+            }
+
+            .sell-relx{
+                .sell-buy-left-con-item-relx-item:hover{
+                    @include mixin-bg-sell-btn();
+                }
+            }
+            &-money{
+                display: inline-block;
+                font-size: 12px;
+                height: 16px;
+                line-height: 20px;
+                margin: 6px 20px 0 0;
+                float: right;
+            }
+            &-btn{
+                width: calc(100% - 40px);
+                height: 40px;
+                font-size: 14px;
+                border: none;
+                text-align: center;
+                line-height: 40px;
+                padding: 0;
+                border-radius: 20px;
+                cursor: pointer;
+                background: $buy_bg;
+                @include mixin-bg-buy-btn-linear();
+                color: #fff !important;
+                font-weight: 800;
+                margin-left: 20px;
+            }
+
+            &-btn:hover{
+                @include mixin-bg-buy-btn();
+            }
+            .login{
+                @include mixin-common-btn();
+            }
+            .login:hover{
+                @include mixin-common-btn-hover();
+            }
+            .sell-btn{
+                @include mixin-bg-sell-btn-linear();
+            }
+            .sell-btn:hover{
+                @include mixin-bg-sell-btn();
+            }
+        }
+        &-item:nth-of-type(2){
+            margin: 0;
+        }
+    }
+
+    .model{
+        .model-prices-t{
+            margin-top: 16px;
+        }
+
+        .model-prices{
+            .sell-buy-left-con-item-price-title{
+                margin-left: 10px;
+            }
+        }
+
+        .sell-buy-left-con-item-balance{
+            line-height: 30px;
+            width: 100%;
+            padding: 0 10px;
+            box-sizing: border-box;
+            margin-bottom: 16px;
+            .balances{
+                margin-right: 10px;
+                @include mixin-font-act-color();
+            }
+        }
+
+        .sell-buy-left-con-item{
+            width: 100%;
+            height: 100%;
+            &-money{
+                margin-top: 0;
+            }
+            &-btn{
+                width: calc(100% - 20px);
+                margin-left: 10px;
+            }
+        }
+
+        .model-relx{
+            text-indent: 10px;
+            margin: 14px 0 14px;
+            .sell-buy-left-con-item-relx-item{
+                width: 32px;
+                border-radius: 8px;
+            }
+        }
+
+        .sell-buy-left-con-item-model-tile {
+            height: 40px;
+            line-height: 40px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid;
+            @include mixin-border-color();
+        }
+    }
+  }
+
+
+@media(min-width: 0) and (max-width: 1439px){
+    .model {
+        .model-prices-t{
+            margin-top: 10px !important;
+        }
+        .sell-buy-left-con-item{
+            &-model-tile {
+                display: flex;
+                flex-direction: inherit;
+                text-align: center;
+                div {
+                    flex: 1;
+                    border-bottom: 2px solid;
+                    border-color: rgba($color: #fff, $alpha: 0);
+                    opacity: 0.8;
+                    cursor: pointer;
+                    font-size: 14px;
+                    height: 38px;
+                }
+
+                div:hover {
+                    border-color: rgba($color: #4181FF, $alpha: 1);
+                    opacity: 1;
+                    font-weight: 800;
+                    @include mixin-font-act-color();
+                }
+
+                .act {
+                    border-color: rgba($color: #4181FF, $alpha: 1);
+                    opacity: 1;
+                    font-weight: 800;
+                    @include mixin-font-act-color();
+                }
+
+                .tile-big {
+                    display: none;
+                }
+            }
+            &-balance{
+                margin-bottom: 5px !important;
+            }
+            &-relx{
+                height: 38px !important;
+                padding: 0 10px;
+                box-sizing: border-box;
+                &-item{
+                    width: 34px !important;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+            &-money{
+                display: block;
+                margin: 0px !important;
+                width: 149px;
+                height: auto !important;
+                text-indent: 0 !important;
+                position: relative;
+                text-align: right;
+                word-break: break-all;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+        .model-relx{
+            margin: 10px 0 10px !important;
+        }
+    }
+
+}
+
+@media(min-width: 1440px) and (max-width: 1819px) {
+    .model {
+        .model-prices-t{
+            margin-top: 5px !important;
+        }
+        .sell-buy-left-con-item {
+            &-model-tile {
+                display: flex;
+                flex-direction: inherit;
+                text-align: center;
+                margin-bottom: 10px !important;
+                div {
+                    flex: 1;
+                    border-bottom: 2px solid;
+                    border-color: rgba($color: #fff, $alpha: 0);
+                    opacity: 0.8;
+                    cursor: pointer;
+                    font-size: 14px;
+                    height: 38px;
+                }
+
+                div:hover {
+                    border-color: rgba($color: #4181FF, $alpha: 1);
+                    opacity: 1;
+                    font-weight: 800;
+                    @include mixin-act-border();
+                }
+
+                .act {
+                    border-color: rgba($color: #4181FF, $alpha: 1);
+                    opacity: 1;
+                    font-weight: 800;
+                    @include mixin-act-border();
+                }
+
+                .tile-big {
+                    display: none;
+                }
+            }
+            &-balance{
+                line-height: 22px;
+                margin-bottom: 24px;
+            }
+            &-relx{
+                height: 38px !important;
+                padding: 0 10px;
+                box-sizing: border-box;
+                &-item{
+                    width: 34px !important;
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            }
+            &-money{
+                display: block;
+                margin: 0px !important;
+                width: 149px;
+                height: auto !important;
+                text-indent: 0 !important;
+                position: relative;
+                text-align: right;
+                word-break: break-all;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            &-balance{
+                margin-bottom: 0px !important;
+            }
+        }
+        .model-relx{
+            margin: 10px 0 7px !important;
+        }
+    }
+}
+@media(min-width: 1820px) and (max-width: 20000px){
+    .model{
+        @include mixin-bg-color();
+        border: 1px solid;
+        @include mixin-border-color();
+        border-radius: 4px;
+        overflow: hidden;
+        .sell-buy-left-con-item{
+            width: 50% !important;
+            float: left;
+            margin: 0;
+            border: none !important;
+            display: block;
+            &-model-tile{
+                text-indent: 10px;
+                @include mixin-font-act-color();
+                .tile-small{
+                    display: none;
+                }
+            }
+
+            &-balance{
+                line-height: 22px;
+                margin-bottom: 24px;
+            }
+
+            &-relx{
+                margin: 20px 0 0px !important;
+                height: auto !important;
+                &-item{
+                    width: 22% !important;
+                    margin-right: 1% !important;
+                    &:nth-of-type(1){
+                        margin-left: 10px;
+                    }
+                }
+            }
+            &-money{
+                width: 100%;
+                display: block;
+                text-align: center;
+                line-height: 38px;
+                height: 38px;
+                margin: 10px 0 18px !important;
+            }
+        }
+    }
+}

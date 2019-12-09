@@ -1,47 +1,79 @@
-import 'reflect-metadata';
-import '../polyfills';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { CoreModule } from './core/core.module';
-import { SharedModule } from './shared/shared.module';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {HttpClient} from '@angular/common/http';
 
-import { AppRoutingModule } from './app-routing.module';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 
-// NG Translate
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+//Common
+import {SharedModule} from './components/shared.module';
 
-import { HomeModule } from './home/home.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {registerLocaleData} from '@angular/common';
+import zh from '@angular/common/locales/zh';
 
-import { AppComponent } from './app.component';
+// 封装的API方法
+import {service} from './common/util/service';
+import {resetData} from './common/util/resetData';
+import {secret} from './common/util/secret';
+import {regular} from './common/util/regular';
+import {User} from './common/util/user';
+import {Utils} from './common/util/util';
+import {Loadings} from './components/loadings/loadings';
 
-// AoT requires an exported function for factories
-export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+import {AddInvedtorService} from './service/addInvedtor.service';
+
+//公链
+import {BtService} from './common/util/bt.service';
+
+// translate server
+export function createTranslateHttpLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
+registerLocaleData(zh);
+
 @NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    CoreModule,
-    SharedModule,
-    HomeModule,
-    AppRoutingModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    })
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+    ],
+    imports: [
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateHttpLoader,
+                deps: [HttpClient]
+            }
+        }),
+        BrowserModule,
+        AppRoutingModule,
+        SharedModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        HttpClientModule,
+
+    ],
+    entryComponents: [
+        // DialogComponent
+    ],
+    providers: [
+        service,
+        regular,
+        User,
+        Utils,
+        resetData,
+        secret,
+        Loadings,
+        AddInvedtorService,
+        BtService
+    ],
+    bootstrap: [AppComponent]
 })
-export class AppModule {}
+
+export class AppModule {
+}

@@ -1,0 +1,40 @@
+/*
+Error: Invalid US-ASCII character "\xE4"
+        on line 7 of trade.component.scss
+
+2: 
+3: .deal{
+4:     width: 100%;
+5:     padding: 10px;
+6:     min-height: 560px;
+7:     // 传统模式
+8:     .container{
+9:         width: 100%;
+10:         &-top{
+11:             width: 100%;
+12:             height: 870px;
+
+Backtrace:
+trade.component.scss:7
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1300:in `rescue in block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1297:in `block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `each'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `each_with_index'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:905:in `check_sass_encoding'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:436:in `check_encoding!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:392:in `_to_tree'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:391:in `run'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:52:in `parse'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:19:in `parse!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:22:in `load'
+/usr/local/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid US-ASCII character \"\xE4\"\A         on line 7 of trade.component.scss\A \A 2: \A 3: .deal{\A 4:     width: 100%;\A 5:     padding: 10px;\A 6:     min-height: 560px;\A 7:     // 传统模式\A 8:     .container{\A 9:         width: 100%;\A 10:         &-top{\A 11:             width: 100%;\A 12:             height: 870px;"; }

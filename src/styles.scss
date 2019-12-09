@@ -1,7 +1,153 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-  margin: 0;
-  padding: 0;
+.confirm-btn{
+    background: rgb(47, 129, 255);
+}
 
-  height: 100%;
+
+.tip-alert{
+    // width: 100%;
+    position: fixed;
+    top: -100px;
+    display: inline-block;
+    // top: 50%;
+    // left: 0;
+    text-align: center;
+    z-index: 9999999;
+    // animation: tip1 3s;
+    font-size: 14px;
+    // transform: translate(0, -50%);
+    animation: toBottom 3s forwards;
+    left: 50%;
+    transform: translateX(-50%);
+    .tip-main{
+        display: inline-block;
+        min-width: 570px;
+        height: 50px;
+        line-height: 50px;
+        color: #fff;
+        text-align: left;
+        // box-shadow: 0 0 20px #999;
+        padding: 0 30px;
+        border-radius: 4px;
+
+    }
+    .tip-close{
+        float: right;
+        font-size: 10px;
+        cursor: pointer;
+    }
+    // .tip-icon{
+    //     display: inline-block;
+    //     font-size: 16px;
+    //     color: #ffffff;
+    //     margin-right: 10px;
+    //     border-radius: 20px;
+    //     height: 20px;
+    //     width: 20px;
+    //     text-align: center;
+    //     line-height: 20px;
+    // }
+    .tip-putong{
+        background: #4181FF;
+    }
+    .tip-success{
+        background: #00C3B3;
+    }
+    .tip-warning{
+        background: #FCC842;
+    }
+    .tip-error{
+        background: #FF6F79;
+    }
+}
+@keyframes toBottom{
+    0%{top: -100px;}
+    10%{top: 70px;}
+    90%{top: 70px;}
+    100%{top: -100px;}
+}
+
+@keyframes tip1{
+    0%{top: -100px;}
+    10%{top: 100px;}
+    90%{top: 100px;}
+    100%{top: -100px;}
+}
+
+
+.frame{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 99;
+    .frame-main{
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-size: 16px;
+    }
+    .alerted{
+        max-width: 60%;
+        line-height: 20px;
+        padding: 20px;
+        background: #fff;
+        position: absolute;
+        top: 90px;
+        left: 20%;
+        word-wrap: break-word;
+        word-break: normal;
+        z-index: 9999;
+        border-radius: 4px;
+    }
+    .frame-box{
+
+
+    }
+    .tip-main{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: #fff;
+        min-width: 300px;
+        min-height: 40px;
+        line-height: 40px;
+        padding: 40px;
+        border-radius: 10px;
+        text-align: center;
+
+        display: inline-block;
+        background: #fff;
+        box-shadow: 0 0 10px #ccc;
+
+        border-radius: 8px;
+    }
+    .tip-icon{
+        display: inline-block;
+        font-size: 14px;
+        color: #ffffff;
+        margin-right: 10px;
+        border-radius: 20px;
+        height: 20px;
+        width: 20px;
+        text-align: center;
+        line-height: 20px;
+    }
+    .tip-success{
+        background: #52c41a;
+    }
+    .tip-warning{
+        background: #faad14;
+    }
+    .tip-error{
+        background: #f5222d;
+    }
+}
+
+// 最小高度满屏（除去head 和 foot）
+.min-height-vh{
+    height: calc(100vh - 170px);
 }

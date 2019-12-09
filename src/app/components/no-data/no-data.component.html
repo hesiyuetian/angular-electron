@@ -1,0 +1,5 @@
+<div class="no-data">
+    <img *ngIf="theme === 'Light'" src="./assets/images/nodata.png" alt="">
+    <img *ngIf="theme === 'Dark'" src="./assets/images/nodata-d.png" alt="">
+    <p>{{'common.nodata' | translate}}</p>
+</div>

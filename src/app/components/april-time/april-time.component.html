@@ -1,0 +1,12 @@
+<div id='april-time' class='time noselect border-box' tabIndex="2" style="width:100%" [ngStyle]="{'line-height': height+'px'}" (focus)="dis = true;listener();" (blur)='dis = false'>
+    <input type="text" placeholder="输入时间" class='f-cursor' [ngClass]="{'focus_bor': dis}" [(ngModel)]="times" readonly disabled
+    [ngStyle]="{'width':'100%','height':height+'px','color':color}">
+    <i class='iconfont icon-shijian'>&#xe697;</i>
+    <div class='time-contion' *ngIf="dis" style="top: 0px" [ngStyle]="{'top': height+10+'px','background': background}">
+      <div class='pc-data-time-s-g' [ngStyle]="{'top': iconTop+'px'}"></div>
+      <header>选择时间</header>
+      <section class='qcfd'>
+        <div class='time-contion-item f-fl' *ngFor="let item of tileList"  [ngClass]="{'now': times === item.txt}" (click)='changeTime(item.txt)'>{{item.txt}}</div>
+      </section>
+    </div>
+</div>

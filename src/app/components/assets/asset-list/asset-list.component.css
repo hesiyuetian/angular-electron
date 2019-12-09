@@ -1,0 +1,40 @@
+/*
+Error: Invalid US-ASCII character "\xE8"
+        on line 26 of asset-list.component.scss
+
+21:         @include mixin-bg-color();
+22:         border: 1px solid;
+23:         @include mixin-border-color();
+24:     }
+25: 
+26:     // 资产列表
+27:     &-list{
+28:         width: 100%;
+29:         // margin: 0 10px;
+30:         line-height: 78px;
+31:         display: flex;
+
+Backtrace:
+asset-list.component.scss:26
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1300:in `rescue in block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1297:in `block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `each'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `each_with_index'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:905:in `check_sass_encoding'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:436:in `check_encoding!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:392:in `_to_tree'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:391:in `run'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:52:in `parse'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:19:in `parse!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:22:in `load'
+/usr/local/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid US-ASCII character \"\xE8\"\A         on line 26 of asset-list.component.scss\A \A 21:         @include mixin-bg-color();\A 22:         border: 1px solid;\A 23:         @include mixin-border-color();\A 24:     }\A 25: \A 26:     // 资产列表\A 27:     &-list{\A 28:         width: 100%;\A 29:         // margin: 0 10px;\A 30:         line-height: 78px;\A 31:         display: flex;"; }

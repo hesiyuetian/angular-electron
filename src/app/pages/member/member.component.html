@@ -1,0 +1,61 @@
+<div class="member">
+    <div class="member-content f-center">
+
+        <!--    loading    -->
+        <div class="member-zhan" *ngIf="loadFlag">
+            <h1></h1>
+            <p></p>
+            <p class=" member-zhan-tip"></p>
+            <div></div>
+            <img class="member-zhan-loading f-center" src="./assets/images/loading_apng.png" alt="">
+        </div>
+
+
+        <!--    账户余额满足要求    -->
+        <div class="member-content-step" *ngIf="!loadFlag && !hasTag && blance">
+            <h1>Bithumb DEX Member</h1>
+            <p class="member-content-step-tip">You need to pay 10 BT to become a lifetime member,</p>
+            <p class="member-content-step-tip">enjoy 20% off tading fee discount.</p>
+
+            <!--     输入域名      -->
+            <div class="member-content-step-name f-center-x">
+                <input class="f-center-y" type="text" placeholder="Domain name" [(ngModel)]="name" (keyup)="checkKeyup('name')">
+                <span class="member-content-step-name-tip">.prime.xtar</span>
+                <i class="iconfont icon-font f-opacity-4 f-cursor" [ngClass]="{'f-cursor-not': nameErrorGrade !== -2, 'member-next': nameErrorGrade === -2}" *ngIf="nameErrorGrade !== -1" (click)="nameErrorGrade === -2 && regName()">&#xe63d;</i>
+                <i class="iconfont icon-font member-content-step-name-success" *ngIf="nameErrorGrade === -1">&#xe61d;</i>
+
+                <div class="member-content-step-name-error" *ngIf="nameErrorGrade > 0">
+                    <span class="member-content-step-name-error-san"></span>
+                    <i class="iconfont icon-error">&#xe621;</i>
+                    <p>
+                        <span *ngIf="nameErrorGrade == 1">≤ 12 characters</span>
+                        <span *ngIf="nameErrorGrade == 2">This domain name cannot be used.Please enter another.</span>
+                    </p>
+                </div>
+            </div>
+
+            <!--     输入密码       -->
+            <div class="member-content-step-name f-center-x" *ngIf="nameErrorGrade === -1">
+                <input class="f-center-y" [type]="regular.isCssSuper() ? 'text' : 'password'" style="-webkit-text-security:disc" placeholder="Enter your wallet password" [(ngModel)]="pwd" (keyup)="checkKeyup('pwd')">
+                <i *ngIf="pwdFlag" class="iconfont icon-font f-opacity-4  member-next f-cursor" (click)="register(this.pwd)">&#xe63d;</i>
+            </div>
+        </div>
+
+        <!--    账户余额不满足要求    -->
+        <div class="member-content-step" *ngIf="!loadFlag && !hasTag && !blance">
+            <h1>Lyra DEX Member</h1>
+            <p class="member-content-step-tip">You need to pay 10 BT to become a lifetime member,</p>
+            <p class="member-content-step-tip">enjoy 20% off tading fee discount.</p>
+
+            <div class="member-content-step-deposit member-deposit f-cursor f-center-x" (click)="link('/assets_records/list')">{{'common.deposit' | translate}}</div>
+            <div class="member-content-step-deposit member-return f-cursor f-center-x" (click)="link('return')">{{'common.return' | translate}}</div>
+        </div>
+
+        <!--    已经是会员    -->
+        <div class="member-content-step" *ngIf="hasTag">
+            <h1>SUCCESS</h1>
+            <p class="member-content-step-tip">You are BT DEX member now</p>
+            <p class="member-content-step-tip" style="margin-top: 8px">{{time}}S</p>
+        </div>
+    </div>
+</div>

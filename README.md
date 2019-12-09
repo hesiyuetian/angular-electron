@@ -1,6 +1,7 @@
 [![Angular Logo](https://www.vectorlogo.zone/logos/angular/angular-icon.svg)](https://angular.io/) [![Electron Logo](https://www.vectorlogo.zone/logos/electronjs/electronjs-icon.svg)](https://electronjs.org/)
 
 [![Travis Build Status][build-badge]][build]
+[![Dependencies Status][dependencyci-badge]][dependencyci]
 [![Make a pull request][prs-badge]][prs]
 [![License](http://img.shields.io/badge/Licence-MIT-brightgreen.svg)](LICENSE.md)
 
@@ -10,21 +11,19 @@
 
 # Introduction
 
-Bootstrap and package your project with Angular 8 and Electron (Typescript + SASS + Hot Reload) for creating Desktop applications.
+Bootstrap and package your project with Angular 7 and Electron (Typescript + SASS + Hot Reload) for creating Desktop applications.
 
 Currently runs with:
 
-- Angular v8.2.12
-- Electron v7.0.0
-- Electron Builder v21.2.0
+- Angular v7.2.0
+- Electron v4.0.0
+- Electron Builder v20.28.1
 
 With this sample, you can :
 
 - Run your app in a local development environment with Electron & Hot reload
 - Run your app in a production environment
 - Package your app into an executable file for Linux, Windows & Mac
-
-/!\ Angular 8.x CLI needs Node 10.9 or later to works correctly.
 
 ## Getting Started
 
@@ -40,7 +39,7 @@ Install dependencies with npm :
 npm install
 ```
 
-There is an issue with `yarn` and `node_modules` when the application is built by the packager. Please use `npm` as dependencies manager.
+There is an issue with `yarn` and `node_modules` that are only used in electron on the backend when the application is built by the packager. Please use `npm` as dependencies manager.
 
 
 If you want to generate Angular components with Angular-cli , you **MUST** install `@angular/cli` in npm global context.
@@ -76,23 +75,24 @@ You can disable "Developer Tools" by commenting `win.webContents.openDevTools();
 
 ## You want to use a specific lib (like rxjs) in electron main thread ?
 
-YES! You can do it! Just by importing your library in npm dependencies section (not **devDependencies**) with `npm install --save`. It will be loaded by electron during build phase and added to your final package. Then use your library by importing it in `main.ts` file. Quite simple, isn't it ?
+You can do this! Just by importing your library in npm dependencies (not devDependencies) with `npm install --save`. It will be loaded by electron during build phase and added to the final package. Then use your library by importing it in `main.ts` file. Easy no ?
 
 ## Browser mode
 
-Maybe you want to execute the application in the browser with hot reload ? Just run `npm run ng:serve:web`.
-**Note that you can't use Electron or NodeJS native libraries in this case.** Please check `providers/electron.service.ts` to watch how conditional import of electron/Native libraries is done.
+Maybe you want to execute the application in the browser with hot reload ? You can do it with `npm run ng:serve:web`.
+Note that you can't use Electron or NodeJS native libraries in this case. Please check `providers/electron.service.ts` to watch how conditional import of electron/Native libraries is done.
 
 ## Branch & Packages version
 
 - Angular 4 & Electron 1 : Branch [angular4](https://github.com/maximegris/angular-electron/tree/angular4)
 - Angular 5 & Electron 1 : Branch [angular5](https://github.com/maximegris/angular-electron/tree/angular5)
 - Angular 6 & Electron 3 : Branch [angular6](https://github.com/maximegris/angular-electron/tree/angular6)
-- Angular 7 & Electron 3 : Branch [angular7](https://github.com/maximegris/angular-electron/tree/angular7)
-- Angular 8 & Electron 7 : (master)
+- Angular 7 & Electron 3 : (master)
 
 [build-badge]: https://travis-ci.org/maximegris/angular-electron.svg?branch=master
 [build]: https://travis-ci.org/maximegris/angular-electron
+[dependencyci-badge]: https://dependencyci.com/github/maximegris/angular-electron/badge
+[dependencyci]: https://dependencyci.com/github/maximegris/angular-electron
 [license-badge]: https://img.shields.io/badge/license-Apache2-blue.svg?style=flat
 [license]: https://github.com/maximegris/angular-electron/blob/master/LICENSE.md
 [prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square

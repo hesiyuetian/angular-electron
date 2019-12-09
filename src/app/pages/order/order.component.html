@@ -1,0 +1,8 @@
+<div class='order'>
+    <div class='order-head qcfd border-box'>
+        <div class='order-head-item f-fl' [ngClass]="{'act': routerLink === '/order/list'}" (click)='link("list")'>{{'order.menu.openOrders' | translate}}</div>
+        <div class='order-head-item f-fl' [ngClass]="{'act': routerLink === '/order/history'}" (click)='link("history")'>{{'order.menu.orderHistory' | translate}}</div>
+        <div class='order-head-item f-fl' [ngClass]="{'act': routerLink === '/order/transaction'}" (click)='link("transaction")'>{{'order.menu.transactionHistory' | translate}}</div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

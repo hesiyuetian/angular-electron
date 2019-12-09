@@ -1,0 +1,100 @@
+<div class='assets-history'>
+	<header class='qcfd'>
+		<div class='assets-list-ser f-fl date'>
+			<app-april-date [height]=32 [date]='startDate' [minDate]='minDate' [maxDate]='endDate' (change)='startChangeDate($event)'></app-april-date>
+		</div>
+		<div class='assets-list-row f-fl f-opacity-t'>~</div>
+		<div class='assets-list-ser f-fl date'>
+			<app-april-date [height]=32 [date]='endDate' [minDate]='startDate' [maxDate]='maxDate' (change)='endChangeDate($event)'></app-april-date>
+		</div>
+		<div class='assets-list-ser f-fl'>
+			<app-april-sear-select [height]=32 [list]=coinList [defaultt]= "'common.coins' | translate" (requer)='requer($event)'></app-april-sear-select>
+		</div>
+		<div class='assets-list-ser f-fl'>
+			<app-april-select [list]=directionList [placeholder]="'common.type' | translate" [height]=32 (change)='checkedBack($event)'></app-april-select>
+		</div>
+		<!-- <div class='assets-list-ser f-fl f-cursor' id='btn' (click)='search()'>{{'common.search' | translate}}</div> -->
+	</header>
+	<div class='assets-history-con'>
+		<div class='assets-history-con-list'>
+			<div class='assets-history-con-list-item'>{{'assets.history.time' | translate}}</div>
+			<div class='assets-history-con-list-item'>{{'assets.history.type' | translate}}</div>
+			<div class='assets-history-con-list-item'>{{'assets.history.coin' | translate}}</div>
+			<div class='assets-history-con-list-item'>{{'assets.history.amount' | translate}}</div>
+			<div class='assets-history-con-list-item'>{{'assets.history.custodyFee' | translate}}</div>
+			<div class='assets-history-con-list-item'>{{'assets.history.transactionFee' | translate}}</div>
+			<div class='assets-history-con-list-item'>{{'assets.history.status' | translate}}</div>
+			<div class='assets-history-con-list-item special'></div>
+		</div>
+		<div class='assets-history-con-list f-opacity' *ngFor="let item of historyList">
+			<div class='assets-history-con-list-item'>{{item.create_time | utcTolocal}}</div>
+			<div class='assets-history-con-list-item'>{{ ('assets.history.tradeRecordStatus' + item.type) | translate}}</div>
+			<div class='assets-history-con-list-item'>{{item.symbol}}</div>
+			<div class='assets-history-con-list-item'>{{toPrecision(item.symbol,item.amount)}}</div>
+			<div class='assets-history-con-list-item'>{{toPrecision(item.symbol,item.custody_fee || 0)}} {{item.symbol}}</div>
+			<div class='assets-history-con-list-item'>{{toPrecision(item.symbol,item.transaction_fee || 0)}} {{item.symbol}}</div>
+			<div class='assets-history-con-list-item'>{{('assets.history.status'+item.status) | translate}}</div>
+			<div class='assets-history-con-list-item special f-semantic-btn' (click)='seeDetail(item.type,item)'>{{'assets.history.detail' | translate}}</div>
+		</div>
+		<div *ngIf="historyList.length < 1" style="margin-top: 200px;">
+			<app-no-data *ngIf="!loadTrade"></app-no-data>
+		</div>
+
+		<div class='f-text-right' style="margin: 20px 40px 0 0;">
+			<app-paginator [currentPage]='pageNum' [totalRow]='total' (onCurrentPageChange)='onCurrentPageChange($event)'></app-paginator>
+		</div>
+
+	</div>
+
+	<div class='assets-history-detail' *ngIf="isDetail">
+		<div class='assets-history-detail-zhan' (click)='isDetail = false'></div>
+		<div class='assets-history-detail-con border-box f-center'>
+			<!-- <img class='close f-cursor' (click)='isDetail = false' src="./assets/images/close.svg" alt=""> -->
+			<i class='iconfont close f-cursor icon_style' (click)='isDetail = false'>&#xe608;</i>
+			<img class='type f-center-x' *ngIf="detailType == 'deposit'" src="./assets/images/deposit.png" alt="">
+			<img class='type f-center-x' *ngIf="detailType != 'deposit'" src="./assets/images/withdraw.png" alt="">
+			<p class='assets-history-detail-con-type f-opacity'>{{detailType == 'deposit' ? 'Deposit' : 'Withdraw'}}</p>
+			<div class='assets-history-detail-con-list'>
+				<span>{{'assets.history.amount' | translate}}</span>
+				<span class='f-fr f-opacity'> {{detailType == 'withdraw' ? "-" : "+"}} {{detailInfo.amount}} ({{detailInfo.symbol}})</span>
+			</div>
+			<div class='assets-history-detail-con-list'>
+				<span>{{'assets.history.time' | translate}}</span>
+				<span class='f-fr f-opacity'>{{detailInfo.create_time | utcTolocal}}</span>
+			</div>
+			<div class='assets-history-detail-con-list'>
+				<span>{{'assets.history.status' | translate}}</span>
+				<span class='f-fr f-opacity'>{{('assets.history.status'+detailInfo.status) | translate}}</span>
+			</div>
+			<div class='assets-history-detail-con-list list-special'>
+				<span>Tx ID</span>
+				<p class='f-fr f-opacity'>{{detailInfo.tx_id}}</p>
+			</div>
+			<div *ngIf="detailType == 'withdraw'" class='assets-history-detail-con-list'>
+				<span>{{'assets.history.address' | translate}}</span>
+				<span class='f-fr f-opacity'>{{detailInfo.address}}</span>
+			</div>
+			<div *ngIf="detailInfo.is_tag" class='assets-history-detail-con-list'>
+				<span>{{'assets.history.tag' | translate}}</span>
+				<span class='f-fr f-opacity'>{{detailInfo.address_tag}}</span>
+			</div>
+			<!-- <div *ngIf="detailType == 'withdraw' && detailInfo.haveOutAsset" class='assets-history-detail-con-list'>
+				<span>{{'assets.history.gatewayAddress' | translate}}</span>
+				<span class='f-fr'>{{detailInfo.address}}</span>
+			</div> -->
+			<div *ngIf="detailType == 'withdraw' && detailInfo.haveOutAsset" class='assets-history-detail-con-list'>
+				<span>{{'assets.history.custodyFee' | translate}}</span>
+				<span class='f-fr f-opacity'>{{detailInfo.custody_fee}} {{detailInfo.symbol}}</span>
+			</div>
+			<div *ngIf="detailType == 'withdraw'" class='assets-history-detail-con-list'>
+				<span>{{'assets.history.transactionFee' | translate}}</span>
+				<span class='f-fr f-opacity'>{{detailInfo.transaction_fee}} {{detailInfo.symbol}}</span>
+			</div>
+			<div class='assets-history-detail-con-list'>
+				<span>{{'assets.history.processingTime' | translate}}</span>
+				<span class='f-fr f-opacity'>{{detailInfo.process_time | utcTolocal}}</span>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,695 @@
+body, html {
+    font-family: DINPro-Regular, /*韩文*/ NanumGothic, /*中文*/ PingFang SC, Hiragino Sans GB, Microsoft YaHei UI, Microsoft YaHei, Source Han Sans CN, sans-serif;
+
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 1px;
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: #3D4B69;
+}
+
+.intervals-container.favored-list-container.no-first {
+    margin-top: 7px;
+}
+
+.chart-container {
+    /*border: 1px solid #1A191C !important;*/
+}
+
+.feature-no-touch .favored-list-container span:hover,
+.favored-list-container span.disabled, .favored-list-container span.disabled.active, .feature-no-touch .favored-list-container span.disabled:active, .feature-touch .favored-list-container span.disabled:active,
+.favored-list-container span.active, .favored-list-container span.selected, .feature-no-touch .favored-list-container span:active, .feature-touch .favored-list-container span:active {
+    background: rgba(255, 255, 255, .1) !important;
+}
+
+.pane-separator .handle {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.chart-page,
+.chart-page .chart-container {
+    background: transparent !important;
+    border: 0;
+}
+
+/*.ui-draggable{display: none!important;}*/
+
+.header-chart-panel-content.on:after {
+    right: 122px
+}
+
+.header-chart-panel .button.fullscreen svg {
+    fill: #8a8b8d
+}
+
+.header-group-properties .button.iconed,
+.bottom-widgetbar-content.backtesting .button, .header-chart-panel .button, .hotlist-controls .button, .symbol-edit-widget .button {
+    background: transparent;
+}
+
+.header-group-properties {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.header-group-properties svg {
+    width: 15px;
+}
+
+.header-group-fullscreen {
+    position: absolute;
+    right: 25px;
+    top: 0;
+
+}
+
+.header-group-fullscreen svg {
+    width: 15px;
+
+}
+
+.left .group {
+    cursor: pointer;
+}
+
+.chart-top-toolbar .space-single, .header-chart-panel .space-single {
+    margin-top: 4px;
+}
+
+.group.space-single.header-group-indicators {
+    float: left;
+    padding: 2px 0 0;
+}
+
+.button.iconed, .header-chart-panel .button.iconed {
+    padding: 6px 5px 8px;
+}
+
+.feature-no-touch ._tv-dialog .button:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch ._tv-dialog .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .bottom-widgetbar-content.backtesting .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .header-chart-panel .submenu:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .button:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .custom-select .switcher:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .favored-list-container span:not(.disabled):not(.selected):hover:before, .feature-no-touch .properties-toolbar .submenu:not(.disabled):not(.selected):hover:before {
+    border-color: transparent;
+}
+
+.feature-no-touch .header-chart-panel .button:hover, .feature-no-touch .symbol-edit-widget .button:hover,
+.bottom-widgetbar-content.backtesting .button.active, .ch-controls .button.active, .feature-no-touch .bottom-widgetbar-content.backtesting .button:active, .feature-no-touch .ch-controls .button:active, .feature-no-touch .header-chart-panel .button.active:hover, .feature-no-touch .header-chart-panel .button:active, .feature-no-touch .hotlist-controls .button:active, .feature-no-touch .save-load-buttons .active:hover, .feature-no-touch .save-load-buttons a:not(.link):active, .feature-no-touch .symbol-edit-widget .button:active, .feature-touch .bottom-widgetbar-content.backtesting .button:active, .feature-touch .ch-controls .button:active, .feature-touch .header-chart-panel .button:active, .feature-touch .hotlist-controls .button:active, .feature-touch .save-load-buttons a:not(.link):active, .feature-touch .symbol-edit-widget .button:active, .header-chart-panel .button.active, .hotlist-controls .button.active, .save-load-buttons .active, .symbol-edit-widget .button.active {
+    /* NO2 */
+    background: none !important;
+    color: #9b9bbb !important
+    /* background: transparent !important; */
+}
+
+/* NO2 */
+.header-chart-panel-sizer .header-chart-panel-content .left .group.header-group-bars-style{
+    display: none !important;
+}
+.header-chart-panel-sizer .header-chart-panel-content .left .active .button{
+    color: #1D242B !important;
+}
+
+/* NO2 */
+.button:hover{
+
+}
+
+/* NO2 */
+.apply-common-tooltip{
+    padding-top: 5px !important;
+}
+
+/* NO2 */
+.pane-legend-line{
+    color: rgba(102, 114, 132, .8);
+}
+/* NO2 */
+.pane-legend-minbtn .expand{
+    color: rgba(102, 114, 132, .8);
+}
+
+.feature-no-touch .header-chart-panel .button{
+    color: rgba(102, 114, 132, .8);
+
+    /* NO2 */
+    width: 100%;
+    text-align: center;
+}
+
+/* NO2 */
+.button.indicators svg{
+    fill: rgba(102, 114, 132, .8);
+}
+
+.feature-no-touch .header-chart-panel .selected{
+    color: #f8f8f9 !important
+}
+
+.common-tooltip-wrapper .common-tooltip-body {
+    background-color: #242B3E;
+    color: rgba(255, 255, 255, .87);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.common-tooltip-wrapper.below:before {
+    border-bottom: 8px solid rgba(255, 255, 255, 0.05)
+}
+
+.common-tooltip-wrapper.below:after {
+    border-bottom: 6px solid #242B3E
+}
+
+.common-tooltip-wrapper.above:before {
+    border-top: 8px solid rgba(255, 255, 255, 0.05)
+}
+
+.common-tooltip-wrapper.above:after {
+    border-top: 6px solid #242B3E;
+}
+
+.common-tooltip-wrapper.otr:before {
+    border-right: 8px solid rgba(255, 255, 255, 0.05)
+}
+
+.common-tooltip-wrapper.otr:after {
+    border-right: 6px solid #242B3E;
+}
+
+.common-tooltip-wrapper.otl:before {
+    border-left: 8px solid rgba(255, 255, 255, 0.05)
+}
+
+.common-tooltip-wrapper.otl:after {
+    border-left: 6px solid #242B3E;
+}
+
+.intervals-container .quick .apply-common-tooltip:last-child {
+    display: none;
+}
+
+.onchart-custom-logo a, .onchart-tv-logo a {
+    background: transparent !important
+}
+
+.header-chart-panel-sizer {
+    position: relative;
+}
+
+.onchart-tv-logo .wrapper {
+    padding: 0;
+}
+
+.onchart-tv-logo.expanded.blue .wrapper, .onchart-tv-logo.expanded.grey .wrapper, .onchart-tv-logo.expanded .wrapper {
+    background: none;
+}
+
+/* 비교 종목추가 */
+.tv-tabbed-dialog__tab-page:first-child {
+    display: none !important
+}
+
+.tv-tabbed-dialog__tab-page:last-child {
+    display: block !important
+}
+
+.tv-compare-dialog__tab:first-child {
+    display: none !important;
+}
+
+.tv-compare-dialog__tab:last-child {
+    display: block !important;
+}
+
+.symbol-edit-popup {
+    width: 338px !important;
+}
+
+.symbol-edit-popup .filter a:last-child {
+    display: none;
+}
+
+.symbol-search-dialog .filter a:last-child {
+    display: none;
+}
+
+div.symbol-edit-popup .table-wrapper {
+    width: 338px
+}
+
+._tv-dialog,
+.feature-no-touch .tv-dropdown__item.i-active:hover,
+.tv-dialog {
+    background: #242B3E;
+    border: none;
+    border-radius: 3px;
+    color: rgba(18,25,50, .87);
+}
+
+.tv-dialog__title,
+.tv-objects-tree-item {
+    color: rgba(255, 255, 255, .87);
+}
+
+._tv-dialog, ._tv-dialog-content {
+    max-height: 460px;
+}
+
+._tv-dialog-content .alert-dialog-content, ._tv-dialog-content .main-properties {
+    max-height: 300px;
+    padding: 10px 25px;
+}
+
+.feature-no-touch .favored-list-container span {
+    background: transparent;
+    border-color: transparent;
+}
+
+.favored-list-container span {
+    height: auto;
+    color: rgba(255, 255, 255, 0.54) !important;
+    font-weight: 500;
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+
+.tv-close-panel,
+.header-chart-panel-content .getimage,
+.chart-controls-bar {
+    display: none;
+}
+
+.tv-dialog.ui-draggable {
+    top: 40px !important;
+    background: #FFFFFF;
+    border: 1px solid rgba(18, 25, 50, 0.05);
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.06);
+    border-radius: 4px;
+}
+
+.tv-insert-indicator-dialog__body.js-dialog__scroll-wrap {
+    height: 300px !important;
+}
+
+.tv-tabbed-dialog__bottom-border {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/*.header-group-intervals,*/
+/*.header-chart-panel--compact .group.header-group-bars-style,*/
+/*.header-group-bars-style {*/
+/*display: none !important;*/
+/*opacity: 0;*/
+/*width: 0px;*/
+/*height: 0px;*/
+/*}*/
+.not-favored-active {
+    display: none;
+}
+
+.layout__area--top.header-chart-panel {
+    top: -8px !important;
+    left: 40px !important;
+    width: calc(100% - 40px) !important;
+    height: 38px !important;
+    background: none;
+}
+
+.layout__area--center {
+    top: 30px !important;
+    left: 40px !important;
+    height: calc(100% - 30px) !important;
+    width: calc(100% - 40px) !important;
+}
+
+.layout__area--center .chart-container {
+    width: 100% !important;
+}
+
+.header-chart-panel .button {
+    padding: 7px 10px 0 0;
+}
+
+.header-chart-panel .button,
+.button.toggle-caption.indicators.apply-common-tooltip:before {
+    border: none !important;
+}
+
+.tv-insert-indicator-dialog .tv-dialog__section {
+    padding: 10px 30px;
+}
+
+.tv-floating-toolbar__widget,
+.tv-dialog__section,
+.tv-floating-toolbar {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+.feature-no-touch .tv-insert-study-item:hover,
+.tv-tabbed-dialog__bottom-border {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tv-insert-indicator-dialog__page {
+    padding-top: 0;
+}
+
+.tv-search-row__input {
+    min-height: 30px;
+    height: 30px;
+    line-height: 30px;
+}
+
+.tv-search-row__search-icon {
+    left: 40px;
+}
+
+.tv-dialog__close {
+    opacity: 1;
+}
+
+.tv-search-row {
+    border-color: transparent;
+    padding: 10px 30px;
+    box-sizing: border-box;
+}
+
+.tv-dialog__close svg {
+    fill: #fff;
+}
+
+.tv-dialog__close {
+    top: -3px;
+    right: 0;
+}
+
+.header-chart-panel .button.active:hover,
+.header-chart-panel .button.active {
+    background: transparent !important;
+}
+
+.favored-list-container span.active, .favored-list-container span.selected, .feature-no-touch .favored-list-container span:active, .feature-touch .favored-list-container span:active {
+    color: #4970c4;
+}
+
+.favored-list-container .submenu {
+    display: none;
+}
+
+.tv-side-toolbar,
+.tv-grouped-floating-toolbar__widget-wrapper {
+    background: rgb(255,255,255);
+}
+
+.drawing-favorites-toolbar .tools-group .button, .feature-no-touch .tv-side-toolbar .tools-group .button:active, .feature-no-touch .tv-side-toolbar .tools-group .button:hover, .feature-touch .tv-side-toolbar .tools-group .button:active, .properties-toolbar .tools-group .button, .tv-side-toolbar .tools-group .button.active, .tv-side-toolbar .tools-group .button.selected {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.tv-floating-toolbar,
+.drawing-favorites-toolbar .tools-group .button.active, .feature-no-touch .drawing-favorites-toolbar .tools-group .button:active, .feature-no-touch .properties-toolbar .tools-group .button:active, .feature-no-touch .tv-side-toolbar .tools-group .button:active .side, .feature-no-touch .tv-side-toolbar .tools-group .button:not(.subgroup):active, .feature-touch .drawing-favorites-toolbar .tools-group .button:active, .feature-touch .properties-toolbar .tools-group .button:active, .feature-touch .tv-side-toolbar .tools-group .button:active .side, .feature-touch .tv-side-toolbar .tools-group .button:not(.subgroup):active, .properties-toolbar .tools-group .button.active, .tv-side-toolbar .tools-group .button.active .side, .tv-side-toolbar .tools-group .button.selected .main, .tv-side-toolbar .tools-group .button:not(.subgroup).active, .tv-side-toolbar .tools-group .button:not(.subgroup).selected {
+    background-color: #fff;
+    /* cursor: pointer; */
+}
+
+.button.properties.active svg,
+.tv-side-toolbar .button.selected svg,
+.tv-linetool-properties-toolbar__icon svg,
+.drawings-popup-list.iconed .item svg, .drawings-popup-list .item svg,
+.tv-side-toolbar .button svg {
+    fill: rgba(102, 114, 132, .8);
+}
+
+.tv-grouped-floating-toolbar {
+    top: 40px !important;
+}
+
+.tv-side-toolbar .tools-group .button .main.text-as-icon,
+.charts-popup-list .item span {
+    color: #7d7d7d !important;
+}
+
+.tv-side-toolbar .tools-group:not(:first-child):not(.no-delimiter):before {
+    background: rgba(255, 255, 255, .54);
+}
+
+.selected .side {
+    display: none;
+}
+
+.tv-side-toolbar .tools-group .button .side {
+    border-left: none;
+}
+
+.apply-common-tooltip:hover .side {
+    display: block;
+}
+
+.tv-side-toolbar {
+    border-right: none;
+}
+
+._tv-dialog-content .dialog-buttons a.tv-left {
+    left: -17px;
+    background: transparent;
+    border-color: transparent;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.75) !important;
+}
+
+._tv-dialog-content .dialog-buttons a.tv-left:hover {
+    border-color: transparent !important;
+}
+
+.tv-grouped-floating-toolbar__widget-wrapper.i-dropped .tv-grouped-floating-toolbar__caret,
+.feature-no-touch .tv-side-toolbar .tools-group .button:hover .main.text-as-icon, .tv-side-toolbar .tools-group .button.selected .main.text-as-icon {
+    color: #627CE8;
+}
+
+.tv-side-toolbar .tools-group .button.selected .main,
+.tv-side-toolbar .tools-group .button .main {
+    left: 50%!important;
+    transform: translateX(-50%)!important;
+}
+
+._tv-button.ok,
+._tv-button.cancel {
+    cursor: pointer;
+}
+
+.charts-popup-list,
+.tv-grouped-floating-toolbar__sub-widget:not(:first-child),
+.feature-no-touch .tv-grouped-floating-toolbar__sub-widget:hover, .tv-grouped-floating-toolbar__sub-widget--current,
+.tv-grouped-floating-toolbar__popup {
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    background: #1f263a;
+}
+
+.tv-linetool-properties-toolbar__color-picker .colorpicker-widget + svg {
+    background: #273147;
+}
+
+.feature-no-touch .tv-linetool-properties-toolbar__color-picker .colorpicker-widget + svg:hover .bg, .tv-linetool-properties-toolbar__color-picker .colorpicker-widget.i-active + svg .bg,
+.tv-linetool-properties-toolbar__color-picker .colorpicker-widget + svg .bg {
+    fill: rgba(255, 255, 255, 0.1);
+}
+
+.tv-linetool-properties-toolbar__color-picker .colorpicker-widget + svg .icon {
+    fill: #fff;
+}
+
+._tv-button.ok,
+.tv-linetool-properties-toolbar__color-picker .colorpicker-widget,
+.properties-tabs a.properties-tabs-label.active:after,
+.tv-tabs__slider, .tv-tabs__tab.i-active:after,
+.tv-linetool-properties-toolbar__color-picker .colorpicker-widget.i-active + svg .icon,
+.feature-no-touch ._tv-button.ok:hover {
+    background: #4970C4 !important;
+    border-color: transparent;
+}
+
+.button.indicators.active svg,
+.i-active .tv-linetool-properties-toolbar__icon svg, .i-dropped .tv-linetool-properties-toolbar__icon svg,
+.tv-linetool-properties-toolbar__color-picker .colorpicker-widget.i-active + svg .icon {
+    fill: #4970C4;
+}
+
+.tv-objects-tree-item,
+.tv-objects-tree-tab__group:not(:last-child),
+.tv-dropdown__item.i-active,
+.sbOptions a:visited, .tv-select-container .sbOptions a:link, .tv-unstyled-select-container .sbOptions a:link {
+    color: rgba(255, 255, 255, 0.87);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.feature-no-touch .tv-dropdown__item:hover,
+.tv-dialog__title,
+.tv-dropdown__item, .tv-dropdown__item:visited {
+    color: rgba(255, 255, 255, 0.87);
+    color: #121932;
+}
+
+.tv-select-container .sbOptions a.active, .tv-unstyled-select-container .sbOptions a.active,
+.charts-popup-list .item.active, .feature-no-touch .charts-popup-list .item:hover,
+.charts-popup-list .item.active,
+.tv-dropdown__item.i-active,
+.tv-objects-tree-item.i-active,
+.feature-no-touch .tv-dropdown__item.i-active:hover,
+.feature-no-touch .tv-dropdown__item:hover,
+.feature-no-touch .tv-objects-tree-item:hover, .tv-objects-tree-item.ui-sortable-helper,
+.feature-no-touch .tv-objects-tree-item.i-active:hover,
+.feature-no-touch .tv-linetool-properties-toolbar__button:hover, .tv-linetool-properties-toolbar__button.i-active, .tv-linetool-properties-toolbar__button.i-dropped,
+.feature-no-touch .tv-grouped-floating-toolbar__widget-wrapper:hover, .tv-grouped-floating-toolbar__widget-wrapper.i-dropped,
+.feature-no-touch .tv-linetool-properties-toolbar__color-picker .colorpicker-widget + svg:hover .bg, .tv-linetool-properties-toolbar__color-picker .colorpicker-widget.i-active + svg .bg,
+.feature-no-touch .tv-select-container .sbOptions a:hover, .feature-no-touch .tv-unstyled-select-container .sbOptions a:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-left: none;
+}
+
+.tv-dropdown__body {
+    top: 0px;
+    background-color: #273147;
+    box-shadow: none;
+}
+
+.feature-no-touch .tv-tabs__tab:active, .feature-no-touch .tv-tabs__tab:hover, .feature-touch .tv-tabs__tab:active, .tv-tabs__tab.i-active, .tv-tabs__tab.i-hover,
+.properties-tabs a.properties-tabs-label,
+.property-page,
+._tv-dialog-content label,
+.tv-select-container .sbSelector,
+.tv-select-container.sbHolderOpen, .tv-select-container.sbHolderOpen a,
+.feature-no-touch .tv-select-container:hover:not(.sbHolderDisabled), .feature-no-touch .tv-select-container:hover:not(.sbHolderDisabled) a {
+    color: rgba(255, 255, 255, .87);
+}
+
+.custom-select .items .item.selected,
+.feature-no-touch .custom-select .items .item:hover {
+    background: rgba(255, 255, 255, .05);
+}
+
+._tv-button.cancel,
+.feature-no-touch ._tv-button.cancel:not(.disabled):hover,
+.tv-ticker .icon,
+.tv-tabs:before,
+._tv-button.active, ._tv-button.toolbutton.active, .feature-no-touch ._tv-button.toolbutton:active, .feature-no-touch ._tv-button:active:not([disabled]), .feature-no-touch .tv-select-container:active, .feature-touch ._tv-button.toolbutton:active, .feature-touch ._tv-button:active:not([disabled]), .feature-touch .tv-select-container:active, .tv-select-container.sbHolderOpen {
+    background: transparent !important;
+}
+
+.tv-select-container,
+.custom-select,
+.custom-select .switcher,
+._tv-dialog-content textarea,
+input[type="text"] {
+    background-color: transparent !important;
+    border-bottom: 1px solid rgba(18, 25, 50, 0.05) !important;
+    color: rgba(18,25,50, 1) !important;
+}
+
+.custom-select .items,
+.feature-no-touch ._tv-dialog ._tv-button:not(.ok):not(.cancel):not(.disabled):not(.delete):hover, .feature-no-touch ._tv-dialog .tv-select-container:not(.sbHolderDisabled):hover, .feature-no-touch .bottom-widgetbar-content.backtesting ._tv-button:not(.ok):not(.cancel):not(.disabled):not(.delete):hover, .feature-no-touch .bottom-widgetbar-content.backtesting .tv-select-container:not(.sbHolderDisabled):hover, .feature-no-touch .header-chart-panel ._tv-button:not(.ok):not(.cancel):not(.disabled):not(.delete):hover, .feature-no-touch .header-chart-panel .tv-select-container:not(.sbHolderDisabled):hover, .feature-no-touch .properties-toolbar ._tv-button:not(.ok):not(.cancel):not(.disabled):not(.delete):hover, .feature-no-touch .properties-toolbar .tv-select-container:not(.sbHolderDisabled):hover, .feature-no-touch .widgetbar-widgetheader .button:hover {
+    border: 1px solid rgba(255, 255, 255, .05);
+}
+
+.tv-select-container .sbOptions, .tv-unstyled-select-container .sbOptions {
+    background: #273147;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.feature-no-touch input:focus + .tv-ticker, .feature-touch input:focus + .tv-ticker,
+.custom-select .items .item.selected {
+    border-left: none;
+}
+
+.custom-select .items {
+    background: #273147;
+}
+
+.layout__area--left.js-hidden,
+.header-chart-panel .group.header-group-back-button, .header-chart-panel .group.header-group-compare, .header-chart-panel .group.header-group-properties,
+.header-chart-panel .group.header-group-select-layout, .header-chart-panel .group.header-group-undo-redo,
+.header-chart-panel .layout-toggle-container,
+.header-chart-panel--compact .group.header-group-back-button,
+.header-chart-panel--compact .group.header-group-compare, .header-chart-panel--compact .group.header-group-create-alert, .header-chart-panel--compact .group.header-group-eot-pro, .header-chart-panel--compact .group.header-group-properties, .header-chart-panel--compact .group.header-group-publishing,
+.header-chart-panel--compact .group.header-group-select-layout, .header-chart-panel--compact .group.header-group-undo-redo, .header-chart-panel--compact .layout-toggle-container, .header-chart-panel--compact .save-load-buttons .title, .header-chart-panel--compact .save-load-buttons .titled .separator {
+    display: block !important;
+}
+
+.layout__area--left.js-hidden {
+    height: 100% !important;
+    background: #1C2233;
+    z-index: 9;
+    width: 40px !important;
+}
+
+.layout__area--left .tv-side-toolbar {
+    overflow-y: auto;
+    width: 41px;
+}
+
+.tv-side-toolbar .tools-group {
+    margin: 4px;
+}
+
+.js-hidden {
+    display: block !important;
+}
+
+/*K线图loading*/
+.loading-indicator, #loading-indicator, .chart-page {
+    background: #fff !important;
+}
+
+.loading-indicator .spinner div > div {
+    background: #ccc !important;
+}
+
+.loading-indicator .spinner {
+    position: relative;
+    width: 35px !important;
+    height: 35px !important;
+    transform: translate(-50%, -50%);
+}
+
+.loading-indicator .spinner div {
+    display: none;
+}
+
+.loading-indicator .spinner:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* background: url("images/svg/loading.svg") no-repeat; */
+    background-size: 100% 100%;
+    font-size: 22px;
+    animation: loadingCircle 1s infinite linear
+}
+
+@keyframes loadingCircle {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.chart-markup-table.price-axis{
+    min-width: 77px!important;
+}
+
+body, .tv-side-toolbar, .chart-controls-bar, #footer-chart-panel{
+    /* background-color: #fff !important; */
+}
+
+.chart-page .apply-common-tooltip{
+    cursor: pointer;
+}
+
+/* .chart-page [class^="icon-"] svg {
+    fill: #98B0C0 !important;
+} */

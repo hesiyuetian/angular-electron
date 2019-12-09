@@ -1,0 +1,86 @@
+<div class="trad-content">
+        <div class='trad-content-left'>
+
+            <div class='trad-content-con' [ngClass]="{'model': modeSel === 'tile'}">
+                <div class='trad-content-left-now qcfd'> <!-- *ngIf="modeSel === 'traditional'" -->
+                    <div class='f-fl trad-content-left-now-left'>
+                        <span class="icon_start" *ngIf="modeSel === 'tile'">
+                            <i class="iconfont nonal" *ngIf="!isfav" (click)="check(true);$event.stopPropagation();">&#xe626;</i>
+                            <i class="iconfont fav" *ngIf="isfav" (click)="check(false);$event.stopPropagation();" >&#xe626;</i>
+
+                            <!--  width >= 1920 -->
+                            <span class='width-screen' [ngClass]="{'f-cursor': !leftDirec}" (mouseenter)="setMarketShow()" (mouseleave)="marketShow = false">
+                                {{icon}}
+                                <label class='iconfont f-cursor' *ngIf="!leftDirec" [ngClass]="{'animation-triangle': marketShow}">&#xe771;</label>
+                            </span>
+
+                            <!--  width < 1920 -->
+                            <span class='f-cursor width-screen-small' (mouseenter)="marketShow = true" (mouseleave)="marketShow = false">
+                                {{icon}}
+                                <label class='iconfont' [ngClass]="{'animation-triangle': marketShow}">&#xe771;</label>
+                            </span>
+
+                        </span>
+
+                        <span class='trad-content-left-now-left-price'>
+                            <span [ngClass]="{'blue': tickerList?.change > 0, 'red': tickerList?.change < 0}">{{regular.toFixed(tickerList?.close || 0 , precision.pricePrecision)}}</span>
+<!--                            <span class="usdt f-opacity">≈&nbsp;${{usdtVal}}</span>-->
+                            <span class="usdt f-opacity">≈&nbsp;${{regular.toBigsells([resetData.raleUSDTObject[symbol.split("_")[1]] || 0 , tickerList?.close || 0], 4) }}</span>
+                        </span>
+
+                        <div class='trad-content-left-now-left-item'>
+                            <p class='f-opacity-k'>{{'tradeHead.gain' | translate}}</p>
+                            <p [ngClass]="{'blue': tickerList?.change > 0, 'red': tickerList?.change < 0}">{{regular.sliceChange(regular.toFixed(tickerList?.change*100 || 0,2))}}%</p>
+                        </div>
+
+                        <div class='trad-content-left-now-left-item'>
+                            <p class='f-opacity-k'>{{'tradeHead.high' | translate}}</p>
+                            <p>{{ regular.toFixed(tickerList?.high || 0 , precision.pricePrecision) }}</p>
+                        </div>
+
+                        <div class='trad-content-left-now-left-item'>
+                            <p class='f-opacity-k'>{{'tradeHead.low' | translate}}</p>
+                            <p>{{ regular.toFixed(tickerList?.low || 0 , precision.pricePrecision)}}</p>
+                        </div>
+
+                        <div class='trad-content-left-now-left-item'>
+                            <p class='f-opacity-k'>{{'tradeHead.amount' | translate}}</p>
+                            <p>{{ regular.toFixed(tickerList?.base_vol || 0 , precision.amountPrecision) }}&nbsp;({{symbol.split("_")[0] || '-'}})</p>
+                        </div>
+                    </div>
+
+                    <div class='f-fr trad-content-left-now-right qcfd'>
+                        <div class='trad-content-left-now-right-screen f-fr f-center-y' [ngClass]="{'f-cursor': chartShow == 'k', 'f-cursor-not': chartShow != 'k'}" (click)='chartShow == "k" ? onFullScreenClick($event) : "" '>
+                            <i class="iconfont">&#xe63c;</i>
+                        </div>
+                        <div class="trad-content-left-now-right-btn f-center-y f-fr">
+                            <span class='trad-content-left-now-right-btn-font f-fl f-cursor' [ngClass]="{'act': chartShow == 'k'}" (click)='changeChart("k")'>{{'tradeContent.Kline' | translate}}</span>
+                            <span class='trad-content-left-now-right-btn-font f-fl f-cursor' [ngClass]="{'act': chartShow !== 'k'}" (click)='changeChart("")'>{{'tradeContent.depth' | translate}}</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="show-market" id="show-market" [ngClass]="{'discar': modeSel === 'tile' && marketShow}" (mouseenter)="marketShow = true" (mouseleave)="marketShow = false">
+                    <app-trade-symbol></app-trade-symbol>
+                </div>
+
+                <div *ngIf="modeSel === 'tile'" class='model-left model-icon' (click)='changeDire("leftDirec",leftDirec)'>
+                    <i *ngIf="leftDirec" class='iconfont f-center'>&#xe836;</i>
+                    <i *ngIf="!leftDirec" class='iconfont f-center'>&#xe837;</i>
+                </div>
+
+                <div class='kline' [ngClass]="{'z-index-8': chartShow == 'k'}">
+                    <div id="k-line"></div>
+                </div>
+
+                <div id="container" [ngClass]="{'z-index-8': chartShow != 'k'}"  style="width:100%; height:calc(100% - 60px);"></div>
+
+                <div class='container_zhan f-center' *ngIf="chartShow !== 'k' && this.echartsList.buy.length == 0 && this.echartsList.sell.length == 0">
+                    <app-no-data class='no-data'></app-no-data>
+                </div>
+            </div>
+
+
+        </div>
+    </div>

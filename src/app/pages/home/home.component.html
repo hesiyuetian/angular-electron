@@ -1,0 +1,93 @@
+<div class="home">
+
+    <div class='home-content'>
+        <!--  main  -->
+        <div class="home-top">
+            <img class="f-center-x" [src]=logoHome alt="">
+            <h2 class="f-center-x">{{'home.n1t' | translate}}</h2>
+            <div class="f-center-x f-cursor" (click)="link('trade')">{{'home.trade' | translate}}</div>
+            <div class="f-center-x f-cursor" (click)="link('/user/create_wallet')">{{'home.create' | translate}}</div>
+        </div>
+
+        <!-- 行情   -->
+        <div class="home-ticker">
+            <div class="home-ticker-tip">
+                <div class="home-ticker-tip-con f-center-x qcfd">
+                    <div class='home-ticker-tip-con-banner qcfd f-fl '>
+                        <ng-container *ngFor="let item of noticeList;let ind = index">
+                            <a [href]="language === 'zh' ? item.url_zh : item.url_en" target="_blank" *ngIf="ind < 3">
+                                <div class="home-ticker-tip-con-banner-item f-fl f-cursor" >
+                                    <p class="ellipsis">{{language === 'zh' ? item.title_zh : item.title_en}}</p>
+                                    <span class="f-fr f-opacity-f">{{item.create_time | utcTolocal | format:6}}</span>
+                                </div>
+                            </a>
+                        </ng-container>
+                    </div>
+
+                    <a [href]="language === 'zh' ? 'https://bdex.zendesk.com/hc/zh-hk' : 'https://bdex.zendesk.com/hc/en-us'" target="_blank">
+                        <div class='home-ticker-tip-con-more f-fr f-cursor'>{{'home.more' | translate}}</div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="home-ticker-main f-center-x">
+                <div class="home-ticker-main-line qcfd">
+                    <div class="home-ticker-main-line-item width-nomar">{{"Market.transaction" | translate}}</div>
+                    <div class="home-ticker-main-line-item width-nomar">{{"Market.coinName" | translate}}</div>
+                    <div class="home-ticker-main-line-item width-nomar">{{"Market.lastPrice" | translate}}</div>
+                    <div class="home-ticker-main-line-item width-change">{{"Market.24UpsDowns" | translate}}</div>
+                    <div class="home-ticker-main-line-item width-volume">{{"Market.24Volume" | translate}}</div>
+                </div>
+
+                <div class="f-center-y" style="margin-top: 80px" *ngIf="!tickerList || tickerList.length <= 0" >
+                    <app-no-data *ngIf="!tickerLoadStatus"></app-no-data>
+                    <app-load *ngIf="tickerLoadStatus" class='no-data' style="margin-top: 40px;"></app-load>
+                </div>
+                <div class="home-ticker-main-line qcfd" *ngFor="let item of tickerList">
+                    <div class="home-ticker-main-line-item width-nomar">
+                        <span class="f-fontw8">{{ splitPair(item.pair, 0) }}</span> /
+                        <span>{{ splitPair(item.pair, 1) }}</span>
+                    </div>
+                    <div class="home-ticker-main-line-item width-nomar f-fontw8">{{item.name}}</div>
+                    <div class="home-ticker-main-line-item width-nomar">
+                        <span class="f-fontw8">{{regular.numFormat(tickerListObj[item.pair].close)}}</span>
+                        <span>&nbsp;&nbsp;&nbsp;$ {{regular.toBigsells([reset.raleUSDTObject[item.quote] || 0 , tickerListObj[item.pair].close ], 4) }}</span>
+                    </div>
+                    <div class="home-ticker-main-line-item width-change f-fontw8" [ngClass]="{'blue': tickerListObj[item.pair].change > 0, 'red': tickerListObj[item.pair].change < 0}">
+                        <span>{{tickerListObj[item.pair].change > 0 ? "+" : ''}}</span>{{regular.toFixed(tickerListObj[item.pair].change * 100, 2)}}%
+                    </div>
+                    <div class="home-ticker-main-line-item width-volume f-fontw8">{{tickerListObj[item.pair].base_vol}}</div>
+                </div>
+
+<!--                <div class="home-ticker-main-all f-center-x f-cursor f-fontw6">{{'home.allMarket' | translate}}</div>-->
+            </div>
+        </div>
+    </div>
+
+    <!--  介绍  -->
+    <div class="home-explain f-center-x">
+        <div class="home-explain-radius left f-center-y f-cursor noselect" [ngClass]="{'f-opacity-t': explainActIndex <= 0}" (click)="explainActIndex > 0 && action('add')"> <i class="iconfont">&#xe644;</i></div>
+        <div class="home-explain-radius f-center-y f-cursor noselect" [ngClass]="{'f-opacity-t': explainActIndex >= explainList.length-1}" (click)="explainActIndex < explainList.length-1 && action('reduce')"> <i class="iconfont">&#xe643;</i> </div>
+
+        <div class="home-explain-con qcfd">
+            <div class="home-explain-con-box" id="home-explain-con-box">
+                <div class="home-explain-con-item f-fl" *ngFor="let item of explainList">
+                    <h4 class="f-center-x">{{'home.' + item.name | translate}}</h4>
+                    <p class="f-center-x">{{'home.' + item.val | translate}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  footer  -->
+    <div class="home-footer qcfd f-center-x">
+        <div class="home-footer-item f-fl" *ngFor="let item of menuList">
+            <h5>{{'home.' + item.title | translate}}</h5>
+            <div class='home-footer-item-list'>
+                <div class='home-footer-item-list-item f-cursor' *ngFor="let val of item.list" (click)='go(val.link)'>{{'home.' + val.val | translate}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class='home-hr f-center-x'></div>
+</div>

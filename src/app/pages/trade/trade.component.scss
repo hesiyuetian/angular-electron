@@ -1,0 +1,285 @@
+@import "../../skin/mixin";
+
+.deal{
+    width: 100%;
+    padding: 10px;
+    // 传统模式
+    .container{
+        width: 100%;
+        &-top{
+            width: 100%;
+            height: 870px;
+            &-left{
+                height: 100%;
+                &-head{
+                    width: 100%;
+                    height: 576px;
+                    &-left{
+                        width: 328px;
+                        margin-right: 10px;
+                        height: 100%;
+                        border-radius: 4px;
+                    }
+                    &-right{
+                        width: calc(100% - 339px);
+                        height: 100%;
+                        border-radius: 4px;
+                        overflow: hidden;
+                    }
+                }
+                &-trad{
+                    margin-top: 10px;
+                    width: 100%;
+                    height: 310px;
+                }
+            }
+            &-right{
+                height: 100%;
+            }
+        }
+        &-foot{
+            margin-top: 10px;
+        }
+    }
+
+    // 平铺模式
+    .container-tile{
+        width: 100%;
+        height: calc( 100vh - 80px);
+        min-height: 380px;
+
+        &-top{
+            width: 100%;
+            &-left{
+                width: 330px;
+                height: 100%;
+                margin-right: 10px;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-midel{
+                width: calc( 100% - 681px);
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-right{
+                width: 341px;
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+        }
+
+        .disRight{
+            .container-tile-top-right{
+                width: 0px;
+                //transition: width 200ms ease-in-out;
+            }
+            .container-tile-top-left{
+                width: 306px;
+                margin-right: 10px;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-midel{
+                width: calc( 100% - 340px);
+                //transition: width 200ms ease-in-out;
+            }
+        }
+
+        &-bottom{
+            width: 100%;
+            margin-top: 10px;
+            &-left{
+                width: calc( 100% - 341px);
+                margin-right: 10px;
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-right{
+                width: 331px;
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+        }
+    }
+
+
+    @media(min-width: 0) and (max-width: 1439px){
+        .container-top-left{
+            width: calc(100% - 340px);
+            height: 100%;
+        }
+        .container-top-rigth{
+            width: 340px;
+            height: 100%;
+        }
+
+        // 平铺模式
+        .container-tile-top{
+            height: calc(100% - 285px);
+            &-left{
+                width: 0px;
+                height: 100%;
+                margin-right: 0px;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-midel{
+                width: calc( 100% - 341px);
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-right{
+                width: 341px;
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+        }
+        .container-tile-bottom{
+            height: 265px;
+        }
+
+        .disLeft{
+            .container-tile-top-left{
+                width: 0px;
+                margin-right: 0;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-right{
+                width: 341px;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-midel{
+                width: calc( 100% - 341px);
+                //transition: width 300ms ease-in-out;
+            }
+        }
+    }
+
+    @media(min-width: 1440px) and (max-width: 1819px){
+        .container-top-left{
+            width: calc(100% - 340px);
+            height: 100%;
+        }
+        .container-top-rigth{
+            width: 340px;
+            height: 100%;
+        }
+
+        // 平铺模式
+        .container-tile-top{
+            height: calc(100% - 275px);
+            &-left{
+                width: 306px;
+                height: 100%;
+                margin-right: 10px;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-midel{
+                width: calc( 100% - 657px);
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-right{
+                width: 341px;
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+        }
+        .container-tile-bottom{
+            height: 255px;
+        }
+
+        .disLeft{
+            .container-tile-top-left{
+                width: 0px;
+                margin-right: 0;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-right{
+                width: 341px;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-midel{
+                width: calc( 100% - 341px);
+                //transition: width 300ms ease-in-out;
+            }
+        }
+
+    }
+
+    @media(min-width: 1820px) and (max-width: 20000px){
+        .container-top-left{
+            width: calc(100% - 680px);
+            height: 100%;
+        }
+
+        .container-top-rigth{
+            width: 632px;
+            height: 100%;
+        }
+
+        // 平铺模式
+        .container-tile-top{
+            height: calc(100% - 368px);
+            &-left{
+                width: 306px;
+                height: 100%;
+                margin-right: 10px;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-midel{
+                width: calc( 100% - 950px);
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+            &-right{
+                width: 632px;
+                height: 100%;
+                border-radius: 4px;
+                overflow: hidden;
+            }
+        }
+
+        .container-tile-bottom{
+            height: 348px;
+            &-left{
+                width: calc( 100% - 634px);
+            }
+            &-right{
+                width: 624px;
+            }
+        }
+
+        .disLeft{
+            .container-tile-top-left{
+                width: 0px;
+                margin-right: 0;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-right{
+                width: 632px;
+                //transition: width 300ms ease-in-out;
+            }
+            .container-tile-top-midel{
+                width: calc( 100% - 634px);
+                //transition: width 300ms ease-in-out;
+            }
+        }
+
+    }
+}
+
+.screens{
+    padding-bottom: 0;
+}

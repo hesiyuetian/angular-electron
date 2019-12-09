@@ -1,0 +1,29 @@
+<div class="sell-buy-right border-box">
+    <header class='head'>
+        <span class='head-item'>{{'tradeBuySell.latestDeal' | translate}}</span>
+    </header>
+
+    <ul class='sell-buy-right-con'>
+        <li class='qcfd special'>
+            <div>{{'tradeBuySell.dealPrice' | translate}}({{symbol.split("_")[1]}})</div>
+            <div>{{'tradeBuySell.dealAmount' | translate}}({{symbol.split("_")[0]}})</div>
+            <div>{{'tradeBuySell.time' | translate}}</div>
+        </li>
+
+        <ng-container *ngIf="newTradList.length > 0">
+            <div class='sell-buy-right-con-tant'>
+                <li class='qcfd f-cursor f-hover' [ngClass]="{'act-trade-new': item.isnew}" *ngFor="let item of newTradList;let i = index;">
+                    <div [ngClass]="{'red': item.side !== 0,'blue': item.side === 0}">{{ regular.toFixed(item.price || 0, precision.pricePrecision) }}</div>
+                    <div>{{ regular.toFixed(item.amount || 0, precision.amountPrecision)}}</div>
+                    <div style="overflow-x: hidden">{{ item.time | utcTolocal | format:1}}</div>
+                </li>
+            </div>
+        </ng-container>
+
+        <div *ngIf="!newTradList || newTradList.length <= 0" class='f-center-y'>
+            <app-no-data *ngIf="!loadTrade" class='no-data'></app-no-data>
+            <app-load *ngIf="loadTrade"></app-load>
+        </div>
+    </ul>
+
+</div>

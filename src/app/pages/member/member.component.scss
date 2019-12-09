@@ -1,0 +1,165 @@
+@import "../../skin/mixin";
+
+.member{
+    width: 100%;
+    height: calc(100vh - 170px);
+    @include mixin-font-act-color();
+
+    &-zhan{
+        width: 402px;
+        height: auto;
+        position: relative;
+        div, p, h1{
+            background: rgba(0, 58, 97, 0.05);
+            border-radius: 4px;
+        }
+        h1{
+            height: 44px;
+            margin-bottom: 20px;
+        }
+        p{
+            height: 20px;
+        }
+        &-tip{
+            width: 260px;
+            margin: 10px auto 0;
+        }
+        div{
+            margin-top: 32px;
+            height: 50px;
+        }
+        &-loading{
+            position: absolute;
+            width: 90px;
+        }
+    }
+
+    &-content{
+        width: 402px;
+        height: auto;
+        text-align: center;
+        //top: 40%;
+        &-step{
+            h1{
+                line-height: 44px;
+                height: 44px;
+                font-size: 34px;
+                margin-bottom: 20px;
+                font-weight: 800;
+            }
+            &-tip{
+                line-height: 20px;
+                height: 20px;
+                font-size: 14px;
+            }
+            &-name{
+                width: 402px;
+                height: 50px;
+                position: relative;
+                background: #fff;
+                line-height: 50px;
+                font-size: 14px;
+                margin-top: 10px;
+                border-radius: 25px;
+                input{
+                    width: 245px;
+                    position: absolute;
+                    left: 22px;
+                    height: 30px;
+                    font-size: 14px;
+                    @include mixin-font-act-color();
+                }
+                &-tip{
+                    position: absolute;
+                    right: 60px;
+
+                }
+                .icon-font{
+                    position: absolute;
+                    right: 10px;
+                    font-size: 28px;
+                }
+                .member-next{
+                    @include mixin-font-color();
+                }
+                &-success{
+                    color: #00C3B3 !important;
+                    //@include mixin-font-act-color();
+                }
+                .member-next:hover{
+                    opacity: 1 !important;
+                    @include mixin-font-act-color();
+                }
+
+                &-error{
+                    padding: 12px 10px;
+                    position: absolute;
+                    left: 417px;
+                    width: 190px;
+                    color: #fff;
+                    background: #121932;
+                    border-radius: 4px;
+                    i{
+                        position: absolute;
+                        left: 8px;
+                        top: -2px;
+                        font-size: 12px;
+                    }
+                    .icon-success{
+                        color: #00C3B3;
+                    }
+                    .icon-error{
+                        color: #FF6F79;
+                    }
+                    &-san{
+                        position: absolute;
+                        width: 10px;
+                        height: 10px;
+                        display: inline-block;
+                        top: 9px;
+                        left: -5px;
+                        background: #121932;
+                        transform: rotate(45deg);
+                    }
+                    p{
+                        font-size: 12px;
+                        line-height: 20px;
+                        position: relative;
+                        text-align: left;
+                        width: 180px;
+                        padding-left: 20px;
+                    }
+                }
+            }
+            &-name:nth-of-type(1){
+                margin-top: 40px;
+            }
+
+            &-deposit{
+                width: 402px;
+                height: 50px;
+                position: relative;
+                line-height: 50px;
+                font-size: 14px;
+                margin-top: 50px;
+                border-radius: 25px;
+                color: #fff;
+                &:last-child{
+                    margin-top: 10px;
+                    background: none !important;
+                    @include mixin-color-blue();
+                }
+            }
+            .member-return:hover{
+                color: $btn_hover !important;
+            }
+            .member-deposit{
+                @include mixin-common-btn();
+                &:hover{
+                    @include mixin-common-btn-hover();
+                }
+            }
+        }
+    }
+
+}

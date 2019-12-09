@@ -1,0 +1,148 @@
+<div class="nav" [ngClass]="{'home': routerUrl == 'main', 'navbg': routerUrl != 'main' , 'white': specialFlag}">
+    <div class="container" [ngClass]="{'container-border': headHidden && routerUrl != 'main', 'container-main': routerUrl == 'main'}">
+        <!-- logo -->
+        <div class="nav-left">
+            <a routerLink="/" class="logo">
+                <img *ngIf="routerUrl == 'main'" [src]=logoHome alt="">
+                <img *ngIf="routerUrl != 'main'" [src]=logo alt="">
+            </a>
+            <span>{{time}}</span>
+        </div>
+
+        <div class="nav-right qcfd">
+            <div class="nav-right-box qcfd f-cursor"
+                [ngClass]="{'activated': routerLink.indexOf('_') !== -1 && routerLink.indexOf('/trade/') !== -1,'nav-right-boxhover': routerUrl != 'main', 'nav-right-boxhover-main': routerUrl == 'main'}"
+                (click)="activated('trade-record','/trade/',$event)"
+                *ngIf="headHidden"
+                >
+                {{'Header.exchange' | translate}}
+            </div>
+
+            <!-- 已登录 -->
+            <div class="nav-right-box nav-right-boxhover f-cursor"
+                [ngClass]="{'activated': routerLink.indexOf('/order/') !== -1}"
+                (click)="link('order')"
+                *ngIf="this.routerUrl != 'main' && headHidden && user.token()"
+                >
+                {{'Header.order' | translate}}
+            </div>
+
+            <div class="nav-right-box nav-right-boxhover f-cursor"
+                [ngClass]="{'activated': routerLink.indexOf('/assets_records/') !== -1}"
+                (click)="link('assets_records')"
+                *ngIf="this.routerUrl != 'main' && headHidden && user.token()"
+                >
+                {{'Header.assets' | translate}}
+            </div>
+
+            <!-- 用户中心 -->
+            <div class="nav-right-box3" (mouseover)="setLanguages('userInfo', true)"
+                (mouseleave)="setLanguages('userInfo', false)" *ngIf="this.routerUrl != 'main' && headHidden && user.token()"
+                >
+                <label class="f-cursor"><i class="iconfont icon-hover">&#xe614;</i></label>
+
+                <div class='user-center' [ngClass]="{'show': userInfoStatus, 'hide': !userInfoStatus}" >
+                    <div class='user-center-zhan' (mouseover)="setLanguages('userInfo', false);$event.stopPropagation();"></div>
+                    <div class='user-center-con'>
+                        <div class='user-center-con-left f-fl qcfd'>
+                            <div class='user-center-con-left-item f-fl'>
+                                <h2>CPU</h2>
+                                <p class='user-center-con-left-item-ms'>{{reg.msChange(xtarScource.cpu.usableCpu)}} / {{reg.msChange(xtarScource.cpu.usableCpu)}}</p>
+                                <div class='chart f-center-x'>
+                                    <img class='f-center-x' src="./assets/images/cpu.svg" alt="">
+                                    <app-slide [anima]='userInfoStatus' type='cpu' [rol]='cpuFlex'></app-slide>
+                                </div>
+                                <p class='user-center-con-left-item-line'>Staked： {{reg.xtarChange(xtarScource.cpu.cpuAmount)}} BT</p>
+                                <p class='user-center-con-left-item-line'>Used：{{ reg.msChange(xtarScource.cpu.cpuUsage) }}</p>
+                                <p class='user-center-con-left-item-line'>Remain：{{reg.msChange(xtarScource.cpu.usableCpu) }}</p>
+                            </div>
+
+                            <div class='user-center-con-left-item f-fl'>
+                                <h2>NET</h2>
+                                <p class='user-center-con-left-item-ms'>{{reg.bitChange(xtarScource.net.usableNet)}} / {{reg.bitChange(xtarScource.net.usableNet)}}</p>
+                                <div class='chart f-center-x'>
+                                    <img class='f-center-x' src="./assets/images/net.svg" alt="">
+                                    <app-slide [anima]='userInfoStatus' type='net' [rol]='netFlex'></app-slide>
+                                </div>
+                                <p class='user-center-con-left-item-line'>Staked：{{reg.xtarChange(xtarScource.net.netAmount)}} BT</p>
+                                <p class='user-center-con-left-item-line'>Used：{{reg.bitChange(xtarScource.net.netUsage)}}</p>
+                                <p class='user-center-con-left-item-line'>Remain：{{reg.bitChange(xtarScource.net.usableNet)}}</p>
+                            </div>
+
+                            <div class='user-center-con-left-item f-fl'>
+                                <h2>RAM</h2>
+                                <p class='user-center-con-left-item-ms'>{{reg.bitChange(xtarScource.ram.totalReserved)}} / {{reg.bitChange(xtarScource.ram.totalRam)}}</p>
+                                <div class='chart f-center-x'>
+                                    <img class='f-center-x' src="./assets/images/pam.svg" alt="">
+                                    <app-slide [anima]='userInfoStatus' type='ram' [rol]='ramFlex'></app-slide>
+                                </div>
+                                <p class='user-center-con-left-item-line'>Used：{{reg.bitChange(xtarScource.ram.totalUsed)}}</p>
+                                <p class='user-center-con-left-item-line'>Remain：{{reg.bitChange(xtarScource.ram.totalReserved)}}</p>
+                            </div>
+                        </div>
+
+                        <div class='user-center-con-right f-fl'>
+                            <div class='user-center-con-right-line f-cursor' (click)="copyAddress(accountInfo.address);$event.stopPropagation();">
+                                <h3 class='f-opacity'>{{accountInfo.name || ''}}</h3>
+                                <p class='f-opacity-k'>{{accountInfo.address || ''}}</p>
+                                <img *ngIf="user.prime()" src="./assets/images/vip.svg" alt="">
+                                <div class='user-center-con-right-line-register f-cursor' *ngIf="!user.prime()" (click)='registerPrime();$event.stopPropagation();'>{{'Header.registeredMember' | translate}}</div>
+                                <div class='user-center-con-right-line-hr'></div>
+                            </div>
+                            <div class='user-center-con-right-line user-center-con-right-vip'>
+                                {{'Header.vip' | translate}}
+                                <span class="f-fr" *ngIf="user.prime()">20% {{'Header.OFF' | translate}}</span>
+                                <span class="f-fr" *ngIf="!user.prime()">{{'Header.None' | translate}}</span>
+                                <div class='user-center-con-right-line-hr'></div>
+                            </div>
+                            <div class='user-center-con-right-line f-cursor' (click)="link('setting');$event.stopPropagation();">
+                                {{'Header.setting' | translate}}
+                                <div class='user-center-con-right-line-hr'></div>
+                            </div>
+                            <div class='user-center-con-right-line f-cursor' (click)="logOut();$event.stopPropagation();">
+                                {{'set.out2' | translate}}
+                                <div class='user-center-con-right-line-hr'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 未登录-->
+            <div class="nav-right-box nav-right-boxhover" (click)="link('/user/login')"
+                *ngIf="this.routerUrl != 'main' && headHidden && !user.token()"
+                >
+                <label class="f-cursor">
+                    <font>{{'Header.login' | translate}}</font>
+                </label>
+            </div>
+
+            <!-- 主题 语言 -->
+<!--            <div class="nav-right-box3 special f-cursor" *ngIf="this.routerUrl != 'main' && headHidden">-->
+
+<!--&lt;!&ndash;                <i *ngIf="modeSel ==='traditional'" class='iconfont modeSel icon-hover' (click)="changeMode('modeSel', 'tile')">&#xe639;</i>&ndash;&gt;-->
+<!--&lt;!&ndash;                <i *ngIf="modeSel ==='tile'" class='iconfont modeSel icon-hover' (click)="changeMode('modeSel', 'traditional')">&#xe63a;</i>&ndash;&gt;-->
+<!--                <label>-->
+<!--                    <i class='iconfont f-cursor theme icon-hover' *ngIf="theme == 'Light'" (click)="changeMode('theme', 'Dark')">&#xe63b;</i>-->
+<!--                    <i class='iconfont f-cursor theme icon-hover' *ngIf="theme == 'Dark'" (click)="changeMode('theme', 'Light')">&#xe638;</i>-->
+<!--                </label>-->
+
+<!--                <div class='bor-line'></div>-->
+<!--            </div>-->
+
+            <!-- 多语言-->
+            <div class="nav-right-box nav-right-box2" (mouseover)="setLanguages('language', true)"
+                (mouseleave)="setLanguages('language', false)">
+                <i class=" guoqi" *ngIf="language == 'CN'"><img src="./assets/images/guoqi_cn.svg" /></i>
+                <i class=" guoqi" *ngIf="language == 'EN'"><img src="./assets/images/guoqi_en.svg" /></i>
+                <!-- <span>{{language}}</span> -->
+                <i class="iconfont tubiao" [ngClass]="{'tubiao2': shouLanguage}">&#xe771;</i>
+                <ul *ngIf="shouLanguage">
+                    <li (click)="setLanguage('zh')"><i class=" guoqi2"><img src="./assets/images/guoqi_cn.svg" /></i>简体中文</li>
+                    <li (click)="setLanguage('en')"><i class=" guoqi2"><img src="./assets/images/guoqi_en.svg" /></i>English </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

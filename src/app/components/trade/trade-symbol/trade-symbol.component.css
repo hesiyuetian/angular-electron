@@ -1,0 +1,40 @@
+/*
+Error: Invalid US-ASCII character "\xE7"
+        on line 123 of trade-symbol.component.scss
+
+118:               div {
+119:                 float: left;
+120:                 font-size: 12px;
+121:                 height: 40px;
+122:                 line-height: 40px;
+123:                 -moz-user-select:none;/*火狐*\/
+124:                 -webkit-user-select:none;/*webkit浏览器*\/
+125:                 -ms-user-select:none;/*IE10*\/
+126:                 user-select:none;
+127: 
+128:                 label{
+
+Backtrace:
+trade-symbol.component.scss:123
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1300:in `rescue in block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1297:in `block in find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `each'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `each_with_index'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:1296:in `find_encoding_error'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/util.rb:905:in `check_sass_encoding'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:436:in `check_encoding!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:392:in `_to_tree'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/engine.rb:298:in `render_with_sourcemap'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:391:in `run'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/sass_scss.rb:63:in `process_result'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:52:in `parse'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/lib/sass/exec/base.rb:19:in `parse!'
+/Library/Ruby/Gems/2.3.0/gems/sass-3.4.23/bin/sass:13:in `<top (required)>'
+/usr/local/bin/sass:22:in `load'
+/usr/local/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Invalid US-ASCII character \"\xE7\"\A         on line 123 of trade-symbol.component.scss\A \A 118:               div {\A 119:                 float: left;\A 120:                 font-size: 12px;\A 121:                 height: 40px;\A 122:                 line-height: 40px;\A 123:                 -moz-user-select:none;/*火狐*/\A 124:                 -webkit-user-select:none;/*webkit浏览器*/\A 125:                 -ms-user-select:none;/*IE10*/\A 126:                 user-select:none;\A 127: \A 128:                 label{"; }

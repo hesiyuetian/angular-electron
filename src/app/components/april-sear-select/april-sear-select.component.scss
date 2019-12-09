@@ -1,0 +1,107 @@
+@import '../../skin/mixin.scss';
+.select-box{
+    // float: right;
+    width: 100%;
+    padding: 0 10px;
+    border-radius: 4px;
+    // border: 1px solid;
+    // @include mixin-border-color();
+    position: relative;
+    cursor: pointer;
+    // font-size: 16px;
+    .sanjiao_xia{
+        float: right;
+        opacity: .3;
+        @include mixin-font-color();
+    }
+    .set-value{
+        @include mixin-font-act-color();
+    }
+    .placeholder{
+        @include mixin-font-color();
+        opacity: .4;
+    }
+    .up{
+        margin-top: -2px;
+    }
+    .down-box{
+        position: absolute;
+        top: 50px;
+        left: -1px;
+        z-index: 22;
+        width: calc(100% + 2px);
+        background-color: inherit;
+        font-size: 12px;
+        border-radius: 2px;
+        // background-color: #fff;
+        border: 1px solid;
+        @include mixin-border-color();
+        @include mixin-bg-color();
+        @include mixin-dialog-color();
+        // box-shadow: 0 2px 8px rgba(0,0,0,.15);
+        border-radius: 4px;
+        // padding: 52px 0 0;
+        input{
+            width: 90%;
+            height: 30px;
+            position: absolute;
+            top: 3px;
+            left: 50%;
+            margin: 5px 0;
+            transform: translateX(-50%);
+            border: 1px solid;
+            @include mixin-border-color();
+            border-radius: 4px;
+            text-indent: 5px;
+            @include mixin-font-color();
+        }
+        p{
+            margin: 0;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            @include mixin-font-color();
+            text-indent: 10px;
+            font-weight: 400;
+            line-height: 34px;
+        }
+        p:hover{
+            @include mixin-border-bg();
+        }
+        .april-select-con{
+            margin-top: 50px;
+            max-height: 260px;
+            overflow-y: auto;
+        }
+        .act{
+            @include mixin-border-bg();
+        }
+    }
+}
+  .down {
+    // transform-origin: center center;
+    animation: Down 0ms linear;
+  }
+  
+  .up {
+    // transform-origin: center center;
+    animation: Up 0ms linear;
+  }
+  
+  @keyframes Down {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+  }
+  
+  @keyframes Up {
+    from {
+        -webkit-transform: rotate(180deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+  }

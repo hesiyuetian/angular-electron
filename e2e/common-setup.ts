@@ -2,7 +2,7 @@ const Application = require('spectron').Application;
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
 const path = require('path');
 
-export default function setup(): void {
+export default function setup() {
   beforeEach(async function () {
     this.app = new Application({
       // Your electron path can be any binary

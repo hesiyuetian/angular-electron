@@ -1,0 +1,10 @@
+<div class='warn alert-t'>
+  <div class='warn-zhan' (click)='onThisDialogClose()'></div>
+  <div class='warn-con'>
+    <i class='iconfont' *ngIf="config.label == 1">&#xe63b;</i>
+    <img  *ngIf="config.label == 2" src="./assets/images/dui.png" alt="">
+    <i class='iconfont dis f-cursor' (click)='onThisDialogClose()'>&#xe608;</i>
+    <p class='warn-con-content'>{{config.title}}</p>
+    <div class='warn-con-btn button2 f-cursor' (click)='go()'>{{config.btnVal}}</div>
+  </div>
+</div>

@@ -1,0 +1,189 @@
+// drak
+// $background: #36384B;
+// $color: #fff;
+// $border-color: rgba(255,255,255,.06);
+
+// lint
+$color: #121932;
+$border-color: rgba(18, 25, 50,.05);
+$border-color-zh: rgba(28,36,57,.5);
+$color_blue : #4F6CFF;
+
+
+@import './skin/mixin.scss';
+
+/deep/.Drak{
+
+}
+/deep/.Light{
+
+}
+
+/deep/ .loadings{
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba($color: #000000, $alpha: 0.5);
+    &-content{
+        position: absolute;
+        z-index: 9999;
+        width: 100px;
+        height: 100px;
+        border-radius: 4px;
+    }
+    &-loading{
+        width: 80px;
+        opacity: .8;
+    }
+}
+
+// 输入框颜色
+/deep/.put-focus{
+    height: 30px;
+    border: none;
+    border-radius: 0;
+    text-indent: 0px;
+    border-bottom: 1px solid;
+    @include mixin-border-color();
+    width: 100%;
+}
+/deep/.textarea:focus, /deep/.put-focus:focus{
+    outline: none;
+    border-bottom: 1px solid;
+    @include mixin-input-focus-border();
+}
+
+
+
+//登录注册等输入框，标题动画
+/deep/.enterTxt{
+    position: relative;
+    // background: rgba(0,0,0,0);
+    input{
+        margin-top: 20px;
+        height: 30px;
+        width: 100%;
+        font-size: 14px;
+        // background: rgba(0,0,0,0);
+        @include mixin-font-act-color();
+        border-bottom: 1px solid;
+        @include mixin-border-color();
+    }
+    span{
+        position: absolute;
+        bottom: 10px;
+        left: 0px;
+        transition: all .3s;
+        font-size: 12px;
+        // color: #1A1B29;
+        @include mixin-font-color();
+        opacity: 0.3;
+        // z-index: -1;
+    }
+    label{
+        position: absolute;
+        bottom: 8px;
+        right: 0px;
+        cursor: pointer;
+        opacity: .4;
+        font-size: 13px;
+    }
+    .label-light{
+        // color: rgba(26,27,41,0.2)
+        @include mixin-font-color();
+        opacity: .4;
+    }
+    ul{
+        position: absolute;
+        right: -190px;
+        top: 24px;
+        width: 180px;
+        color: #fff;
+        background: #121932;
+        border-radius: 4px;
+        li{
+            font-size: 12px;
+            padding: 5px 15px;
+        }
+    }
+    .direction{
+        position: absolute;
+        left: -12px;
+        top: 7px;
+        display: inline-block;
+        width: 0;
+        height: 0;
+        padding: 0;
+        border: 6px solid rgba(0, 0, 0, 0);
+        border-right: 6px solid #121932;
+    }
+
+}
+/deep/.enterTxtFocus{
+    span{
+        bottom: 30px;
+        left: 0px;
+        transition: all .3s;
+        font-size: 12px;
+    }
+}
+
+//中间有文字的分割线
+/deep/.txt-hr, /deep/.txt-hr2{
+    display: table;
+    span{
+        display: inline-block;
+        padding: 0 10px;
+        background: transparent;
+        opacity: $opction;
+        @include mixin-font-color();
+    }
+}
+
+/deep/.txt-hr::after, /deep/.txt-hr::before{
+    position: relative;
+    top: 50%;
+    display: table-cell;
+    width: 50%;
+    border-top: 1px solid ;
+    @include mixin-border-color();
+    -webkit-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+    content: '';
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/deep/.txt-hr2::after, /deep/.txt-hr2::before{
+    position: relative;
+    top: 50%;
+    display: table-cell;
+    width: 50%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    -webkit-transform: translateY(50%);
+    -ms-transform: translateY(50%);
+    transform: translateY(50%);
+    content: '';
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+//验证密码强度的颜色条
+/deep/ .borderError{
+    border-color: #FF6F79 !important;
+}
+
+/deep/.passwordColor0{
+    background: #FF6F79 !important;
+}
+/deep/.passwordColor1{
+    background: rgba(248, 183, 0, 1) !important;
+}
+/deep/.passwordColor2{
+    background: #00B553 !important;
+}
+
+
+

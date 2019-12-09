@@ -1,0 +1,8 @@
+<div class='assets'>
+    <div class='assets-head qcfd border-box'>
+        <div class='assets-head-item f-fl' [ngClass]="{'act': this.routerLink === '/assets_records/list'}" (click)='link("list")'>{{'assets.assetList' | translate}}</div>
+<!--        <div class='assets-head-item f-fl' [ngClass]="{'act': this.routerLink === '/assets_records/bonus'}" (click)='link("bonus")'>{{'assets.accountBonus' | translate}}</div>-->
+        <div class='assets-head-item f-fl' [ngClass]="{'act': this.routerLink === '/assets_records/history'}" (click)='link("history")'>{{'assets.hisList' | translate}}</div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

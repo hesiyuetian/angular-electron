@@ -1,0 +1,420 @@
+@import '../../../skin/mixin';
+
+.connect{
+    width: 450px;
+    @include mixin-font-act-color();
+    margin: 0 auto;
+    &-main{
+        padding: 50px 30px 40px;
+        text-align: center;
+        border-radius: 4px;
+        @include mixin-bg-color();
+        h3{
+            font-size: 30px;
+            margin-bottom: 50px;
+        }
+        &-col1{
+            margin-bottom: 60px;
+            @include mixin-font-color();
+            opacity: 0.9;
+        }
+        &-col2{
+            margin-bottom: 30px;
+        }
+        &-col3{
+            @include mixin-color-blue();
+            font-weight: 600;
+            font-size: 14px;
+            span{
+                cursor: pointer;
+            }
+        }
+        &-col4{
+            margin-bottom: 20px;
+        }
+        &-btn1{
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+            width: 394px;
+            @include mixin-common-btn();
+            border-radius: 25px;
+            margin: 50px 0 30px;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        &-btn1:hover{
+            @include mixin-common-btn-hover();
+        }
+        &-btn1:nth-of-type(2){
+            margin: 20px 0 ;
+        }
+    }
+
+    &-select{
+        width: 450px;
+        padding: 60px 28px 40px;
+        text-align: center;
+        border-radius: 4px;
+        font-size: 14px;
+        @include mixin-bg-color();
+        h3{
+            font-size: 30px;
+            margin-bottom: 80px;
+        }
+        &-btn{
+            width: 100%;
+            line-height: 50px;
+            border-radius: 25px;
+            margin-bottom: 20px;
+            color: #fff;
+            font-weight: 600;
+            @include mixin-common-btn();
+            &:hover{
+                @include mixin-common-btn-hover();
+            }
+        }
+        p{
+            color: #FA9128;
+            margin-top: 10px;
+            line-height: 18px;
+            font-weight: 600;
+        }
+
+
+    }
+}
+
+.connect-nouser-main{
+    text-align: center;
+    border-radius: 4px;
+    height: calc(100% - 140px);
+    margin-top: 70px;
+    width: 100%;
+    .connect-width{
+        width: 450px;
+        padding: 60px 0 20px;
+        border-radius: 4px;
+        z-index: 1;
+        position: relative;
+        overflow: hidden;
+        background-position: center top;
+        background-size: cover;
+        @include mixin-bg-color();
+        background: none !important;
+        h3 {
+            font-size: 30px;
+            margin-bottom: 80px;
+        }
+    }
+}
+
+
+.connect2{
+    margin: 0 auto;
+    display: table;
+
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../../assets/images/login_bg.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    //color: #fff;
+
+    &-head{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 70px;
+        width: 100%;
+
+        &-l{
+            float: left;
+            margin-left: 20px;
+            display: table;
+            height: 100%;
+            &-txt{
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 12px;
+                padding-left: 5px;
+                cursor: pointer;
+            }
+        }
+        &-r{
+            float: right;
+            margin-right: 10px;
+            display: table;
+            height: 100%;
+            &-row{
+                min-width: auto;
+                text-align: right;
+                position: relative;
+
+                display: table-cell;
+                vertical-align: middle;
+                font-size: 12px;
+                cursor: pointer;
+
+                ul{
+                    position: absolute;
+                    right: 0;
+                    top: 46px;
+                    @include mixin-bg-color();
+                    width: 90px;
+                    border-radius: 4px;
+                    border: 1px solid;
+                    @include mixin-border-color();
+                    @include mixin-font-color();
+                    @include mixin-dialog-color();
+                    li{
+                        font-size: 14px;
+                        text-align: left;
+                        padding: 0 20px;
+                        height: 40px;
+                        line-height: 40px;
+                    }
+                    li:hover{
+                        @include mixin-border-bg();
+                        border-radius: 4px;
+                    }
+                }
+                .tubiao, span {
+                    position: relative;
+                    top: -3px;
+                    color: #fff !important;
+                }
+            }
+        }
+    }
+    &-main{
+        &-col1{
+            margin-bottom: 60px;
+            opacity: 0.9;
+        }
+        &-col2{
+            margin-bottom: 30px;
+        }
+    }
+
+    &-foot{
+        position: absolute;
+        bottom: 0px;
+        left: 0;
+        height: 70px;
+        width: 100%;
+        color: #fff !important;
+    }
+    .nav-body{
+        text-align: center;
+        display: table;
+        width: 100%;
+        height: 100%;
+        &-col{
+            display: table-cell;
+            vertical-align: middle;
+            &-f1{
+                font-size: 16px;
+                opacity: .7;
+            }
+            &-f2{
+                margin-top: 10px;
+                font-size: 12px;
+                opacity: .4;
+            }
+        }
+    }
+
+
+
+}
+// 删除用户的提示弹窗
+.connect-alert{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0, 0.5);
+    &-con{
+       position: relative;
+       top: 50%;
+       left: 50%;
+       transform: translate(-50%, -50%);
+       width: 442px;
+        @include mixin-bg-color();
+        @include mixin-font-color();
+       border-radius: 4px;
+       padding: 30px;
+    }
+    &-close{
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        display: inline-block;
+        cursor: pointer;
+        opacity: 0.1;
+    }
+    &-close:hover{
+        opacity: 0.5;
+    }
+    &-main{
+        text-align: left;
+        &-tou{
+            margin-top: 30px;
+
+            text-align: center;
+            img{
+                height: 120px;
+            }
+        }
+        &-col1{
+            margin-top: 20px;
+            font-size: 34px;
+        }
+        &-col2{
+            margin-top: 20px;
+            p:last-child{
+                margin-top: 20px;
+            }
+        }
+        &-btn{
+            margin-top: 66px;
+            text-align: center;
+            div{
+                height: 50px;
+                line-height: 50px;
+                border-radius: 25px;
+                width: 187px;
+                cursor: pointer;
+            }
+            .close{
+                color: #fff;
+                @include mixin-common-btn();
+                &:hover{
+                    @include mixin-common-btn-hover();
+                }
+            }
+            .remove-cancel{
+                margin-right: 20px;
+                color: #FA9128;
+                @include mixin-common-btn-primary();
+                &:hover{
+                    color: #fff;
+                    @include mixin-common-btn-hover();
+                }
+            }
+        }
+    }
+}
+
+.logo{
+    display: table-cell;
+    vertical-align: middle;
+    height: 70px;
+    img{
+        margin-top: 5px;
+        height: 32px;
+    }
+}
+.guoqi{
+    padding-right: 10px;
+    img{
+        width: 20px;
+        position: relative;
+        top: 3px;
+    }
+}
+.guoqi2{
+    float: right;
+    img{
+        width: 20px;
+        position: relative;
+        top: 2px;
+    }
+}
+.tubiao{
+    font-size: 10px;
+    margin-left: 6px;
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: all .3s;
+}
+.tubiao2{
+    transform: rotate(180deg);
+    transition: all .3s;
+}
+
+.putStyle{
+    position: relative;
+    ul{
+        position: absolute;
+        border-radius: 4px;
+        padding: 20px 10px;
+        z-index: 998;
+        width: 115%;
+        text-align: left;
+        top: 27px;
+        left: -10.5%;
+        max-height: 300px;
+        overflow-x: auto;
+        border: 1px solid;
+        @include mixin-font-color();
+        @include mixin-bg-color();
+        @include mixin-border-color();
+        @include mixin-dialog-color();
+        li{
+            padding: 0 10px;
+            border-radius: 4px;
+            height: 40px;
+            line-height: 40px;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+        li:hover{
+            @include mixin-border-bg();
+        }
+    }
+    &-close{
+        float: right;
+        font-size: 10px;
+    }
+    &-add{
+        float: left;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 50%;
+        text-align: center;
+        margin-top: 5px;
+        color: #fff;
+        // background: #333548;
+        background: #4181FF;
+        // @include mixin-bg-color();
+    }
+    &-col1{
+        text-align: right;
+        color: #4181FF;
+
+    }
+}
+
+.btn_none{
+    @include mixin-common-btn-disabled();
+    cursor: not-allowed !important;
+    color: #fff !important;
+    opacity: .15;
+}
+
+input[readonly]{
+    @include mixin-bg-color();
+}

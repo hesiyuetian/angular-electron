@@ -1,0 +1,51 @@
+<div class='order-list'>
+    <header class='qcfd'>
+      <div class='order-list-ser f-fl date'>
+          <app-april-date [height]=32 [date]='startDate' [minDate]='minDate' [maxDate]='endDate' (change)='startChangeDate($event)'></app-april-date>
+      </div>
+		  <div class='assets-list-row f-fl'>~</div>
+      <div class='order-list-ser f-fl date'>
+          <app-april-date [height]=32 [date]='endDate' [minDate]='startDate' [maxDate]='maxDate' (change)='endChangeDate($event)'></app-april-date>
+      </div>
+      <div class='order-list-ser f-fl '>
+          <app-april-sear-select [height]=32 [list]=pairsList [defaultt]= "'common.pairs' | translate" (requer)='requer($event)'></app-april-sear-select>
+      </div>
+      <div class='order-list-ser f-fl '>
+          <app-april-select [placeholder]="'common.direction' | translate" [list]=directionList [height]=32 (change)='checkedBack($event)'></app-april-select>
+      </div>
+      <!-- <div class='order-list-ser f-cursor f-fl' id='btna' (click)='search()'>{{'common.search' | translate}}</div> -->
+    </header>
+    <div class='order-list-con'>
+      <div class='order-list-con-list'>
+        <div class='order-list-con-list-item'>{{'tradeFoot.time' | translate}}</div>
+        <div class='order-list-con-list-item flex1'>{{'tradeFoot.type' | translate}}</div>
+        <div class='order-list-con-list-item flex1'>{{'tradeFoot.ticker' | translate}}</div>
+        <div class='order-list-con-list-item'>{{'tradeFoot.unitPrice' | translate}}</div>
+        <div class='order-list-con-list-item'>{{'tradeFoot.amount' | translate}}</div>
+        <div class='order-list-con-list-item'>{{'tradeFoot.total' | translate}}</div>
+        <div class='order-list-con-list-item'>{{'tradeFoot.executed' | translate}}</div>
+        <div class='order-list-con-list-item'>{{'tradeFoot.unexecuted' | translate}}</div>
+        <div class='order-list-con-list-item'>{{'tradeFoot.status' | translate}}</div>
+        <div class='order-list-con-list-item special'>{{'tradeFoot.operation' | translate}}</div>
+      </div>
+      <div class='order-list-con-list hover' *ngFor="let item of orderList">
+            <div class='order-list-con-list-item'>{{item.create_time | utcTolocal}}</div>
+            <div class='order-list-con-list-item flex1'>{{'Rootrex.finaStatus'+item.side | translate}}</div>
+            <div class='order-list-con-list-item flex1'>{{pairSplit(item.pair,0)}}/{{pairSplit(item.pair,1)}}</div>
+            <div class='order-list-con-list-item'>{{regular.toFixed(item.price,item.priciPrecision)}} {{pairSplit(item.pair,1)}}</div>
+            <div class='order-list-con-list-item'>{{regular.toFixed(item.amount,item.amountPrecision)}} {{pairSplit(item.pair,0)}}</div>
+            <div class='order-list-con-list-item'>{{regular.toFixed(item.total)}} {{pairSplit(item.pair,1)}}</div>
+            <div class='order-list-con-list-item'>{{regular.toFixed(item.filled_amount,item.amountPrecision)}} {{pairSplit(item.pair,0)}}</div>
+            <div class='order-list-con-list-item'>{{ regular.toModulo(item.amount,item.filled_amount,item.amountPrecision) }}  {{pairSplit(item.pair,0)}}</div>
+            <div class='order-list-con-list-item'>{{('Rootrex.OrderStatus:-:'+ item.status) | translate}}</div>
+            <div class='order-list-con-list-item special f-semantic-btn' (click)='item.status != 5 && cancel(item.order_id)'> <span *ngIf="item.status != 5" class="f-cursor">{{'tradeFoot.revoke' | translate}}</span></div>
+      </div>
+      <div class='f-text-right' style="margin: 20px 0 0 0;">
+          <app-paginator [currentPage]='currentPage' [totalRow]='totalRow' (onCurrentPageChange)='onCurrentPageChange($event)'></app-paginator>
+      </div>
+      <div style="margin-top: 200px;" *ngIf="orderList.length < 1">
+          <app-no-data *ngIf="!loadTrade"></app-no-data>
+          <!-- <app-load *ngIf="loadTrade"></app-load> -->
+      </div>
+    </div>
+  </div>

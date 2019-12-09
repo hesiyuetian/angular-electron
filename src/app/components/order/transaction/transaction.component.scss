@@ -1,0 +1,238 @@
+@import "../../../skin/mixin";
+
+.order-list{
+    width: calc(100% - 20px);
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    @include mixin-font-color();
+    header{
+        height: 54px;
+        width: 100%;
+        .assets-list-row{
+            display: inline-block;
+            line-height: 52px;
+            font-size: 14px;
+            width: 30px;
+            margin-left: -21px;
+            text-align: center;
+        }
+        .order-list-ser{
+            margin-top: 10px;
+            width:128px;
+            height: 32px;
+            margin-right: 10px;
+            display: inline-block;
+            @include mixin-bg-color();
+            border: 1px solid;
+            @include mixin-border-color();
+            border-radius: 4px
+        }
+        .order-list-ser:first-child{
+            margin-right: 20px;
+        }
+        .date{
+            width:200px;
+        }
+        #btnb{
+            background: #4181ff !important;
+            color: #fff;
+            position: relative;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 32px;
+        }
+        #btnb:hover{
+            background: #1E5ED9 !important;
+        }
+    }
+    &-con{
+        width: 100%;
+        @include mixin-bg-color();
+        padding-bottom: 10px;
+        border-radius: 4px;
+        min-height: 526px;
+        border: 1px solid;
+        @include mixin-border-color();
+        &-list{
+            width: 100%;
+            line-height: 40px;
+            display: flex;
+            padding-left: 20px;
+            box-sizing: border-box;
+            flex-direction: inherit;
+            border-top: 1px solid;
+            @include mixin-border-color();
+            &-item{
+                flex: 1;
+                text-align: left;
+                &-btn{
+                    display: inline-block;
+                    padding: 0 10px;
+                    line-height: 21px !important;
+                    height: 20px;
+                    text-align: center;
+                    border-radius: 4px;
+                }
+            }
+            &-item:last-child{
+                text-align: center;
+            }
+            .link{
+                @include mixin-color-blue();
+            }
+            .fail{
+                @include mixin-sell();
+            }
+            .special{
+                flex: .5;
+                text-align: center;
+                @include mixin-color-blue();
+                cursor: pointer;
+                font-weight: 800;
+            }
+            .flex1{
+                flex: .5;
+            }
+            .flex2{
+                flex: .7;
+            }
+        }
+        .hover:hover{
+            @include mixin-border-bg();
+        }
+        &-list:nth-of-type(1){
+            border: none;
+            div{
+                opacity: $opction;
+            }
+        }
+    }
+}
+.order-detail{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 333;
+    @include mixin-font-color();
+    &-zhan{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include mixin-dialog-bg();
+    }
+    &-con{
+        width: 444px;
+        padding: 0 20px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        @include mixin-bg-color();
+        border: 1px solid;
+        @include mixin-border-color();
+        border-radius: 4px;
+        overflow: hidden;
+        header{
+            width: 100%;
+            height: 40px;
+            position: relative;
+            margin: 20px 0;
+            line-height: 40px;
+            padding: 0 20px 0 0;
+            box-sizing: border-box;
+            .header-title{
+                height: 50px;
+                width: 100%;
+                h2{
+                    line-height: 20px;
+                    font-size: 16px;
+                    div{
+                        padding: 0 20px;
+                        line-height: 20px;
+                        @include mixin-buy-bg();
+                        display: inline-block;
+                        margin: -2px 0 0 20px;
+                        font-size: 12px;
+                        color: #fff !important;
+                        border-radius: 4px;
+                    }
+                    .sell{
+                        @include mixin-sell-bg();
+                    }
+                }
+                p{
+                    line-height: 30px;
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+            }
+            .close{
+                position: absolute;
+                right: 0px;
+                width: 20px;
+                height: 20px;
+                top: -6px;
+            }
+
+        }
+        .order-detail-content{
+            margin-top: 10px;
+            width: 100%;
+            &-transaction{
+                width: 100%;
+                margin-bottom: 10px;
+                &-line{
+                    width: 100%;
+                    line-height: 40px;
+                    border-bottom: 1px solid;
+                    @include mixin-border-color();
+                }
+                &-line:last-child{
+                    border: none;
+                }
+            }
+            &-info{
+                width: 100%;
+                width: calc(100% + 40px);
+                position: relative;
+                left: -20px;
+                padding: 0px 20px 20px;
+                @include mixin-bg-all();
+                &-line{
+                    width: calc(100% - 40px);
+                    line-height: 40px;
+                    border-bottom: 1px solid;
+                    @include mixin-border-color();
+                    &-value{
+                        display: inline-block;
+                        width: 70%;
+                        text-align: right;
+                        p{
+                            line-height: 12px;
+                            word-break: break-all;
+                        }
+
+                    }
+                }
+                &-line:last-child{
+                    height: 60px;
+                    border: none;
+                    line-height: 60px;
+                    .order-detail-content-info-line-value{
+                        height: 60px;
+                        @include mixin-color-blue();
+                    }
+                    .fail{
+                        @include mixin-sell();
+                    }
+                }
+            }
+        }
+    }
+
+}

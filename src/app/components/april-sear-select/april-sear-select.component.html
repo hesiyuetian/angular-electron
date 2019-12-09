@@ -1,0 +1,21 @@
+<div class="select-box noselect border-box" [ngClass]="{'focus_bor': dis}"
+	[ngStyle]="{'line-height': height+'px','height':height+'px'}" (click)="foucr();$event.stopPropagation();">
+	<!--(blur)='dis = false'-->
+	<span class='set-value' *ngIf="setLang">{{setLang}}</span>
+	<span class='placeholder' *ngIf="!setLang">{{placeholder}}</span>
+	<i class='iconfont sanjiao_xia down' *ngIf="!dis">&#xe625;</i>
+	<i class='iconfont sanjiao_xia april-up up' *ngIf="dis">&#xe624;</i>
+	<div class="down-box hover_bgColor april-select" *ngIf="dis" [ngStyle]="{'top': height+6+'px'}">
+		<input type="text" class='f-opacity' [(ngModel)]="key" (keyup)="getData();$event.stopPropagation();">
+		<div class='april-select-con'>
+			<ng-container *ngFor="let item of list">
+				<p class='f-opacity'  *ngIf="!key || (item.zhName).indexOf(key.toUpperCase()) != -1"
+					[ngClass]="{'act': item.code == this.defaultset}"
+					(click)="sel(item,$event);$event.stopPropagation();">
+					<span *ngIf="language != 'en'">{{item.zhName}}</span>
+					<span *ngIf="language == 'en'">{{item.enName}}</span>
+				</p>
+			</ng-container>
+		</div>
+	</div>
+</div>

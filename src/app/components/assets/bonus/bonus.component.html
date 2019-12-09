@@ -1,0 +1,30 @@
+<div class="bonus-content">
+    <div class="bonus-content-assets border-box qcfd">
+        <div class="bonus-content-assets-content qcfd">
+            <div class="bonus-content-assets-content-line" *ngFor="let item of bonusList">
+                <p class="bonus-content-assets-content-line-head f-opacity-k">{{"assets.bonusPage."+item.name | translate}}(BT)</p>
+                <p class="bonus-content-assets-content-line-con">{{item.value == 0 ? 0 : regular.toDividedByAry([(item.value || '0'), pow(10, xtarInfo.decimal || 8) ], xtarInfo.decimal || 8)}}</p>
+            </div>
+            <div class="bonus-content-assets-content-line">
+                <p class="bonus-content-assets-content-line-head f-opacity-k">{{"assets.bonusPage.action" | translate}}</p>
+                <p class="bonus-content-assets-content-line-con">
+                    <span class="f-cursor f-semantic-btn" (click)="claimBonus()">{{"assets.bonusPage.extract" | translate}}</span>
+                    <span class="f-cursor f-semantic-btn" (click)="link('/order/transaction')">{{"assets.bonusPage.history" | translate}}</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="bonus-content-detail" [ngClass]="{'show': showRules}">
+        <h1><i class="iconfont f-cursor" [ngClass]="{'show-rules': !showRules}" (click)="closeRules()">&#xe624;</i>{{"assets.bonusPage.rules" | translate}}</h1>
+        <div class="bonus-content-detail-con f-center-x">
+            <p class="bonus-content-detail-con-head">奖励规则：BT为有效的回馈终端用户,将每日BT解锁额的98%优先用于挖矿交易奖励。系统于每日凌晨释放一定量的BT作为交易挖矿的奖励，先交易先得（具体释放规则请参考《BT白皮书》）</p>
+            <p class="bonus-content-detail-con-detail">1. 每一笔链上成功撮合的交易都会收取一定的系统手续费，系统根据当时BT的价格计算出等值的BT数量，100%奖励给用户，交易越多奖励越多；</p>
+            <p class="bonus-content-detail-con-detail">2. 交易者分为Maker和Taker，Maker产生了挂单，而Taker消费了挂单，渠道为交易者的交易提供接入平台。每笔交易奖励会按照比例分配给该笔交易的四个用户：<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;Maker（订单创建者）获取80%奖励；Taker（订单接受者）无奖励；<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;Maker渠道获取10%奖励；Taker渠道获取10%奖励。
+            </p>
+            <img class="f-center-x" src="{{theme ==='Dark' ? './assets/images/bonusRules-dark.svg' : './assets/images/bonusRules.svg'}}" alt="">
+            <p class="bonus-content-detail-con-detail bonus-content-detail-con-tip"><span>*</span> 每个用户每天的奖励是有上限的，具体奖励上限会因其抵押的BT不同而不同，抵押越多，用户每日奖励上限越高；若无抵押则默认每日奖励上限为1 BT。</p>
+        </div>
+    </div>
+</div>

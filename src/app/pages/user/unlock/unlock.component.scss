@@ -1,0 +1,272 @@
+@import '../../../skin/mixin';
+
+.main {
+    display: table;
+    width: 100%;
+
+    &-body {
+        display: table-cell;
+        vertical-align: middle;
+        @include mixin-font-act-color();
+        text-align: center;
+        font-size: 14px;
+
+        /****  btn  *****/
+        .container-btn {
+            width: 394px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 25px;
+        }
+        .btn-dis{
+            color: #FA9128;
+            @include mixin-common-btn-primary();
+            &:hover{
+                color: #fff;
+                @include mixin-common-btn-hover();
+            }
+        }
+        .btn-sure{
+            color: #fff;
+            @include mixin-common-btn();
+            &:hover{
+                @include mixin-common-btn-hover();
+            }
+        }
+        /****  end  *****/
+
+
+        /****  keystore-down  *****/
+        .keystore-down{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 999;
+            &-zhan{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                @include mixin-dialog-bg();
+            }
+            &-con{
+                width: 450px;
+                padding: 50px 30px 30px;
+                @include mixin-bg-color();
+                border-radius: 4px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+                box-sizing: border-box;
+                text-align: center;
+                h3{
+                    font-size: 30px;
+                    line-height: 40px;
+                    margin-bottom: 20px;
+                }
+                p{
+                    line-height: 18px;
+                    width: 100%;
+                    margin-bottom: 41px;
+                }
+            }
+        }
+        /****  end  *****/
+
+
+        .container { // 可以复用
+            width: 790px;
+            margin: 0 auto;
+            padding: 20px 30px 25px;
+            @include mixin-bg-color();
+            border-radius: 4px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+            h3 {
+                font-size: 30px;
+                line-height: 40px;
+                margin-bottom: 20px;
+                text-align: left;
+                span{
+                    font-size: 16px;
+                    @include mixin-color-blue();
+                }
+            }
+            &-textarea {
+                width: 100%;
+                height: 280px;
+                padding: 21px 20px;
+                border: 1px dashed;
+                box-sizing: border-box;
+                border-radius: 4px;
+                @include mixin-border-color();
+                margin-bottom: 30px;
+                position: relative;
+
+                ul{
+                    display: block;
+                    li{
+                        height: 18px;
+                        line-height: 14px;
+                        padding: 3px 9px;
+                        border-radius: 9px;
+                        margin: 0 20px 10px 0;
+                        color: #FA9128;
+                        @include mixin-common-btn-primary();
+                        &:hover{
+                            color: #fff;
+                            @include mixin-common-btn-hover();
+                        }
+                        i{
+                            font-size: 12px;
+                            margin-left: 5px;
+                        }
+                    }
+                }
+
+                &-input{
+                    margin: 20px 0 0;
+                    width: 92%;
+                    height: 40px;
+                    border-bottom: 1px solid;
+                    position: absolute;
+                    bottom: 50px;
+                    left: 4%;
+                    @include mixin-border-color();
+                    &:focus{
+                        @include mixin-input-focus-border();
+                        box-shadow: 0 0 0px #67a6d9;
+                    }
+                }
+
+                &-btn{
+                    padding: 5px 22px;
+                    position: absolute;
+                    bottom: 10px;
+                    color: #FA9128;
+                    border-radius: 15px;
+                    font-weight: 600;
+                    @include mixin-common-btn-primary();
+                    &:hover{
+                        color: #fff;
+                        @include mixin-common-btn-hover();
+                    }
+                }
+                &-reUpload{
+                    left: 20px;
+                }
+                &-clean{
+                    right: 20px;
+                }
+
+            }
+
+            &-textarea-keystore{
+                height: 150px;
+                margin-bottom: 10px;
+                &-select{
+                    width: 100%;
+                    p{
+                        height: 18px;
+                        line-height: 18px;
+                        text-align: center;
+                    }
+                    &-btn{
+                        display: inline-block;
+                        text-align: center;
+                        margin-top: 10px;
+                        &-item{
+                            line-height: 30px;
+                            width: 130px;
+                            text-align: center;
+                            display: inline-block;
+                            color: #FA9128;
+                            margin-right: 10px;
+                            border-radius: 15px;
+                            font-weight: 800;
+                            @include mixin-common-btn-primary();
+                            &:hover{
+                                color: #fff;
+                                @include mixin-common-btn-hover();
+                            }
+                        }
+                        &-item:nth-of-type(1){
+                            color: #fff;
+                            @include mixin-common-btn();
+                            &:hover{
+                                @include mixin-common-btn-hover();
+                            }
+                        }
+                    }
+                }
+
+                &-file{
+                    line-height: 18px;
+                    text-align: center;
+                    i{
+                        margin-right: 10px;
+                        font-size: 12px;
+                        color: #00B553;
+                    }
+                    .error{
+                        color: #FF6996;
+                    }
+                }
+
+                &-input{
+                    width: 100%;
+                    height: 103px;
+                    position: relative;
+                    top: -13px;
+                    .textarea{
+                        width: calc(100% - 20px);
+                        padding: 10px;
+                        @include mixin-font-color();
+                        background: rgba(197, 209, 217, 0.2);
+                        border-radius: 4px;
+                        border: none;
+                    }
+                }
+            }
+
+
+
+            &-keystore-account{
+                width: 390px;
+                margin-top: 10px;
+                .row3-col1{
+                    margin-bottom: 20px;
+                }
+                .container-btn{
+                    margin-top: 10px;
+                }
+            }
+        }
+
+        .container-pwdcent {
+            width: 450px;
+            margin: 0 auto;
+            padding: 50px 30px 30px;
+            @include mixin-bg-color();
+            border-radius: 4px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+            box-sizing: border-box;
+            h3{
+                font-size: 30px;
+                line-height: 40px;
+                text-align: center;
+                margin-bottom: 50px;
+            }
+            .row3-col1{
+                height: 50px;
+                width: 100%;
+                margin-bottom: 20px;
+            }
+            .sprace{
+                margin-bottom: 50px;
+            }
+        }
+    }
+}

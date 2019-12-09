@@ -1,0 +1,198 @@
+@import "../../../skin/mixin";
+
+.trad-foot{
+    width: 100%;
+    height: 100%;
+    @include mixin-bg-color();
+    @include mixin-font-color();
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid;
+    @include mixin-border-color();
+    &-head{
+        width: 100%;
+        height: 39px;
+        border-bottom: 1px solid;
+        @include mixin-border-color();
+        @include mixin-bg-banner();
+        line-height: 39px;
+        position: relative;
+        font-size: 14px;
+        span{
+            display: inline-block;
+            height: 38px;
+            padding: 0 40px;
+            opacity: .8;
+        }
+        span:hover{
+            border-bottom: 2px solid;
+            @include mixin-act-border();
+            opacity: 1;
+            font-weight: 800;
+            @include mixin-font-act-color();
+        }
+        .act{
+            border-bottom: 2px solid;
+            @include mixin-act-border();
+            opacity: 1;
+            font-weight: 800;
+            @include mixin-font-act-color();
+        }
+        i{
+            font-size: 18px;
+            opacity: .5;
+            position: absolute;
+            top: 0px;
+            right: 10px;
+        }
+        i:hover{
+            opacity: 1;
+        }
+    }
+    &-con{
+        width: 100%;
+        height: calc(100% - 40px);
+        .con{
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+        &-item{
+            width: 100%;
+            .line{
+                width: 100%;
+                height: 40px;
+                line-height: 40px;
+                border-top: 1px solid;
+                @include mixin-border-color();
+                display: flex;
+                flex-direction: initial;
+            }
+
+            .line.special{
+                border: none;
+                opacity: $opction;
+            }
+            .hover:hover{
+                @include mixin-border-bg();
+            }
+            &-item{
+                height: 100%;
+                font-size: 12px;
+                text-align: right;
+            }
+            &-item:nth-of-type(1){
+                flex: 1.2;
+                margin-left: 12px;
+                text-indent: 10px;
+                text-align: left;
+            }
+            &-item:nth-of-type(2){
+                flex: .6;
+                text-align: center;
+            }
+            &-item:nth-of-type(3){
+                flex: 1;
+                text-align: center;
+            }
+            &-item:nth-of-type(4){
+                flex: 1;
+            }
+            &-item:nth-of-type(5){
+                flex: 1;
+            }
+            &-item:nth-of-type(6){
+                flex: 1;
+            }
+            &-item:nth-of-type(7){
+                flex: 1;
+            }
+            &-item:nth-of-type(8){
+                flex: 1;
+            }
+            &-item:nth-of-type(9){
+                flex: 1;
+                padding-right: 10px;
+                box-sizing: border-box;
+            }
+            .action{
+                flex: 1;
+                position: relative;
+                top: -2px;
+                .detail{
+                    @include mixin-color-blue();
+                    position: relative;
+                    label{
+                        display: inline-block;
+                        font-size: 14px;
+                        position: relative;
+                        top: 2px;
+                        left: 2px;
+                        transition: all .3s;
+                        transform: rotate(0deg);
+                    }
+                    .animation-triangle{
+                        transform: rotate(180deg) !important;
+                    }
+                }
+                .revoke{
+                    font-size: 12px;
+                    margin-left: 15px;
+                }
+            }
+            .action{
+                @include mixin-font-sell-color();
+            }
+
+            &-detail{
+                width: 100%;
+                padding: 5px 0 15px 40px;
+                box-sizing: border-box;
+                border-top: 1px solid;
+                @include mixin-border-color();
+
+                &-item{
+                    width: 100%;
+                    height: 22px;
+                    line-height: 22px;
+                    display: flex;
+                    flex-direction: inherit;
+                    opacity: .8;
+                    div{
+                        flex: 1;
+                        text-align: center;
+                    }
+                    div:nth-of-type(6){
+                        margin-right: 10px;
+                    }
+                    .link{
+                        @include mixin-color-blue();
+                    }
+                    .fail{
+                        @include mixin-sell();
+                    }
+                }
+                &-item:nth-of-type(1){
+                    width: 100%;
+                    height: 42px;
+                    line-height: 42px;
+                    opacity: .5;
+                    // color: red !important;
+                }
+
+            }
+        }
+        &-unlogin{
+            text-align: center;
+            font-size: 14px;
+            @include mixin-font-color();
+            line-height: 50px;
+            top: 40%;
+            a{
+                color: #FA9128;
+                text-decoration: none;
+                cursor: pointer;
+                opacity: 1 !important;
+            }
+        }
+    }
+}

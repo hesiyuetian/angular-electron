@@ -1,0 +1,102 @@
+@import "../../../skin/mixin";
+
+.bonus-content{
+    width: 85%;
+    margin: 10px auto;
+    @include mixin-font-color();
+    &-assets{
+        padding: 20px;
+        @include mixin-bg-color();
+        border-radius: 4px;
+        border: 1px solid;
+        @include mixin-border-color();
+        &-content{
+            width: 100%;
+            display: flex;
+            flex-direction: inherit;
+            &-line{
+                flex: 1;
+                height: 47px;
+                text-align: center;
+                position: relative;
+                &-head{
+                    font-size: 12px;
+                }
+                &-con{
+                    position: absolute;
+                    font-size: 16px;
+                    bottom: 0px;
+                    text-align: center;
+                    width: 100%;
+                    font-weight: 600;
+                    @include mixin-font-act-color()
+                }
+            }
+            &-line:nth-last-of-type(1){
+                flex: 1.7;
+                .bonus-content-assets-content-line-con{
+                    font-size: 12px;
+                    cursor: pointer;
+                    span:first-child{
+                        margin-right: 30px;
+                    }
+                }
+            }
+        }
+    }
+
+    &-detail{
+        margin-top: 10px;
+        @include mixin-bg-color();
+        border-radius: 4px;
+        border: 1px solid;
+        overflow: hidden;
+        height: 50px;
+        transition: height 300ms ease-in-out;
+        @include mixin-border-color();
+        h1{
+            font-size: 14px;
+            line-height: 50px;
+            font-weight: 600;
+            border-bottom: 1px solid;
+            @include mixin-border-color();
+            text-indent: 47px;
+            position: relative;
+            i{
+                position: absolute;
+                left: -34px;
+                display: inline-block;
+                font-size: 19px;
+            }
+            .show-rules{
+                transform: rotate(-180deg) !important;
+                left: 13px;
+            }
+        }
+        &-con{
+            width: 85%;
+            font-size: 12px;
+            height: auto;
+            &-head{
+                margin: 20px 0;
+                line-height: 17px;
+            }
+            &-detail{
+                line-height: 17px;
+            }
+            img{
+                margin: 50px 0;
+            }
+            &-tip {
+                margin-bottom: 32px;
+                span{
+                    color: #FFDA57;
+                }
+            }
+        }
+        &.show{
+            height: 587px;
+            transition: height 300ms ease-in-out;
+        }
+    }
+}

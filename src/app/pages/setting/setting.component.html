@@ -1,0 +1,180 @@
+<div class="main">
+    <div class="main-head">
+        <div (click)="setStep(1)" [ngClass]="{'main-head-hover': step == 1}">{{'set.set1' | translate}}</div>
+        <div (click)="setStep(2)" [ngClass]="{'main-head-hover': step == 2}">{{'set.set2' | translate}}</div>
+        <div (click)="setStep(3)" [ngClass]="{'main-head-hover': step == 3}">{{'set.set3' | translate}}</div>
+        <div (click)="setStep(4)" [ngClass]="{'main-head-hover': step == 4}">{{'set.set4' | translate}}</div>
+    </div>
+
+    <!-- 常规设置  -->
+    <div class="main-body" *ngIf="step == 1">
+        <div class="main-body-title">{{'set.set1' | translate}}</div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.account' | translate}}</div>
+            <div class="main-body-col1-r">
+                {{users?.name}} <span class="logOut f-semantic-btn" (click)="logOut()">{{'set.out2' | translate}}</span>
+            </div>
+        </div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.address' | translate}}</div>
+            <div class="main-body-col1-r">{{users?.address}}</div>
+        </div>
+        <div class="main-body-col1" tabIndex="2" (click)="select('language', true)" (blur)="select('language', false)">
+            <div class="main-body-col1-l">{{'set.language' | translate}}</div>
+            <div class="main-body-col1-r f-cursor">
+                <span>
+                    <i class="guoqi" *ngIf="language !== 'English'"><img src="./assets/images/guoqi_cn.svg" /></i>
+                    <i class="guoqi" *ngIf="language == 'English'"><img src="./assets/images/guoqi_en.svg" /></i>
+                    {{language}}
+                    <label class="iconfont" [ngClass]="{'iconfont1': languageStatus}">&#xe771;</label>
+                </span>
+                <ul *ngIf="languageStatus">
+                    <li (click)="selectContent('language', 'zh');$event.stopPropagation();"><i class="guoqi"><img src="./assets/images/guoqi_cn.svg" /></i><span>简体中文</span></li>
+                    <li (click)="selectContent('language', 'en');$event.stopPropagation();"><i class="guoqi"><img src="./assets/images/guoqi_en.svg" /></i><span>English</span></li>
+                </ul>
+            </div>
+        </div>
+<!--        <div class="main-body-col1 f-cursor" tabIndex="4" (click)="select('theme', true)" (blur)="select('theme', false)">-->
+<!--            <div class="main-body-col1-l">{{'set.theme' | translate}}</div>-->
+<!--             <div class="main-body-col1-r">-->
+<!--                <span>-->
+<!--                    {{'set.'+theme | translate}}-->
+<!--                    <label class="iconfont" [ngClass]="{'iconfont1': themeStatus}">&#xe771;</label>-->
+<!--                </span>-->
+<!--                <ul *ngIf="themeStatus">-->
+<!--                    <li (click)="selectContent('theme', 'Light');$event.stopPropagation();"><span>{{'set.light' | translate}}</span></li>-->
+<!--                    <li (click)="selectContent('theme', 'Dark');$event.stopPropagation();"><span>{{'set.dark' | translate}}</span></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.currentHeight' | translate}}</div>
+            <div class="main-body-col1-r">{{currentHeight}}</div>
+        </div>
+    </div>
+
+    <!-- 安全设置 -->
+    <div class="main-body" *ngIf="step == 2">
+
+        <div class="main-body-title">{{'set.set2' | translate}}</div>
+
+        <div *ngIf="users.type == 'mnemonic'" class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.word' | translate}}</div>
+            <div class="main-body-col1-r">
+                <span class="show f-semantic-btn" (click)="isShow('mnemonic')">{{'set.show' | translate}}</span>
+            </div>
+        </div>
+
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.private' | translate}}</div>
+            <div class="main-body-col1-r">
+                <span class="show f-semantic-btn" (click)="isShow('privateKey')">{{'set.show' | translate}}</span>
+            </div>
+        </div>
+        <div class="main-body-col1" tabIndex="2" (click)="select('language', true)" (blur)="select('language', false)">
+            <div class="main-body-col1-l">{{'set.bKey' | translate}}</div>
+            <div class="main-body-col1-r f-cursor">
+                <span class="show f-semantic-btn" (click)="isShow('keyStore')">{{'set.import' | translate}}</span>
+            </div>
+        </div>
+        <div class="main-body-col1 f-cursor" tabIndex="3" (click)="select('setTime', true)" (blur)="select('setTime', false)">
+            <div class="main-body-col1-l">{{'set.public' | translate}}</div>
+            <div class="main-body-col1-r">
+                <span> {{publicKey}} </span>
+            </div>
+        </div>
+        <div class="main-body-col1 f-cursor" tabIndex="4" (click)="select('theme', true)" (blur)="select('theme', false)">
+            <div class="main-body-col1-l">{{'set.changePassword' | translate}}</div>
+                <div class="main-body-col1-r">
+                    <span class="show f-semantic-btn" (click)="isShow('change')">{{'set.goChange' | translate}}</span>
+            </div>
+        </div>
+        <div class="main-body-col1 f-cursor" tabIndex="3" (click)="select('setTime', true)" (blur)="select('setTime', false)">
+            <div class="main-body-col1-l">{{'set.out1' | translate}}</div>
+            <div class="main-body-col1-r">
+                <span>
+                    {{setTime}}
+                    <label class="iconfont" [ngClass]="{'iconfont1': setTimeStatus}">&#xe771;</label>
+                </span>
+                <ul *ngIf="setTimeStatus">
+                    <li (click)="selectContent('setTime', '5 min');$event.stopPropagation();"><span>5 min</span></li>
+                    <li (click)="selectContent('setTime', '10 min');$event.stopPropagation();"><span>10 min</span></li>
+                    <li (click)="selectContent('setTime', '30 min');$event.stopPropagation();"><span>30 min</span></li>
+                    <li (click)="selectContent('setTime', '1 hour');$event.stopPropagation();"><span>1 hour</span></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 网络设置 -->
+    <div class="main-body" *ngIf="step == 3">
+        <div class="main-body-title">{{'set.set3' | translate}}</div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.jieAddress' | translate}}</div>
+            <div class="main-body-col1-r">
+                {{sdkUrl}}
+            </div>
+        </div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.jiaoAddress' | translate}}</div>
+            <div class="main-body-col1-r">
+                {{sdkUrl}}
+            </div>
+        </div>
+    </div>
+
+    <!-- 关于我们 -->
+    <div class="main-body" *ngIf="step == 4">
+        <div class="main-body-title">{{'set.set4' | translate}}</div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.v' | translate}}</div>
+            <div class="main-body-col1-r">
+                DEX Exchange 0.0.1
+            </div>
+        </div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.server' | translate}}</div>
+            <div class="main-body-col1-r">
+                <a href="http://support.dexexchange.com" target="_blank" class="show f-semantic-btn">support.dexexchange.com</a>
+            </div>
+        </div>
+        <div class="main-body-col1">
+            <div class="main-body-col1-l">{{'set.legal' | translate}}</div>
+            <div class="main-body-col1-r">
+                <span class="show f-semantic-btn" (click)="isShow('aboutUs')">{{'set.legal1' | translate}}</span> | <span class="show f-semantic-btn" (click)="isShow('aboutUs')">{{'set.legal2' | translate}}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!--  show Dialog  -->
+    <div class="dialog" *ngIf="dialogFlag">
+        <div class="dialog-zhan"></div>
+
+        <!--    mnemonic    -->
+        <div class="container f-center" *ngIf="dialogFlag == 'mnemonic'">
+            <i class='iconfont close f-cursor icon_style' (click)='dialogFlag = ""'>&#xe608;</i>
+
+            <h3>{{"unlock.mnemonic" | translate}}</h3>
+            <div class="container-textarea container-textarea-mix">
+                <ul class="qcfd">
+                    <li class="f-fl" *ngFor="let item of mnemonicList">
+                        {{item}}
+                    </li>
+                </ul>
+                <div class="container-textarea-clean f-cursor" (click)="mnemonicCopy()">{{"createWallet.copy" | translate}}</div>
+            </div>
+        </div>
+
+        <!--    privateKey    -->
+        <div class="container f-center" *ngIf="dialogFlag == 'privateKey'">
+            <i class='iconfont close f-cursor icon_style' (click)='dialogFlag = ""'>&#xe608;</i>
+            <h3>{{"createWallet.privateKey" | translate}}</h3>
+            <div class="container-textarea container-textarea-tip">
+                <p class="f-center">{{privateKey}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

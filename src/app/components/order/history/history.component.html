@@ -1,0 +1,88 @@
+<div class='order-list'>
+	<header class='qcfd'>
+		<div class='order-list-ser f-fl date'>
+			<app-april-date [height]=32 [date]='startDate' [minDate]='minDate' [maxDate]='endDate' (change)='startChangeDate($event)'></app-april-date>
+		</div>
+		<div class='assets-list-row f-fl'>~</div>
+		<div class='order-list-ser f-fl date'>
+			<app-april-date [height]=32 [date]='endDate' [minDate]='startDate' [maxDate]='maxDate' (change)='endChangeDate($event)'></app-april-date>
+		</div>
+		<div class='order-list-ser f-fl'>
+			<app-april-sear-select [height]=32 [list]=pairsList [defaultt]= "'common.pairs' | translate" (requer)='requer($event)'></app-april-sear-select>
+		</div>
+		<div class='order-list-ser f-fl'>
+			<app-april-select [placeholder]="'common.direction' | translate" [list]=directionList [height]=32 (change)='checkedBack($event)'></app-april-select>
+		</div>
+		<!-- <div class='order-list-ser f-cursor' id='btn' (click)='search()'>{{'common.search' | translate}}</div> -->
+	</header>
+	<div class='order-list-con'>
+		<div class='order-list-con-list'>
+			<div class='order-list-con-list-item'>{{'tradeFoot.time' | translate}}</div>
+			<div class='order-list-con-list-item flex1'>{{'tradeFoot.type' | translate}}</div>
+			<div class='order-list-con-list-item flex1'>{{'tradeFoot.ticker' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.unitPrice' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.amount' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.executed' | translate}}</div>
+			<div class='order-list-con-list-item'>{{'tradeFoot.averagePrice' | translate}}</div>
+        	<div class='order-list-con-list-item'>{{'tradeFoot.status' | translate}}</div>
+			<div class='order-list-con-list-item special'>
+				{{'tradeFoot.operation' | translate}}
+			</div>
+		</div>
+
+		<ng-container *ngFor="let item of historyList;let index = index">
+			<div class='order-list-con-list hover'>
+				<div class='order-list-con-list-item'>{{item.create_time | utcTolocal}}</div>
+				<div class='order-list-con-list-item flex1'>{{'Rootrex.finaStatus'+item.side | translate}}</div>
+				<div class='order-list-con-list-item flex1'>{{pairSplit(item.pair,0)}}/{{pairSplit(item.pair,1)}}</div>
+				<div class='order-list-con-list-item'>{{regular.toFixed(item.price,item.priciPrecision)}} {{pairSplit(item.pair,1)}}</div>
+				<div class='order-list-con-list-item'>{{regular.toFixed(item.amount,item.amountPrecision)}} {{pairSplit(item.pair,0)}}</div>
+				<div class='order-list-con-list-item'>{{regular.toFixed(item.filled_amount,item.amountPrecision)}} {{pairSplit(item.pair,0)}}</div>
+				<div class='order-list-con-list-item'>{{item.avg_price ? regular.toFixed(item.avg_price,item.priciPrecision) : "-"}} {{item.avg_price ? pairSplit(item.pair,1) : ''}}</div>
+				<div class='order-list-con-list-item'>{{('Rootrex.OrderStatus:-:'+ item.status) | translate}}</div>
+				<div class='order-list-con-list-item special f-fontw8'>
+					<div *ngIf="item.filled_amount > 0" class="detail f-semantic-btn" (click)='detail(index,item.order_id)'>
+						{{'tradeFoot.details' | translate}}
+						<!-- <label class='iconfont f-cursor' [ngClass]="{'animation-triangle': actIndex === index}">&#xe771;</label> -->
+					</div>
+				</div>
+			</div>
+
+			<div class='order-list-con-listDetail' *ngIf="actIndex === index">
+                <div class="order-list-con-listDetail-zhan"></div>
+                <div class='order-list-con-listDetail-con f-center'>
+                    <h2>{{'tradeFoot.details' | translate}}</h2>
+                    <i class='iconfont close f-cursor icon_style' (click)='actIndex = null'>&#xe608;</i>
+                    <div class='order-list-con-listDetail-item f-center-x'>
+                        <p class='order-list-con-listDetail-item-hr'></p>
+                        <div>{{'tradeFoot.time' | translate}}</div>
+                        <div>{{'tradeFoot.price' | translate}}({{pairSplit(item.pair,1)}})</div>
+                        <div>{{'tradeFoot.amount' | translate}}({{pairSplit(item.pair,0)}})</div>
+                        <div>{{'tradeFoot.dealMoney' | translate}}({{pairSplit(item.pair,1)}})</div>
+                        <div>{{'tradeFoot.fee' | translate}}({{item.side === 0 ? pairSplit(item.pair,0) : pairSplit(item.pair,1)}})</div>
+                        <div>{{'tradeFoot.status' | translate}}</div>
+                        <div>TxId</div>
+                    </div>
+                    <div class='order-list-con-listDetail-item f-center-x' *ngFor="let val of detailDetailList">
+                        <div>{{val.finish_time | utcTolocal}}</div>
+                        <div>{{regular.toFixed(val.trade_price,item.pricePrecision)}}</div>
+                        <div>{{regular.toFixed(val.trade_amount,item.amountPrecision)}}</div>
+                        <div>{{regular.toBigNumber(val.trade_total)}}</div>
+                        <div>{{val.fee}}</div>
+                        <div>{{('Rootrex.tradStatus:-:'+ val.status) | translate}}</div>
+                        <div class='order-list-con-listDetail-item-link f-cursor' [ngClass]="{'fail': val.status == 5}" (click)='auxBt.getOrderInfo(val.tx_id)'>{{regular.sensitiveCheck(val.tx_id)}}</div>
+                    </div>
+                </div>
+			</div>
+		</ng-container>
+
+		<div class='f-text-right' style="margin: 20px 0 0 0;">
+			<app-paginator [currentPage]='currentPage' [totalRow]='totalRow' (onCurrentPageChange)='onCurrentPageChange($event)'></app-paginator>
+		</div>
+		<div style="margin-top: 200px;" *ngIf=" historyList.length < 1">
+			<app-no-data *ngIf="!loadTrade"></app-no-data>
+		</div>
+
+	</div>
+
+</div>

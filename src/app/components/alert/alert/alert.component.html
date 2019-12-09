@@ -1,0 +1,22 @@
+<div class='con alert-t' *ngIf="config.label == 1" [ngStyle]="{'width': config.width + 'px','top': config.top + 'px'}">
+  <img *ngIf="config.type == 'success' " src="./assets/images/dui.png" alt="">
+  <img *ngIf="config.type == 'ing' " src="./assets/images/stoDetail2.png" alt="">
+  <img *ngIf="config.type == 'fail' " src="./assets/images/stoDetail6.png" alt="">
+  <!-- <i class='iconfont success' *ngIf="config.type == 'success' ">&#xe613;</i> -->
+  <!-- <i class='iconfont wain' *ngIf="config.type == 'wain' ">&#xe70d;</i>
+  <i class='iconfont ing' *ngIf="config.type == 'ing' ">&#xe60b;</i>
+  <i class='iconfont fail' *ngIf="config.type == 'fail' ">&#xe607;</i> -->
+  <p class='con-content f-fr' [innerHTML]='config.title'></p>
+</div>
+
+
+<div class='cont qcfd alert-t' *ngIf="config.label == 2">
+  <div class='cont-left f-fl'>
+    <img src="./assets/images/dui.png" alt="">
+  </div>
+  <div class='cont-con f-fl'>
+    <p class='cont-con-top' [innerHTML]='config.title'></p>
+    <p class='cont-con-tip'>({{'mateTip.overTime' | translate}})</p>
+  </div>
+</div>
+<!-- 'height': config.height + 'px','line-height' : config.height + 'px' -->

@@ -1,0 +1,437 @@
+@import "../../../skin/mixin";
+
+.sell-buy{
+    width: 100%;
+    height: 100%;
+    @include mixin-font-color();
+    .red{
+        @include mixin-font-sell-color();
+        opacity: 1;
+    }
+    .blue{
+        @include mixin-font-buy-color();
+        opacity: 1;
+    }
+
+    a{
+        text-decoration: none;
+        font-size: 14px;
+        color: #fff;
+    }
+
+    .f-hover:hover{
+        @include mixin-border-bg();
+    }
+
+    @keyframes isNew {
+        0% {
+            background: rgba(255,111,121,.2)
+        }
+        to {
+            background: none;
+        }
+    }
+    @keyframes isNewBuy {
+        0% {
+            background: rgba(0,195,179,.2)
+        }
+        to {
+            background: none;
+        }
+    }
+    .over-hidden{
+        overflow-y: hidden !important;
+        max-height: none !important;
+    }
+
+    &-center{
+        margin: 0 10px;
+        float: left;
+        height: 100%;
+        @include mixin-bg-color();
+        border: 1px solid;
+        @include mixin-border-color();
+        border-radius: 4px;
+        overflow: hidden;
+        &-depth{
+            width: 100%;
+            height: calc(100% - 40px);
+        }
+        .menu{
+            height: 39px;
+            line-height: 39px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid;
+            @include mixin-border-color();
+            @include mixin-bg-banner();
+            font-size: 14px;
+            display: flex;
+            flex-direction: inherit;
+            div{
+                float: left;
+                height: 37px;
+                float: left;
+                opacity: $opction;
+                flex: 1;
+                text-align: center;
+            }
+            div:hover{
+                opacity: 1;
+                border-bottom: 2px solid;
+                @include mixin-act-border();
+                @include mixin-font-act-color();
+            }
+            .act{
+                @include mixin-font-act-color();
+                opacity: 1;
+                font-weight: 800;
+            }
+        }
+
+        .head{
+            height: 29px;
+            line-height: 29px;
+            padding-left: 10px;
+            border-bottom: 1px solid;
+            @include mixin-border-color();
+            &-type{
+                display: inline-block;
+                width: 20px;
+                line-height: 18px;
+                text-align: center;
+                margin-right: 6px;
+                cursor: pointer;
+                border: 1px solid rgba(0, 0, 0, 0);
+                border-radius: 4px;
+                position: relative;
+                top: -1px;
+                img{
+                    position: relative;
+                    top: 2px;
+                    height: 12px;
+                }
+            }
+            &-type:hover{
+                @include mixin-border-color();
+            }
+            &-type.acts{
+                @include mixin-border-color();
+            }
+            &-item{
+                width: auto;
+                height: 29px;
+                margin-right: 13px;
+                display: inline-block;
+                text-align: center;
+                letter-spacing: 1.5px;
+                &-selDepth{
+                    display: inline-block;
+                    border: 1px solid;
+                    @include mixin-border-color();
+                    height: 19px;
+                    position: relative;
+                    line-height: 20px;
+                    padding: 0 2px 0 10px;
+                    border-radius: 4px;
+                    @include mixin-bg-all();
+                    top: 1px;
+                    span{
+                        opacity: $opction;
+                    }
+                    i{
+                        margin: 0 !important;
+                    }
+                }
+                &-selDepth:hover{
+                    border-color: #357ce1 !important;
+                }
+                .direction{
+                    min-width: 55px;
+                }
+            }
+            &-white{
+                color: #fff;
+                letter-spacing: 0;
+            }
+            &-shen{
+                position: relative;
+                letter-spacing: 0;
+                i{
+                    font-size: 14px;
+                    transform: scale(0.58,0.58);
+                    margin-left: 6px;
+                    display: inline-block;
+                }
+                .up{
+                    transition: all .3s;
+                    transform: rotate(180deg);
+                }
+                .down{
+                    transition: all .3s;
+                    transform: rotate(0deg);
+                }
+                &-dialog{
+                    @include mixin-bg-color();
+                    @include mixin-font-color();
+                    border: 1px solid;
+                    @include mixin-border-color();
+                    border-radius: 4px;
+                    position: absolute;
+                    top: 30px;
+                    right: 0;
+                    margin-left: 0;
+                    z-index: 1;
+                    p{
+                        margin: 0;
+                        padding: 0px 10px 0 30px;
+                        white-space: nowrap;
+                        text-align: right;
+                        font-size: 12px;
+                        line-height: 28px;
+                    }
+                    p:hover{
+                        // background: $border-color;
+                        @include mixin-border-bg();
+                        // color: #357ce1!important;
+                        // background: rgba(229,235,245,.5)!important
+                    }
+                }
+            }
+            &-shen:focus{
+                outline: none;
+                box-shadow: none;
+            }
+        }
+
+        &-head{
+            height: 20px;
+            line-height: 20px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            &-item{
+                width: 28%;
+                height: 100%;
+                float: left;
+                position: relative;
+            }
+
+            .opacity{
+                opacity: .8;
+            }
+            .isNew{
+                animation: isNew 800ms forwards;
+            }
+            .isNewBuy{
+                animation: isNewBuy 800ms forwards;
+            }
+
+            &-item:nth-of-type(1){
+                width: 4%;
+            }
+            &-item:nth-of-type(3){
+                width: 28%;
+                padding-right: 4px;
+                box-sizing: border-box;
+            }
+            &-item:nth-of-type(4){
+                width: 40%;
+                padding-right: 20px;
+                box-sizing: border-box;
+            }
+            &-flex{
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: 100%;
+                background: rgba(255,105,150, .1);
+            }
+            &-flex-buy{
+                background: rgba(0,195,179, .1);
+            }
+        }
+
+        .special{
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .sell-list{
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            max-height: 100%;
+        }
+        &-con{
+            height: calc(100% - 60px);
+            position: relative;
+            &-tip{
+                width: 100%;
+                overflow: hidden;
+                height: 38px;
+                line-height: 38px;
+                padding: 0 10px;
+                font-weight: bold;
+                border-top: 1px solid;
+                border-bottom: 1px solid;
+                @include mixin-border-color();
+                font-size: 16px;
+                span:nth-of-type(1){
+                    width: 50%;
+                }
+                span:nth-of-type(2){
+                    width: 50%;
+                    text-align: right;
+                    font-weight: 800;
+                }
+
+            }
+            &-buy{
+               position: relative;
+               overflow-y: auto;
+            }
+            &-sell{
+                position: relative;
+                overflow-y: auto;
+            }
+        }
+
+        .all{
+            .sell-buy-center-con-buy{
+                width: 100%;
+                height: calc( 50% - 20px);
+                transition: height 300ms ease-in-out;
+            }
+
+            .sell-buy-center-con-sell{
+                width: 100%;
+                height: calc( 50% - 20px);
+                transition: height 300ms ease-in-out;
+            }
+        }
+
+        .buy{
+            .sell-buy-center-con-buy{
+                width: 100%;
+                height: calc( 100% - 40px);
+                transition: height 300ms ease-in-out;
+                overflow-y: auto;
+            }
+
+            .sell-buy-center-con-sell{
+                width: 100%;
+                height: 0px;
+                transition: height 300ms ease-in-out;
+                overflow: hidden;
+            }
+        }
+
+        .sell{
+            .sell-buy-center-con-buy{
+                width: 100%;
+                overflow: hidden;
+                height: 0px;
+                transition: height 300ms ease-in-out;
+            }
+            .sell-buy-center-con-sell{
+                width: 100%;
+                height: calc(100% - 36px);
+                transition: height 300ms ease-in-out;
+                overflow-y: auto;
+            }
+        }
+    }
+    .new-special-trad{
+        height: calc(100% - 40px)
+    }
+}
+
+@media(min-width: 0) and (max-width: 1439px){
+        .sell-buy {
+            &-center {
+                width: 329px;
+            }
+            .new-trade{
+                display: none;
+            }
+            .new-special{
+                display: block;
+            }
+            .act{
+                border-bottom: 2px solid;
+                @include mixin-act-border();
+                opacity: 1;
+            }
+            .menu{
+                div{
+                    cursor: pointer;
+                }
+            }
+        }
+
+}
+@media(min-width: 1440px) and (max-width: 1819px) {
+    .sell-buy {
+        &-center {
+            width: 329px;
+        }
+        .new-trade{
+            display: none;
+        }
+        .new-special{
+            display: block;
+        }
+        .act{
+            border-bottom: 2px solid;
+            @include mixin-act-border();
+            opacity: 1;
+        }
+        .menu{
+            div{
+                cursor: pointer;
+            }
+        }
+    }
+}
+@media(min-width: 1820px) and (max-width: 20000px){
+    .sell-buy {
+        &-center {
+            width: 306px;
+            &-depth{
+                display: block !important;
+            }
+        }
+        .new-special {
+            display: none !important;
+        }
+
+        .item-special {
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            opacity: 1 !important;
+            text-align: left !important;
+            text-indent: 10px;
+            @include mixin-font-act-color();
+        }
+        .item-special:hover{
+            border: none !important;
+        }
+
+        .act {
+            border-bottom: none;
+        }
+
+        .new-trade {
+            display: block;
+            width: 306px;
+            height: 100%;
+            @include mixin-border-color();
+            border-radius: 4px;
+        }
+    }
+
+}
+
+

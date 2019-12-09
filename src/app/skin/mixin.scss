@@ -1,0 +1,467 @@
+@charset "utf-8";
+@import "./variable";/*引入配置*/
+
+$opction: .8;
+
+// 背景色  $background-all
+@mixin mixin-bg-all(){
+  :host-context([data-theme-style='Light']) & {
+    background: $background-all !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background: $background-all-d !important;
+  }
+}
+
+// home banner 背景色  $background-banner
+@mixin mixin-bg-banner-ci(){
+    :host-context([data-theme-style='Light']) & {
+        background: #E36738 url('../../../assets/images/home/banner.svg') no-repeat center center;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: #E36738 url('../../../assets/images/home/banner.svg') no-repeat center center;
+    }
+}
+
+// 背景色  $background-banner
+@mixin mixin-bg-banner(){
+  :host-context([data-theme-style='Light']) & {
+    background: $background-banner;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background: $background-banner-d;
+  }
+}
+
+// 字体颜色  $color
+@mixin mixin-font-color(){
+  :host-context([data-theme-style='Light']) & {
+    color: #003a61 !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    color: $color-d !important;
+  }
+}
+
+// 买字体颜色  $buy_color-buy
+@mixin mixin-font-buy-color(){
+  :host-context([data-theme-style='Light']) & {
+    color: $buy_color-buy !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    color: $buy_color-buy-d !important;
+  }
+}
+
+// 卖字体颜色  $sell_color-sell
+@mixin mixin-font-sell-color(){
+  :host-context([data-theme-style='Light']) & {
+    color: $sell_color-sell !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    color: $sell_color-sell-d !important;
+  }
+}
+
+// 字体颜色  $color-act-d
+@mixin mixin-font-act-color(){
+  :host-context([data-theme-style='Light']) & {
+    color: $color-act !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    color: $color-act-d !important;
+  }
+}
+// 详情文案颜色  $color_color_detail
+@mixin mixin-font-color_detail(){
+  :host-context([data-theme-style='Light']) & {
+    color: $color_detail !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    color: $color_detail !important;
+  }
+}
+
+// 二维码边框颜色  $color
+@mixin mixin-font-bgcolor(){
+  :host-context([data-theme-style='Light']) & {
+    border-color: rgba($color: $color, $alpha: .1) !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    border-color: rgba($color: $color-d, $alpha: .1) !important;
+  }
+}
+
+
+// 数量小于最小数量提示框字体颜色  $color
+@mixin mixin-fontTip-color(){
+  :host-context([data-theme-style='Light']) & {
+    color: #fff !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    color: #fff !important;
+  }
+}
+
+// 数量小于最小数量提示框背景色  $color
+@mixin mixin-bgTip-color(){
+  :host-context([data-theme-style='Light']) & {
+    background: $border-color-zh-d !important;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background: $border-color-zh-d !important;
+  }
+}
+
+// 背景色  $background
+@mixin mixin-bg-color(){
+    :host-context([data-theme-style='Light']) & {
+      background: $background !important;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $background-d !important;
+    }
+  }
+
+// 背景色  $bg
+@mixin mixin-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $bg !important;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $bg-d !important;
+    }
+  }
+
+// 边框  $border-color
+@mixin mixin-border-color(){
+    :host-context([data-theme-style='Light']) & {
+      border-color: $border-color;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      border-color: $border-color-d;
+    }
+  }
+
+// 背景  $border-color
+@mixin mixin-border-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $border-color;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $border-color-d;
+    }
+  }
+
+// buy  $buy_color
+@mixin mixin-buy(){
+    :host-context([data-theme-style='Light']) & {
+      color: $buy_color;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      color: $buy_color;
+    }
+  }
+
+// sell  $sell_color
+@mixin mixin-sell(){
+    :host-context([data-theme-style='Light']) & {
+      color: $sell_color !important;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      color: $sell_color !important;
+    }
+  }
+
+// background  $buy_color
+@mixin mixin-buy-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $buy_color;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $buy_color;
+    }
+  }
+
+// background  $sell_color
+@mixin mixin-sell-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $sell_color !important;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $sell_color !important;
+    }
+  }
+
+// input:focus  $color_blue
+@mixin mixin-input-focus-border(){
+    :host-context([data-theme-style='Light']) & {
+      border-color: $color_blue;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      border-color: $color_blue;
+    }
+  }
+
+// input:focus  $color-main
+@mixin mixin-act-border(){
+    :host-context([data-theme-style='Light']) & {
+        border-color: $color-main;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        border-color: $color-main;
+    }
+}
+
+// color  $color-main
+@mixin mixin-color-blue(){
+    :host-context([data-theme-style='Light']) & {
+      color: $color-main !important;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      color: $color-main-d !important;
+    }
+  }
+
+// background  $color_blue
+@mixin mixin-color-blue-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $color_blue;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $color_blue;
+    }
+  }
+
+// 百分比按钮文字  $border-flexBtn-fontColor
+@mixin mixin-flexBtn-color(){
+    :host-context([data-theme-style='Light']) & {
+      color: $border-flexBtn-fontColor;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      color: $border-flexBtn-fontColor-d;
+    }
+  }
+
+// 百分比按钮  $border-flexBtn-color
+@mixin mixin-flexBtn-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $border-flexBtn-color;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $border-flexBtn-color-d;
+    }
+  }
+
+// 百分比按钮:hover  $buy_bg
+@mixin mixin-flexBtn-buy-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $buy_bg;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $buy_bg;
+    }
+  }
+
+// 百分比按钮:hover  $sell_bg
+@mixin mixin-flexBtn-sell-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $sell_bg;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background: $sell_bg;
+    }
+  }
+
+// 遮罩层 背景 $border-color-zh
+@mixin mixin-dialog-bg(){
+    :host-context([data-theme-style='Light']) & {
+      background: $border-color-zh;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+      background-color: $border-color-zh-d;
+    }
+  }
+
+//color $border-color-zh
+@mixin mixin-dialog-color(){
+  :host-context([data-theme-style='Light']) & {
+    background: $border-color-zh;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background: $border-color-zh-d;
+  }
+}
+
+//shadow $dialog-shadow
+@mixin mixin-dialog-color(){
+  :host-context([data-theme-style='Light']) & {
+    box-shadow: 0px 0px 12px $dialog-shadow;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    box-shadow: 0px 0px 12px $dialog-shadow-d;
+  }
+}
+
+//scorll $scroll-bga
+@mixin mixin-scroll-color(){
+  :host-context([data-theme-style='Light']) & {
+    background-color: $scooll-bgb;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background-color: $scooll-bgb-d;
+  }
+}
+
+//scorll $scooll-bgb
+@mixin mixin-scroll-bg(){
+  :host-context([data-theme-style='Light']) & {
+    box-shadow: inset 0 0 4px $scooll-bga;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    box-shadow: inset 0 0 4px $scooll-bga-d;
+  }
+}
+
+// 深度合并背景色
+@mixin mixin-bg-depth(){
+  :host-context([data-theme-style='Light']) & {
+    background-color: $background-depth;
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background-color: $background-depth-d;
+  }
+}
+
+// 资产 奖励
+@mixin mixin-bg-bonus(){
+  :host-context([data-theme-style='Light']) & {
+    background: rgba(65,129,255, 0.05);
+  }
+  :host-context([data-theme-style="Dark"]) & {
+    background: rgba(65,129,255, 0.1);
+  }
+}
+
+
+/**
+ * common btn
+ */
+
+//普通按钮背景色
+@mixin mixin-common-btn(){
+    :host-context([data-theme-style='Light']) & {
+        background: $btn !important;
+        box-shadow: 0px 5px 20px rgba(214, 38, 22, 0.3);
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $btn-d !important;
+        box-shadow: 0px 5px 20px rgba(214, 38, 22, 0.3);
+    }
+}
+
+//普通按钮背景色  disabled
+@mixin mixin-common-btn-disabled(){
+    :host-context([data-theme-style='Light']) & {
+        background: $btn-disabled;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $btn-disabled-d;
+    }
+}
+
+//普通按钮背景色  hover
+@mixin mixin-common-btn-hover(){
+    :host-context([data-theme-style='Light']) & {
+        background: $btn-hover !important;
+        box-shadow: 0px 5px 20px rgba(214, 38, 22, 0.2);
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $btn-hover-d !important;
+        box-shadow: 0px 5px 20px rgba(214, 38, 22, 0.2);
+    }
+}
+
+//普通按钮背景色 (不推荐的操作按钮)
+@mixin mixin-common-btn-primary(){
+    :host-context([data-theme-style='Light']) & {
+        background: $btn-primary;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $btn-primary-d;
+    }
+}
+
+
+/**
+ * common 橙色背景下 btn
+ */
+
+//按钮背景色
+@mixin mixin-common-bg-btn(){
+    :host-context([data-theme-style='Light']) & {
+        background: $bg-btn;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $bg-btn-d;
+    }
+}
+
+//按钮背景色  hover
+@mixin mixin-common-bg-btn-hover(){
+    :host-context([data-theme-style='Light']) & {
+        background: $bg-btn-hover;
+        color: $color-N03 !important;
+        box-shadow: 0px 2px 20px rgba(214, 38, 22, 0.2);
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $bg-btn-hover-d;
+        color: $color-N03-d !important;
+        box-shadow: 0px 2px 20px rgba(214, 38, 22, 0.2);
+    }
+}
+
+
+/**
+ * 买入卖出模块主题颜色
+ */
+
+// 买入百分比按钮背景色:hover  $buy_color-buy
+@mixin mixin-bg-buy-btn(){
+    :host-context([data-theme-style='Light']) & {
+        background: $buy_color-buy;;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $buy_color-buy-d;
+    }
+}
+
+// 卖出百分比按钮背景色:hover  $sell_color-sell
+@mixin mixin-bg-sell-btn(){
+    :host-context([data-theme-style='Light']) & {
+        background: $sell_color-sell;
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: $sell_color-sell-d;
+    }
+}
+
+// 买入按钮渐变背景色:hover
+@mixin mixin-bg-buy-btn-linear(){
+    :host-context([data-theme-style='Light']) & {
+        background: -webkit-linear-gradient(left, #46C17F, #56D993);
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: -webkit-linear-gradient(left, #46C17F, #56D993);
+    }
+}
+
+// 卖出按钮渐变背景色:hover
+@mixin mixin-bg-sell-btn-linear(){
+    :host-context([data-theme-style='Light']) & {
+        background: -webkit-linear-gradient(left,#EF7059,#f8927F);
+    }
+    :host-context([data-theme-style="Dark"]) & {
+        background: -webkit-linear-gradient(left,#EF7059,#f8927F);
+    }
+}

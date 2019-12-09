@@ -1,0 +1,80 @@
+@import "../../skin/mixin";
+
+.select-box{
+    width: 100%;
+    padding: 0 10px;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    .sanjiao_xia{
+        opacity: .3;
+        float: right;
+        @include mixin-font-color();
+    }
+    .set-value{
+        @include mixin-font-act-color();
+    }
+    .placeholder{
+        @include mixin-font-color();
+        opacity: .4;
+    }
+    .up{
+        margin-top: -2px;
+    }
+    .down-box{
+        position: absolute;
+        top: 50px;
+        left: -1px;
+        z-index: 2;
+        width: calc(100% + 2px);
+        background-color: inherit;
+        font-size: 12px;
+        @include mixin-bg-color();
+        @include mixin-dialog-color();
+        border-radius: 4px;
+        border: 1px solid;
+        @include mixin-border-color();
+        p{
+            margin: 0;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            @include mixin-font-color();
+            text-indent: 10px;
+            font-weight: 400;
+            &:hover{
+                @include mixin-border-bg();
+            }
+        }
+        .act{
+            @include mixin-border-bg();
+        }
+    }
+}
+  .down {
+    animation: Down 0ms linear;
+    opacity: .5;
+  }
+
+  .up {
+    animation: Up 0ms linear;
+    opacity: .5;
+  }
+
+  @keyframes Down {
+    from {
+        transform: rotate(180deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+  }
+
+  @keyframes Up {
+    from {
+        -webkit-transform: rotate(180deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+  }

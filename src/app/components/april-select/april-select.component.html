@@ -1,0 +1,9 @@
+<div class="select-box noselect border-box" tabIndex="1" [ngStyle]="{'line-height': height+'px','height':height+'px'}" (focus)="dis = true" (blur)='dis = false'>
+    <span class='set-value' *ngIf="setLang">{{setLang}}</span>
+    <span class='placeholder' *ngIf="!setLang">{{placeholder}}</span>
+    <i class='iconfont sanjiao_xia down' *ngIf="dis == false">&#xe625;</i>
+    <i class='iconfont sanjiao_xia april-up up' *ngIf="dis == true">&#xe624;</i>
+    <div class="down-box hover_bgColor april-select" *ngIf="dis" [ngStyle]="{'top': height+6+'px'}" >
+        <p *ngFor="let item of list" class='f-opacity' [ngClass]="{'act': item.val == this.defaultset}" (click)="sel(item.val,$event)" ><span *ngIf="language != 'en'">{{item.zhName}}</span><span *ngIf="language == 'en'">{{item.enName}}</span></p>
+    </div>
+</div> 

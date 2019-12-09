@@ -1,0 +1,72 @@
+<div class="deal border-box" [ngClass]="{'screens': modeSel === 'tile'}" id='trade'>
+
+	<div class="container" *ngIf="modeSel === 'traditional'">
+
+		<div class='container-top qcfd'>
+			<!-- 交易对  K线 深度图 -->
+			<div class='container-top-left f-fl'>
+				<div class='container-top-left-head qcfd'>
+
+					<!-- 交易对 -->
+					<div class='container-top-left-head-left f-fl'>
+						<app-trade-symbol></app-trade-symbol>
+					</div>
+
+					<!-- K线 深度图 -->
+					<div class='container-top-left-head-right f-fl'>
+						<app-content></app-content>
+					</div>
+				</div>
+
+				<!-- trad buy sell -->
+				<div class='container-top-left-trad'>
+					<app-trade-top-left-trad></app-trade-top-left-trad>
+				</div>
+			</div>
+
+			<!-- depth  newTrad -->
+			<div class='container-top-rigth f-fl'>
+				<app-trade-top-right [modeSel]='modeSel'></app-trade-top-right>
+			</div>
+		</div>
+
+		<!-- orderHistory -->
+		<div class='container-foot'>
+			<app-foot></app-foot>
+		</div>
+
+	</div>
+
+	<div class="container-tile" *ngIf="modeSel === 'tile'">
+		<div class='container-tile-top qcfd' [ngClass]="{'disLeft': tileLeftFlag && !tileRightFlag, 'disRight': tileRightFlag && !tileLeftFlag, 'disAll': tileRightFlag && tileLeftFlag}">
+
+			<!-- 交易对 -->
+			<div class='container-tile-top-left f-fl'>
+				<app-trade-symbol></app-trade-symbol>
+			</div>
+
+			<!-- K线 深度图 -->
+			<div class='container-tile-top-midel f-fl'>
+				<app-content [modeSel]='modeSel'></app-content>
+			</div>
+
+			<!-- depth  newTrad -->
+			<div class='container-tile-top-right f-fl'>
+				<app-trade-top-right [modeSel]='modeSel'></app-trade-top-right>
+			</div>
+		</div>
+		<div class='container-tile-bottom qcfd'>
+
+			<!-- orderHistory -->
+			<div class='container-tile-bottom-left f-fl'>
+				<app-foot></app-foot>
+			</div>
+
+			<!-- trad buy sell -->
+			<div class='container-tile-bottom-right f-fl'>
+				<app-trade-top-left-trad [modeSel]='modeSel'></app-trade-top-left-trad>
+			</div>
+		</div>
+	</div>
+
+</div>

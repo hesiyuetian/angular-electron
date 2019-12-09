@@ -1,0 +1,147 @@
+<div class="main min-height-vh">
+    <div class="main-body">
+
+        <!-- 助记词解锁 -->
+        <div class="container" *ngIf="step == 'z1'">
+            <h3>
+                {{"unlock.mnemonic" | translate}}
+                <span class="f-fr f-cursor" (click)="select('k1')">{{"unlock.key" | translate}}</span>
+            </h3>
+            <div class="container-textarea">
+                <ul class="qcfd">
+                    <li class="f-fl f-cursor" *ngFor="let item of mnemonicList;let ind = index" (mouseover)='mnemonicIndex = ind' (mouseleave)='mnemonicIndex = null'>
+                        {{item}}
+                        <i class="iconfont" *ngIf="mnemonicIndex == ind" (click)="removeMnemonic(ind);$event.stopPropagation();">&#xe610;</i>
+                    </li>
+                </ul>
+                <input class="container-textarea-input f-fl" type="text" [(ngModel)]="mnemonicVlaue" (keyup)="inputMnemonic($event)" (blur)="inputMnemonicBlur()" [placeholder]="'unlock.tip7' | translate">
+                <div class="container-textarea-btn container-textarea-clean f-cursor" (click)="clearMnemonic()">{{"unlock.clean" | translate}}</div>
+            </div>
+            <div class="container-btn f-center-x" [ngClass]="{'f-cursor-not btn-dis': mnemonicList.length < 15, 'f-cursor btn-sure': mnemonicList.length == 15}" (click)="mnemonicList.length == 15 && checknemonics()">{{'createWallet.continue' | translate}}</div>
+        </div>
+
+        <!-- 助记词解锁 ++++ PWD -->
+        <div class="container-pwdcent" *ngIf="step == 'z2'">
+            <h3>{{'unlock.importWallet' | translate}}</h3>
+
+            <div class="row3-col1">
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': userNameFocusS}">
+                    <span (click)="putStatue('span', 0)">{{'createWallet.userName' | translate}}</span>
+                    <input class="put-focus auth-input" type="text" maxlength="20" [(ngModel)]="userName" autocomplete="off" [readonly]=!userNameFocusS (focus)="putStatue('userName', true)" (blur)="putStatue('userName', false)" (keyup)="enterValue('userName');unlockBtn();" (change)="enterValue('userName');unlockBtn();" />
+                    <ul *ngIf="userName && userName.length<5">
+                        <li class="direction"></li>
+                        <li>{{'createWallet.userLength' | translate}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row3-col1">
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': password1FocusS}">
+                    <span (click)="putStatue('span', 1)">{{'createWallet.password' | translate}}</span>
+                    <input class="put-focus auth-input" type={{passwordType1}} [(ngModel)]="password1" autocomplete="off" [readonly]=!password1FocusS (focus)="putStatue('password1', true)" (blur)="putStatue('password1', false)" (keyup)="enterValue('password1');unlockBtn();" (change)="enterValue('password1');unlockBtn();" />
+
+                    <label class="iconfont label-light" *ngIf="passwordType1 == 'password'" (click)="passwordIsShow('passwordType1')">&#xe683;</label>
+                    <label class="iconfont" *ngIf="passwordType1 == 'text'" (click)="passwordIsShow('passwordType1')">&#xe682;</label>
+                    <ul *ngIf="passwordSecurity>=0 && passwordSecurity<=2">
+                        <li class="direction"></li>
+                        <li>{{'createWallet.passwordLength' | translate}}</li>
+                        <!-- <li>{{'createWallet.passwordType' | translate}}</li> -->
+                    </ul>
+                </div>
+                <div class="row3-cols2">
+                    <div *ngFor="let i of passwordTotalStrength" class="{{i.status}}"></div>
+                </div>
+            </div>
+
+            <div class="row3-col1 sprace">
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': password2FocusS}">
+                    <span (click)="putStatue('span', 2)">{{'createWallet.passwordTo' | translate}}</span>
+                    <input class="put-focus auth-input" type={{passwordType2}} [(ngModel)]="password2" autocomplete="off" [readonly]=!password2FocusS (focus)="putStatue('password2', true)" (blur)="putStatue('password2', false)" (keyup)="enterValue('password2');unlockBtn();" (change)="enterValue('password2');unlockBtn();" />
+
+                    <label class="iconfont label-light" *ngIf="passwordType2 == 'password'" (click)="passwordIsShow('passwordType2')">&#xe683;</label>
+                    <label class="iconfont" *ngIf="passwordType2 == 'text'" (click)="passwordIsShow('passwordType2')">&#xe682;</label>
+                    <ul *ngIf="password2 && (password1 != password2)">
+                        <li class="direction"></li>
+                        <li>{{'createWallet.passwordEqually' | translate}}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="container-btn f-center-x" [ngClass]="{'f-cursor-not btn-dis': btnZ1 == 0, 'f-cursor btn-sure': btnZ1 == 1}" (click)="btnZ1 == 1 && (isDownloadKerstore = true)">{{'createWallet.continue' | translate}}</div>
+
+            <div class="keystore-down" *ngIf="isDownloadKerstore">
+                <div class="keystore-down-zhan"></div>
+                <div class="keystore-down-con f-center">
+                    <h3>{{"LoginAlert.DownloadKeystore" | translate}}</h3>
+                    <p>{{"LoginAlert.changeTip2" | translate}}</p>
+                    <div class="container-btn f-center-x f-cursor btn-sure" (click)="unlock()">{{'createWallet.continue' | translate}}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--    keyStore解锁    -->
+        <div class="container" *ngIf="step == 'k1'">
+            <h3>
+                {{"unlock.key" | translate}}
+                <span class="f-fr f-cursor" (click)="select('z1')">{{"unlock.mnemonic" | translate}}</span>
+            </h3>
+
+            <input id="upload" type="file" style="display: none" (change)="addFile($event)"  />
+
+            <div class="container-textarea container-textarea-keystore">
+                <div class="container-textarea-keystore-select f-center" *ngIf="keystoreStep === 'N01' ">
+                    <p>{{"unlock.tip6" | translate}}</p>
+                    <div class="container-textarea-keystore-select-btn">
+                        <div class="container-textarea-keystore-select-btn-item f-cursor" (click)="upload()">{{"unlock.upload" | translate}}</div>
+                        <div class="container-textarea-keystore-select-btn-item f-cursor" (click)="keystoreStep = 'N03'">{{"unlock.manual" | translate}}</div>
+                    </div>
+                </div>
+
+                <div class="container-textarea-keystore-file f-center" *ngIf="keystoreStep === 'N02' ">
+                    <i class="iconfont error" *ngIf=" fileName && deleteFileStatus != 0" >&#xe608;</i>
+                    <i class="iconfont success" *ngIf="fileName && deleteFileStatus == 0">&#xe61d;</i>
+                    {{fileName}}
+                </div>
+
+                <div class="container-textarea-keystore-input" *ngIf="keystoreStep === 'N03' ">
+                    <textarea class="textarea textarea2" placeholder="{{'unlock.putValue' | translate}}" rows="5" [(ngModel)]="secretTxt1"  (keyup)="unlockBtn()" (change)="unlockBtn()"></textarea>
+                </div>
+
+                <div class="container-textarea-btn container-textarea-reUpload f-cursor" *ngIf="keystoreStep == 'N02' " (click)="upload()">{{"unlock.reUpload" | translate}}</div>
+                <div class="container-textarea-btn container-textarea-clean f-cursor" *ngIf="keystoreStep != 'N01' " (click)="clearKeystore()">
+                    <span *ngIf="secretTxt1.length > 0">{{"unlock.clean" | translate}}</span>
+                    <span *ngIf="secretTxt1.length < 1">{{"unlock.back" | translate}}</span>
+                </div>
+            </div>
+
+            <!--     account (name、pwd)     -->
+            <div class="container-keystore-account f-center-x">
+                <div class="row3-col1">
+                    <div class="enterTxt" [ngClass]="{'enterTxtFocus': userNameFocusS}">
+                        <span (click)="putStatue('span', 0)">{{'createWallet.userName' | translate}}</span>
+                        <input class="put-focus auth-input" type="text" maxlength="20" [(ngModel)]="userName" autocomplete="off" [readonly]=!userNameFocusS (focus)="putStatue('userName', true)" (blur)="putStatue('userName', false)" (keyup)="enterValue('userName');unlockBtn();" (change)="enterValue('userName');unlockBtn();" />
+                        <ul *ngIf="userName && userName.length<5">
+                            <li class="direction"></li>
+                            <li>{{'createWallet.userLength' | translate}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row3-col1">
+                    <div class="enterTxt" [ngClass]="{'enterTxtFocus': password1FocusS}">
+                        <span (click)="putStatue('span', 1)">{{'createWallet.password' | translate}}</span>
+                        <input class="put-focus auth-input" [type]="reg.isCssSuper() ? 'text' : 'password'" [ngStyle]="{'-webkit-text-security': passwordType1 == 'password' ? 'disc' : 'none'}" autocomplete="off" [(ngModel)]="password1" [readonly]=!password1FocusS (focus)="putStatue('password1', true)" (blur)="putStatue('password1', false)" (keyup)="enterValue('password1');unlockBtn();" (change)="enterValue('password1');unlockBtn();" />
+                        <label class="iconfont label-light" *ngIf="passwordType1 == 'password'" (click)="passwordIsShow('passwordType1')">&#xe683;</label>
+                        <label class="iconfont" *ngIf="passwordType1 == 'text'" (click)="passwordIsShow('passwordType1')">&#xe682;</label>
+                        <ul *ngIf="password2 && (password1 != password2)">
+                            <li class="direction"></li>
+                            <li>{{'createWallet.passwordLength' | translate}}</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container-btn f-center-x" [ngClass]="{'f-cursor-not btn-dis':  btnK1 == 0, 'f-cursor btn-sure': btnK1 == 1}" (click)=" btnK1 == 1  && unlock()">{{'createWallet.continue' | translate}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>

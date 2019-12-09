@@ -1,0 +1,246 @@
+
+@import "../../skin/mixin";
+
+.main{
+    display: table;
+    width: 100%;
+
+    &-head{
+        height: 50px;
+        padding: 0 10px;
+        border-bottom: 1px solid;
+        @include mixin-border-color();
+        @include mixin-bg-color();
+        @include mixin-font-act-color();
+        @include mixin-font-color();
+        div{
+            height: 49px;
+            line-height: 49px;
+            float: left;
+            min-width: 100px;
+            opacity: $opction;
+            text-align: center;
+            font-size: 14px;
+            cursor: pointer;
+            border-bottom: 2px solid rgba(0,0,0,0);
+        }
+        &-hover{
+            opacity: 1 !important;
+            border-bottom: 2px solid;
+            @include mixin-act-border();
+            @include mixin-font-act-color();
+            font-weight: 800;
+        }
+        div:hover{
+            opacity: 1 !important;
+            border-bottom: 2px solid;
+            @include mixin-act-border();
+            @include mixin-font-act-color();
+            font-weight: 800;
+        }
+    }
+    &-body{
+        // display: table-cell;
+        // vertical-align: middle;
+        border: 1px solid;
+        @include mixin-border-color();
+        border-radius: 4px;
+        margin: 0 auto;
+        margin-top: 10px;
+        padding: 30px 20px;
+        @include mixin-font-color();
+        width: 60%;
+        min-width: 668px;
+        height: 558px;
+        @include mixin-bg-color();
+        &-title{
+            font-size: 24px;
+            margin-bottom: 20px;
+            @include mixin-font-act-color();
+        }
+        &-col1{
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid;
+            @include mixin-border-color();
+            &-l{
+                display: inline-block;
+                opacity: $opction;
+            }
+            &-r{
+                float: right;
+                position: relative;
+                height: 100%;
+                @include mixin-font-act-color();
+                .logOut{
+                    cursor: pointer;
+                    border-left: 1px solid;
+                    @include mixin-border-color();
+                    padding-left: 10px;
+                    margin-left: 10px;
+                }
+                .show{
+                    cursor: pointer;
+                    // @include mixin-color-blue();
+                }
+                label{
+                    display: inline-block;
+                    margin-left: 10px;
+                    position: relative;
+                    top: 1px;
+                    opacity: $opction;
+                    font-size: 10px;
+                    transition: all .3s;
+                    transform: rotate(0deg);
+                    transform-origin: 50% 48%;
+                    @include mixin-font-color();
+                    font-size: 12px;
+                }
+                ul{
+                    position: absolute;
+                    top: 40px;
+                    right: 0px;
+                    // box-shadow: 0 0 10px rgba(18, 25, 50, 0.2);
+                    border-radius: 4px;
+                    @include mixin-bg-color();
+                    border: 1px solid;
+                    @include mixin-border-color();
+                    @include mixin-dialog-color();
+                    z-index: 99;
+                    overflow: hidden;
+                    li{
+                        padding: 0 15px;
+                        height: 40px;
+                        line-height: 40px;
+                        min-width: 85px;
+                        text-align: left;
+                        span{
+                            padding-left: 10px;
+                        }
+
+                    }
+                    li:hover{
+                        @include mixin-border-bg();
+                    }
+                }
+            }
+        }
+        &-col2{
+            height: 50px;
+            line-height: 40px;
+            &-r{
+                width: 70%;
+                line-height: 20px;
+                text-align: right;
+            }
+        }
+    }
+}
+
+.iconfont1{
+    opacity: 1 !important;
+    transform: rotate(180deg) !important;
+    @include mixin-font-act-color();
+}
+
+.guoqi{
+    img{
+        width: 20px;
+        position: relative;
+        top: 5px;
+    }
+}
+
+.dialog{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    font-size: 14px;
+
+    &-zhan{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        @include mixin-dialog-bg();
+    }
+
+    .container { // 可以复用
+        width: 790px;
+        padding: 50px 20px 40px;
+        @include mixin-bg-color();
+        border-radius: 4px;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+        box-sizing: border-box;
+
+        h3 {
+            font-size: 30px;
+            line-height: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        i{
+            position: absolute;
+            top: 20px;
+            right: 26px;
+        }
+
+        &-textarea {
+            width: 100%;
+            height: 211px;
+            padding: 21px 20px;
+            border: 1px dashed;
+            box-sizing: border-box;
+            border-radius: 4px;
+            @include mixin-border-color();
+            position: relative;
+
+            ul{
+                display: block;
+                li{
+                    height: 18px;
+                    line-height: 14px;
+                    padding: 3px 9px;
+                    border-radius: 9px;
+                    margin: 0 20px 10px 0;
+                    color: #FA9128;
+                    @include mixin-common-btn-primary();
+                    //&:hover{
+                    //    color: #fff;
+                    //    @include mixin-common-btn-hover();
+                    //}
+                    i{
+                        font-size: 12px;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            &-tip{
+                text-align: center;
+                p{
+                    line-height: 18px;
+                    opacity: 1;
+                }
+            }
+
+            &-clean{
+                padding: 5px 22px;
+                position: absolute;
+                right: 20px;
+                bottom: 10px;
+                color: #fff;
+                border-radius: 50px;
+                font-weight: 600;
+                @include mixin-common-btn();
+                &:hover{
+                    @include mixin-common-btn-hover();
+                }
+            }
+        }
+    }
+}
+

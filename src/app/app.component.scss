@@ -1,0 +1,124 @@
+@import "./skin/mixin";
+.main-content{
+    width: 100%;
+    //height: 100%;
+}
+.content {
+    width: 100%;
+    height: 100%;
+    min-width: 1366px;
+    padding: 70px 0 50px;
+    position: relative;
+    box-sizing: border-box;
+
+    &-t {
+        height: 100%;
+        margin: 0 auto;
+    }
+
+    .white {
+        @include mixin-bg-all();
+    }
+    .home {
+        min-height: calc(100vh - 70px);
+    }
+
+}
+
+.no-foot{
+    padding: 70px 0 0;
+}
+
+.screen {
+    padding: 70px 0 0;
+}
+
+.content2 {
+    min-width: 1200px;
+}
+
+.absoults{
+    position: absolute !important;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 222;
+}
+
+.router-content {
+    min-height: calc(100vh - 120px);
+    height: 100%;
+    @include mixin-font-color();
+    box-sizing: border-box;
+}
+
+.footer {
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    position: absolute;
+    @include mixin-bg-all();
+}
+
+.dark-background {
+    @include mixin-bg-all();
+}
+
+.disfoot {
+    display: none;
+}
+
+/deep/ .no-data {
+    //width: 100%;
+    //height: 82px !important;
+    //text-align: center;
+    //line-height: 40px;
+    //font-size: 12px;
+}
+
+/deep/ .loading {
+    width: 100%;
+    height: 40px !important;
+    text-align: center;
+    line-height: 40px;
+
+    .loading_box {
+        display: inline-block;
+        font-size: 12px;
+        position: relative;
+        // padding-left: 20px;
+        .loading_img {
+            background-size: auto 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            // position: absolute;
+            // top: 12px;
+            left: 0;
+            float: left;
+            margin-top: 13.5px;
+            margin-right: 5px;
+            width: 13px;
+            height: 13px;
+            // background-color: red;
+            animation: rotation 1s linear infinite;
+            -webkit-transform-origin: center center;
+            -ms-transform-origin: center center;
+            transform-origin: center center;
+            @keyframes rotation {
+                from {
+                    transform: rotate(0deg)
+                }
+                to {
+                    transform: rotate(360deg)
+                }
+            }
+        }
+    }
+}
+
+

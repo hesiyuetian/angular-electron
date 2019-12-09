@@ -1,0 +1,24 @@
+.jiazai{
+    text-align: center;
+    height: 60px;
+    span{
+        img{
+            position: relative;
+            right: 0px;
+            top: -3px;
+            height: 50px;
+            // animation: t 1.5s linear infinite;
+            // transform:rotate(0deg);
+        } 
+    }
+    p{
+        font-size: 12px;
+        text-align: center;
+    }
+    
+}
+
+// @keyframes t {
+//     0% {transform:rotate(0deg)}
+//     100% {transform:rotate(360deg)}
+// }

@@ -1,0 +1,22 @@
+<div class="connect" [ngClass]="fadeFlag">
+    <div class="main">
+        <span class="close"> <i class="iconfont" (click)="close()">&#xe608;</i> </span>
+        <div class="main-head">
+            <img src="./assets/images/tishi.png" />
+        </div>
+        <label *ngIf="config.content">
+            <div  class="main-title" *ngFor="let i of config.content">
+                <span>{{i}}</span>
+            </div>
+        </label>
+
+
+        <div class="main-foot">
+            <div class="button3" *ngIf="config.cancel" (click)="config.callbackCancel();close();"> {{config.cancel}} </div>
+            <div class="button2" *ngIf="config.sure" (click)="config.callbackSure();close();"> {{config.sure}} </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="mask" (click)="close()"></div>

@@ -1,0 +1,86 @@
+<div class="login" [ngClass]="[fadeFlag,theme]">
+    <div class="connect">
+        <label class="iconfont close icon_style f-cursor" (click)="close()">&#xe608;</label>
+
+        <!-- 显示助记词、私钥、下载keyStore  -->
+        <div class="main" *ngIf="config.type != 'change' && config.type != 'aboutUs'">
+            <h3 class="main-row1"> {{config.tip1}} </h3>
+            <div class="main-row2"> {{config.tip2}} </div>
+            <div class="main-row3"> 
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': passwordFocusS}">
+                    <span (click)="putStatue('span', 0)">{{'LoginAlert.password' | translate}}</span>
+                    <input class="put-focus auth-input" [type]="reg.isCssSuper() ? 'text' : 'password'" [ngStyle]="{'-webkit-text-security': passwordStatus == 'password' ? 'disc' : 'none'}" [(ngModel)]="password" (focus)="putStatue('password', true)" (blur)="putStatue('password', false)" (keyup)="enterValue('password')" (change)="enterValue('password')" />
+                    <label class="iconfont label-light" *ngIf="passwordStatus == 'password'" (click)="setInputType('text')">&#xe683;</label>
+                    <label class="iconfont" *ngIf="passwordStatus == 'text'" (click)="setInputType('password')">&#xe682;</label>
+                </div>
+            </div>
+            <div class="main-btn" > 
+                <div *ngIf="!password" class="f-cursor-not">{{'LoginAlert.ok' | translate}}</div> 
+                <div *ngIf="password" class="main-btn2" (click)="submit()">{{'LoginAlert.ok' | translate}}</div>
+            </div>
+        </div>
+
+        <!-- 修改密码 -->
+        <div class="main" *ngIf="config.type == 'change' && !changeAlert">
+            <h3 class="main-row1"> {{config.tip1}} </h3>
+            <div class="main-row4"> 
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': passwordFocusS}">
+                    <span (click)="putStatue('span', 0)">{{'LoginAlert.password' | translate}}</span>
+                    <input class="put-focus auth-input" [type]="reg.isCssSuper() ? 'text' : 'password'" style="-webkit-text-security: disc" [(ngModel)]="password" (focus)="putStatue('password', true)" (blur)="putStatue('password', false)" (keyup)="enterValue('password');btnStatus('change');" (change)="enterValue('password');btnStatus('change');" />
+                </div> 
+            </div>
+            <div class="main-row3"> 
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': newPasswordFocusS1}">
+                    <span (click)="putStatue('span', 1)">{{'LoginAlert.newPassword1' | translate}}</span>
+                    <input class="put-focus auth-input" [type]="reg.isCssSuper() ? 'text' : 'password'" [ngStyle]="{'-webkit-text-security': passwordStatus == 'password' ? 'disc' : 'none'}" [(ngModel)]="newPassword1" (focus)="putStatue('newPassword1', true)" (blur)="putStatue('newPassword1', false)" (keyup)="enterValue('newPassword1');btnStatus('change');" (change)="enterValue('newPassword1');btnStatus('change');" />
+                    
+                    <label class="iconfont label-light" *ngIf="passwordStatus == 'password'" (click)="setInputType('text')">&#xe683;</label>
+                    <label class="iconfont" *ngIf="passwordStatus == 'text'" (click)="setInputType('password')">&#xe682;</label>
+                </div>
+                <div class="row3-cols2">
+                    <div *ngFor="let i of passwordTotalStrength" class="{{i.status}}"></div>
+                </div>
+            </div>
+            <div class="main-row3"> 
+                <div class="enterTxt" [ngClass]="{'enterTxtFocus': newPasswordFocusS2}">
+                    <span (click)="putStatue('span', 2)">{{'LoginAlert.newPassword2' | translate}}</span>
+                    <input class="put-focus auth-input" [type]="reg.isCssSuper() ? 'text' : 'password'" style="-webkit-text-security: disc" [(ngModel)]="newPassword2" (focus)="putStatue('newPassword2', true)" (blur)="putStatue('newPassword2', false)" (keyup)="enterValue('newPassword2');btnStatus('change');" (change)="enterValue('newPassword2');btnStatus('change');" />
+                </div>
+            </div>
+
+
+            <div class="main-btn" > 
+                <!-- <div class="main-return" (click)="close()">{{'LoginAlert.return' | translate}}</div> -->
+                <div *ngIf="!changeStatue" class="f-cursor-not">{{'LoginAlert.ok' | translate}}</div> 
+                <div *ngIf="changeStatue" class="main-btn2" (click)="submit()">{{'LoginAlert.ok' | translate}}</div>
+            </div>
+        </div>
+
+        <!-- 修改密码 二次弹窗 -->
+        <div class="main" *ngIf="config.type == 'change' && changeAlert">
+            <h3 class="main-row1"> {{'LoginAlert.changeTip1' | translate}} </h3>
+            <div class="main-row2"> {{'LoginAlert.changeTip2' | translate}} </div>
+            
+            <div class="main-btn" > 
+                <div class="main-btn2" (click)="dowLoadKeyStore()">{{'LoginAlert.download' | translate}}</div>
+            </div>
+        </div>
+
+        <!-- aboutUs -->
+        <div class="main main-x" *ngIf="config.type == 'aboutUs'">
+            <div class="main-p1"><h3>Terms and Conditions</h3></div>
+            <div class="main-p2">
+                ATTENTION: PLEASE READ CAREFULLY THESE TERMS AND CONDITIONS AS THEY AFFECT YOUR OBLIGATIONS AND LEGAL RIGHTS, INCLUDING, BUT NOT LIMITED TO LIMITATION OF LIABILITY. IF YOU DO NOT AGREE WITH THESE TERMS AND CONDITIONS DO NOT USE OUR SOFTWARE AND SERVICES
+            </div>
+            <div class="main-p3">
+                <p>This version was last updated on 05/02/2019.</p>
+                <p>TERMS AND CONDITIONS</p>   
+            </div>
+            <div class="main-p4">1. Agreement</div>
+            <div class="main-p2">This is a legal agreement between you and Waves Platform AG, a joint stock company incorporated in Switzerland or any other legal entity that succeeds Waves Platform AG or may be further incorporated (“Company”) and that operates the following software (“Software”): the desktop software “Waves Client”, the Web-version of “Waves</div>
+        </div>
+
+
+    </div>
+</div>
+<div class="mark" (click)="close()"></div>

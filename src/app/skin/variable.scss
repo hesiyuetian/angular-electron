@@ -1,0 +1,75 @@
+@charset "utf-8";
+
+
+// common
+$buy_color : #43EDBA;   // 买
+$sell_color : #FF4A76;  //卖
+$color_blue: #4181FF;  //激活的Tab 或者 文字
+$color_detail: #4970C4; // 订单详情文案颜色
+$btn_hover: #183DFF; // 按钮hover背景
+
+
+
+// drak
+$background-all-d: #181C2A;  // 背景
+$background-d: #1C2439;   // 模块背景
+$background-banner-d: #1E2943; //  banner模块背景
+$color-d: #A9BDE6;          // 字体颜色
+$color-N03-d: #EC7000;                // 字体颜色  Pri/N03
+$color-main-d: #FA9128;           // 主题橙字体颜色  Pri/P01
+$color-act-d: #fff;          // 字体颜色
+$bg-d: #1C2439;         //
+$border-color-d: rgba(44,56,83,1);     // 线
+$border-color-zh-d: rgba(0,0,0,.6);     // 占位背景
+$border-flexBtn-color-d: rgba(169,189,230,.1);      // 买卖百分比按钮背景
+$border-flexBtn-fontColor-d: rgba(169,189,230, 1);      // 买卖百分比按钮文字
+$dialog-shadow-d: rgba(24,28,42,.6);      // 弹框阴影
+$background-depth-d: #1C2439;   // 深度合并背景色
+$buy_color-buy-d : #43EDBA;   // 买
+$sell_color-sell-d : #FF4A76;  //卖
+$btn-d: -webkit-linear-gradient(180deg, #FA9128 0%, #FA9128 100%);   // 按钮背景色
+$btn-disabled-d: -webkit-linear-gradient(180deg, #FA9128 0%, #FA9128 100%);   // 按钮背景色  disabled
+$btn-hover-d: -webkit-linear-gradient(180deg, #FFAD5B 0%, #FFAD5B 100%);   // 按钮hover背景色
+$btn-primary-d: -webkit-linear-gradient(180deg, #FFAD5B 0%, #FFAD5B 100%);   // 按钮背景色  (不推荐的操作按钮)
+
+$bg-btn-d: rgba(255,255,255, .1);    // 橙色背景下 btn
+$bg-btn-hover-d: rgba(255,255,255, 1);   // 橙色背景下 hover
+
+
+$scooll-bga-d: #141E46; // 滚动条
+$scooll-bgb-d: #5f6990; // 滚动条
+
+
+// light
+$background-all: #F2f5f7;  // 背景 SEC/N06
+$background: #fff;         // 模块背景  SEC/N04
+$background-banner: #fff;   //  banner模块背景 SEC/N05
+$bg: #fff;
+$color: #003a61;                // 字体颜色  SEC/N02
+$color-N03: #EC7000;                // 字体颜色  Pri/N03
+$color-main: #FA9128;           // 主题橙字体颜色  Pri/P01
+$color-act: #003a61;          // 字体颜色    SEC/N01
+$border-color: rgba(0, 58, 97 , .1);     // 线 Sec/N03
+$border-color-zh: rgba(0,0,0,.6);     // 占位背景  SEC/S01
+$border-flexBtn-color: rgba(0, 58, 97,.3);      // 买卖百分比按钮背景
+$border-flexBtn-fontColor: rgba(255,255,255,1);      // 买卖百分比按钮文字
+$dialog-shadow: rgba(248,249,251, 0.06);      // 弹框阴影
+$background-depth: #fff;   // 深度合并背景色
+$buy_color-buy: #46C17F;   // 买    Pri/P06
+$sell_color-sell: #EF7059;  //卖    Pri/P04
+$btn: -webkit-linear-gradient(180deg, #FA9128 0%, #FA9128 100%);   // 按钮背景色
+$btn-disabled: -webkit-linear-gradient(180deg, #FA9128 0%, #FA9128 100%);   // 按钮背景色  disabled
+$btn-hover: -webkit-linear-gradient(180deg, #FFAD5B 0%, #FFAD5B 100%);   // 按钮hover背景色
+$btn-primary: rgba($color: #FA9128, $alpha: 0.1);   // 按钮背景色 (不推荐的操作按钮)
+
+$bg-btn: rgba(255,255,255, .1);    // 橙色背景下 btn
+$bg-btn-hover: rgba(255,255,255, 1);   // 橙色背景下 hover
+
+
+$scooll-bga: rgba(18, 25, 50, 0.05);
+$scooll-bgb: rgba(18, 25, 50, 0.05);
+
+
+
+
+

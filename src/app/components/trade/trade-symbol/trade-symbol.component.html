@@ -1,0 +1,92 @@
+<div class='trad-content-right'>
+    <div class="deal-market-box">
+        <div class="deal-market deal-content-bg">
+
+            <div class="deal-market-price">
+
+                <div class="deal-market-price-title ">
+                    <span class="active_hover active-fav" [ngClass]="{'activated':active === 'optional'}"
+                        (click)="activated('optional');$event.stopPropagation();">
+                        {{'tradeContent.favorite' | translate}}</span>
+                    <span class="index-white-color" [ngClass]="{'activated':active === i}" (click)="activated(i);$event.stopPropagation();"
+                        *ngFor="let i of symbolList">
+                        {{i}}
+                    </span>
+                </div>
+
+                <div class='deal-market-price-search border-box'>
+                    <input type="text" placeholder="{{'Market.search' | translate}}" class="deal-font1 f-opacity"
+                        [(ngModel)]="tokenName" (keyup)="onTokenNameChange();$event.stopPropagation();">
+                    <img class='f-cursor f-center-y' src="./assets/images/search.svg" alt="">
+                </div>
+
+                <div class="deal-market-price-option price-option">
+
+                    <div class="trade_tokenName" (click)="tickerSort('pair');$event.stopPropagation();">
+                        <label>
+                            <span>
+                                    {{'tradeContent.symbol' | translate}}
+                            </span>
+
+                            <b >
+                                <i class='iconfont' [ngClass]="{'act': (type && step == 'pair')}">&#xe624;</i>
+                                <i class='iconfont' [ngClass]="{'act': (!type && step == 'pair')}">&#xe625;</i>
+                            </b>
+
+                        </label>
+                    </div>
+
+                    <div class="trade_marketPrice_box" (click)="tickerSort('close');$event.stopPropagation();">
+                        <label>
+                            <span>
+                                    {{'tradeContent.newPrice' | translate}}
+                            </span>
+                            <b>
+                                <i class='iconfont' [ngClass]="{'act': (type && step == 'close')}">&#xe624;</i>
+                                <i class='iconfont' [ngClass]="{'act': (!type && step == 'close')}">&#xe625;</i>
+                            </b>
+                        </label>
+                    </div>
+
+                    <div class='trade_hours' (click)="tickerSort('change');$event.stopPropagation();">
+                        <label style="right: 13px;">
+                            <span> {{'tradeContent.gain' | translate}} </span>
+                            <b >
+                                <i class='iconfont' [ngClass]="{'act': (type && step == 'change')}">&#xe624;</i>
+                                <i class='iconfont' [ngClass]="{'act': (!type && step == 'change')}">&#xe625;</i>
+                            </b>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="deal-market-price-content">
+
+                    <div class="f-center-y" *ngIf="!marketShowList || marketShowList.length <= 0" >
+                        <app-no-data *ngIf="!tickerLoadStatus"></app-no-data>
+                        <app-load *ngIf="tickerLoadStatus" class='no-data' style="margin-top: 40px;"></app-load>
+                    </div>
+
+                    <div class="deal-market-price-option price-option f-hover f-cursor" *ngFor="let i of marketShowList" [ngClass]="{'active-bg': symbol == i.pair}"
+                         (click)="onSymbolClick(i,i.pair)">
+                        <div class="trade_tokenName">
+                            <span class="iconfont favorite nonal" *ngIf="i.collected == 1"
+                                  (click)="check(i, true);$event.stopPropagation();">&#xe626;</span>
+                            <span class="iconfont favorite fav" *ngIf="i.collected == 0"
+                                  (click)="check(i, false);$event.stopPropagation();">&#xe626;</span>
+
+                            <span class="trade_tokenName_symbol">
+                                {{i.pair.replace('_', '/')}}
+                            </span>
+                        </div>
+                        <div class="trade_marketPrice_box">{{regular.toFixed(tickerListObj[i.pair].close || 0, i.priciPrecision)}}</div>
+                        <div class="trade_hours" [ngClass]="{'up-color': tickerListObj[i.pair].change > 0, 'down-color': tickerListObj[i.pair].change < 0, 'normal-color': tickerListObj[i.pair].change == 0}">{{regular.sliceChange(regular.toFixed(tickerListObj[i.pair].change*100 || 0, 2))}}%</div>
+                    </div>
+
+                    <span class='scrollBar'></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

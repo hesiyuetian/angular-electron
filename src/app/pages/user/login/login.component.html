@@ -1,0 +1,105 @@
+<!-- 没有user信息 -->
+<div class="connect2" *ngIf="!userList || userList.length==0">
+    <!-- head -->
+    <div class="connect2-head">
+        <div class="connect2-head-l" (click)="link('/')">
+            <a class="logo" ><img src="./assets/images/bithumb.svg" /></a>
+        </div>
+        <div class="connect2-head-r">
+            <div>
+            </div>
+            <!-- 多语言-->
+            <div class="connect2-head-r-row" (mouseover)="setLanguages(true)"
+                (mouseleave)="setLanguages(false)">
+                <i class=" guoqi" *ngIf="language == 'CN'"><img src="./assets/images/guoqi_cn.svg" /></i>
+                <i class=" guoqi" *ngIf="language == 'EN'"><img src="./assets/images/guoqi_en.svg" /></i>
+                <span>{{language}}</span>
+                <i class="iconfont tubiao" [ngClass]="{'tubiao2': shouLanguage}">&#xe771;</i>
+                <ul *ngIf="shouLanguage">
+                    <li (click)="setLanguage('zh')"><i class=" guoqi2"><img src="./assets/images/guoqi_cn.svg" /></i>CN</li>
+                    <li (click)="setLanguage('en')"><i class=" guoqi2"><img src="./assets/images/guoqi_en.svg" /></i>EN</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- main -->
+    <div class="connect-nouser-main">
+        <div class="connect-width f-center" >
+            <h3>{{'Login.welcome' | translate}}</h3>
+            <div class="connect-main-btn1 f-center-x" (click)="link('/user/create_wallet')">{{'Login.createWallet' | translate}}</div>
+            <div class="connect-main-btn1 f-center-x" (click)="link('/user/unlock')">{{'Login.importUser' | translate}}</div>
+        </div>
+    </div>
+    <!-- foot -->
+    <div class="connect2-foot">
+        <div class="nav-body">
+            <div class="nav-body-col">
+                <p class="nav-body-col-f1">{{'Footer.title' | translate}}</p>
+                <p class="nav-body-col-f2">{{'Footer.registerInfo' | translate}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Login  -->
+<div class="connect min-height-vh" *ngIf=" userList && userList.length>0">
+
+    <!-- 获取到user信息 -->
+    <div class="connect-main f-center border-box" *ngIf="isLogin">
+        <h3>{{'Login.login' | translate}}</h3>
+        <div class="connect-main-col4">
+            <div class="enterTxt putStyle" [ngClass]="{'enterTxtFocus': nameFocusS}" tabIndex="2" (click)="selectUser(true)" (blur)="selectUser(false)">
+                <span>{{'Login.userName' | translate}}</span>
+                <input class="put-focus" disabled type="text" [(ngModel)]="address"  />
+                <label class="iconfont">{{userListStatus ? '&#xe76d;' : '&#xe771;'}}</label>
+                <ul *ngIf="userListStatus">
+                    <li *ngFor="let i of userList" (click)="selectaddress(i.name, i.address);$event.stopPropagation()">
+                        {{i.name}} / {{i.address}}
+                        <em class="iconfont putStyle-close" (click)="deleteUser(1, i.address, i.name);$event.stopPropagation()">&#xe608;</em>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="connect-main-col4">
+            <div class="enterTxt" [ngClass]="{'enterTxtFocus': passwordFocusS}">
+                <span (click)="putStatue('span', 1)">{{'Login.password' | translate}}</span>
+                <input class="put-focus auth-input" [type]="regular.isCssSuper() ? 'text' : 'password'" [ngStyle]="{'-webkit-text-security': passwordType1 == 'password' ? 'disc' : 'none'}" [(ngModel)]="password" autocomplete="off" [readonly]=!passwordFocusS (focus)="putStatue('password', true)" (blur)="putStatue('password', false)" (keyup)="enterValue('password')" (change)="enterValue('password')" />
+
+                <label class="iconfont label-light" *ngIf="passwordType1 == 'password'" (click)="passwordIsShow('passwordType1')">&#xe683;</label>
+                <label class="iconfont" *ngIf="passwordType1 == 'text'" (click)="passwordIsShow('passwordType1')">&#xe682;</label>
+            </div>
+        </div>
+        <div class="connect-main-btn1" id="login" *ngIf="this.address && this.password" (click)="login()">{{'Login.login' | translate}}</div>
+        <div class="connect-main-btn1 btn_none" *ngIf="!this.address || !this.password">{{'Login.login' | translate}}</div>
+        <p class="connect-main-col3" (click)="isLogin = false"><span>{{'Login.createWallet' | translate}} / {{'Login.importUser' | translate}}</span></p>
+    </div>
+
+    <!-- 创建或导入 -->
+    <div class="connect-select f-center border-box" *ngIf="!isLogin">
+        <h3>{{'Login.createWallet' | translate}} / {{'Login.importUser' | translate}}</h3>
+        <div class="connect-select-btn f-center-x f-cursor" (click)="link('/user/create_wallet')">{{'Login.createWallet' | translate}}</div>
+        <div class="connect-select-btn f-center-x f-cursor" (click)="link('/user/unlock')">{{'Login.importUser' | translate}}</div>
+        <p class="f-cursor" (click)="isLogin = true">{{'Login.login' | translate}}</p>
+    </div>
+
+</div>
+
+<!-- 删除用户的提示弹窗 -->
+<div class="connect-alert" *ngIf="closeAlertStatus">
+    <div class="connect-alert-con">
+        <div (click)="closeAlert()" class="connect-alert-close"><i class="iconfont">&#xe608;</i></div>
+        <div class="connect-alert-main">
+            <h3 class="connect-alert-main-col1">{{'Login.coloseTitle' | translate}}</h3>
+            <div class="connect-alert-main-col2">
+                <p>{{'Login.coloseCon1' | translate}}</p>
+                <p>{{'Login.coloseCon2' | translate}}</p>
+            </div>
+            <div class="connect-alert-main-btn qcfd">
+                <div class="close f-fr" (click)="closeAlert()">{{'Login.coloseBtn2' | translate}}</div>
+                <div class="remove-cancel f-fr" (click)="deleteUser(2, closeAddress, closeName)">{{'Login.coloseBtn1' | translate}}</div>
+            </div>
+        </div>
+    </div>
+</div>
+

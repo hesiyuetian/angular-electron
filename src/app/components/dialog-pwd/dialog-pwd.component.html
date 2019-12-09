@@ -1,0 +1,20 @@
+<div class='dialog-pwd'>
+    <div class='dialog-pwd-zhan'></div>
+    <div class='dialog-pwd-con f-center'>
+        <i class='dialog-pwd-con-close iconfont f-cursor icon_style' (click)='close()'>&#xe610;</i>
+        <h2>{{'common.confirmPassword' | translate}}</h2>
+        <div class='dialog-pwd-con-item' [ngClass]="{'f-enterTxtFocus': pwdFlag}">
+            <span class='f-up-title'>{{'assets.list.enterPassword' | translate}}</span>
+            <input class='bottom auth-input' [type]="reg.isCssSuper() ? 'text' : 'password'"
+                   style="-webkit-text-security: disc" autocomplete="off" [(ngModel)]="pwd" [readonly]=!pwdFlag
+                   (focus)='focusInput(true)'
+                   (blur)='focusInput()'>
+        </div>
+
+        <div class='dialog-pwd-con-btn'>
+            <div class='f-cursor close' (click)="close()">{{'assets.list.return' | translate}}</div>
+            <div class='btn' [ngClass]="{'dialog-pwd-con-btn-dis f-cursor-not': !pwd,'f-cursor': pwd}"
+                 (click)='sub_send()'>{{'assets.list.send' | translate}}</div>
+        </div>
+    </div>
+</div>
